@@ -1,0 +1,89 @@
+.myAccount {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 30px;
+    margin: auto;
+    max-width: 1280px;
+}
+
+.infoBlock {
+    width: 500px;
+    overflow: hidden;
+}
+
+.info {
+    border: 2px solid #9a9a9a;
+    padding: 20px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.field {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.label {
+    font-weight: 600;
+}
+
+.inputField,
+.value {
+    width: 100%;
+    max-width: 350px;
+    border: 2px solid #b9b9b9;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 16px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.blockTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.editButton,
+.saveButton {
+    height: 30px;
+    padding: 4px 8px;
+    color: #484848;
+    background-color: transparent;
+    border: none;
+    font-size: 14px;
+}
+
+.editButton:hover,
+.saveButton:hover {
+    cursor: pointer;
+    color: #000;
+    text-decoration: underline;
+}
+
+.userInfo {
+    background-color: #f0f0f0;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.username {
+    font-weight: bold;
+}
+
+.email {
+    margin-top: 10px;
+}
