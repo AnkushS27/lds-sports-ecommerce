@@ -1,6 +1,15 @@
 'use client'
-
+// Components
 import Link from "next/link"
+
+// Icons
+import { FaHotjar, FaHistory, FaShoppingCart, FaRegHeart, FaQuestion, FaUser } from "react-icons/fa";
+import { CiDiscount1 } from "react-icons/ci";
+import { MdSupervisorAccount, MdOutlineLabel } from "react-icons/md";
+import { FiLogOut } from "react-icons/fi";
+
+// Styles
+import style1  from './page.module.css';
 
 export default function VerticalNavBar(
     {params} : {params : 
@@ -10,32 +19,71 @@ export default function VerticalNavBar(
         }
     }) {
     return (
-        <div className="NavMainWrapper">
-            {params.homePage && <div className="NavMenuCloseBtn"> Close </div>}
-            <div className="NavMainContainer">
+        <div className={style1.NavMainWrapper}>
+            {params.homePage && <div className={style1.NavMenuCloseBtn}> Close </div>}
+            <div className={style1.NavMainContainer}>
 
-            <div className="VerticalNavSection">
-                <div className="VerticalNavSectionHead"> Dashboard </div>
-                <div className="VerticalNavSectionItem"> latest arrivals </div>
-                <div className="VerticalNavSectionItem"> History </div>
-                <div className="VerticalNavSectionItem"> Offers </div>
-                <div className="VerticalNavSectionItem"> Cart </div>
-                <div className="VerticalNavSectionItem"> Wishlist </div>
+            <div className={style1.VerticalNavSection}>
+                <div className={style1.VerticalNavSectionHead}> Dashboard </div>
+                <Link href="#" className={style1.VerticalNavSectionItem}>
+                    <FaHotjar className={style1.VerticalNavSectionIcon} />
+                    latest arrivals 
+                </Link>
+                <Link href="#" className={style1.VerticalNavSectionItem}> 
+                    <FaHistory className={style1.VerticalNavSectionIcon} />
+                    Orders
+                </Link>
+                <Link href="#" className={style1.VerticalNavSectionItem}> 
+                    <CiDiscount1 className={style1.VerticalNavSectionIcon} />
+                    Offers
+                </Link>
+                <Link href="/cart" className={style1.VerticalNavSectionItem}>
+                    <FaShoppingCart className={style1.VerticalNavSectionIcon} />
+                    Cart
+                </Link>
+                <Link href="#" className={style1.VerticalNavSectionItem}>
+                    <FaRegHeart className={style1.VerticalNavSectionIcon} />
+                    Favourites
+                </Link>
             </div>
             
-            <div className="VerticalNavSection">
-                <div className="VerticalNavSectionHead"> Other Settings </div>
-                <div className="VerticalNavSectionItem"> Account Overview </div>
-                <Link href='/faq' className="VerticalNavSectionItem"> FAQ </Link>
-                <div className="VerticalNavSectionItem"> Categories </div>
+            <div className={style1.VerticalNavSection}>
+                <div className={style1.VerticalNavSectionHead}> Other Settings </div>
+                <div className={style1.VerticalNavSectionItem}>
+                    <FaUser className={style1.VerticalNavSectionIcon} />
+                    My Account
+                </div>
+                <Link href='/faq' className={style1.VerticalNavSectionItem}>
+                    <FaQuestion className={style1.VerticalNavSectionIcon} />
+                    FAQ
+                </Link>
+                <div className={style1.VerticalNavSectionItem}>
+                    <MdOutlineLabel className={style1.VerticalNavSectionIcon} />
+                    Categories
+                </div>
             </div>
             
-            <div className="VerticalNavSection">
-                <div className="VerticalNavSectionHead"> Account Settings </div>
-                <div className="VerticalNavSectionItem"> Change Account </div>
-                <div className="VerticalNavSectionItem"> Logout </div>
+            <div className={style1.VerticalNavSection}>
+                <div className={style1.VerticalNavSectionHead}> Account Settings </div>
+                <Link href='#' className={style1.VerticalNavSectionItem}>
+                    <MdSupervisorAccount className={style1.VerticalNavSectionIcon} />
+                    Change Account
+                </Link>
+                <Link href='#' className={style1.VerticalNavSectionItem}>
+                    <FiLogOut className={style1.VerticalNavSectionIcon} />
+                    Logout
+                </Link>
             </div>
             </div>
         </div>
     )
 }
+
+
+/////////////////////////////////
+// Work left
+/////////////////////////////////
+/*
+1. Sort and remove unwanted links
+2. Active Link should be highlighted
+*/
