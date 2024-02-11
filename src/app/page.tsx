@@ -49,9 +49,9 @@ export default function Home() {
                             <ProductCard params={{name:'prod_6',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}} />
                         </div>
                     </div>
+                    <Footer />
                 </div>
             </div>
-            <Footer />
         </div>
     )
 }

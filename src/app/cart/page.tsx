@@ -2,8 +2,15 @@
 import { useState } from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
+import ProductCard from "@/Components/productCard/page";
+import VerticalNavBar from "@/Components/VerticalNavbar/page";
+
+
+import { loggedIn } from '@/app/api/user/loggedIn';
+import HorizontalNavBar from "@/Components/HorizontalNavbar/page";
 
 export default function Cart() {
+  const isloggedIn = loggedIn({});
   const [cartItems, setCartItems] = useState([
     {
       id: 1,
@@ -65,72 +72,33 @@ export default function Cart() {
 
   return (
     <div className={styles.cartWrapper}>
-      <div className={styles.cartHeader}>
-        <h1 className={styles.cartTitle}>Shopping Cart</h1>
-      </div>
-      <div className={styles.cartContainer}>
-        <ul className={styles.cartItemsList}>
-          {cartItems.map((item, index) => (
-            <div key={item.id}>
-              <li className={styles.cartItem}>
-                <li key={item.id} className={styles.cartItem}>
-                  <div className={styles.itemCheckbox}>
-                    <input
-                      type="checkbox"
-                      checked={item.isChecked}
-                      onChange={() =>
-                        handleCheckboxChange(item.id, !item.isChecked)
-                      }
-                    />
-                  </div>
-                  <div className={styles.itemImage}>
-                    <Image src={item.image} alt={item.name} />
-                  </div>
-                  <div className={styles.itemDetails}>
-                    <h3 className={styles.itemName}>{item.name}</h3>
-                    <p className={styles.itemSize}>BLACK, US 8</p>
-                    <div className={styles.itemQuantity}>
-                      <button
-                        onClick={() =>
-                          handleQuantityChange(item.id, item.quantity - 1)
-                        }
-                      >
-                        -
-                      </button>
-                      <span>{item.quantity}</span>
-                      <button
-                        onClick={() =>
-                          handleQuantityChange(item.id, item.quantity + 1)
-                        }
-                      >
-                        +
-                      </button>
-                    </div>
-                    <p className={styles.itemPrice}>Rs. {item.price}</p>
-                    <button className={styles.itemMoveToFavorites}>
-                      MOVE TO FAVORITES
-                    </button>
-                  </div>
-                </li>
-              </li>
-              {index < cartItems.length - 1 && (
-                <hr className={styles.horizontalLine} />
-              )}
+      <HorizontalNavBar params={{name:'ABC',loggedIn: isloggedIn}} />
+      <div className={styles.verticalMainContainer}>
+        <VerticalNavBar params={{name : 'ABC', loggedIn : isloggedIn, homePage : true}} />
+        <div className={styles.cartContainer}>
+          <div className={styles.productCradWrapper}>
+            <div className={styles.productCardHead}> Cart </div>
+          <ProductCard params={{name:'prod_1',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}} />
+          <ProductCard params={{name:'prod_2',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}} />
+          <ProductCard params={{name:'prod_3',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}} />
+          <ProductCard params={{name:'prod_4',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}} />
+          <ProductCard params={{name:'prod_5',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}} />
+          <ProductCard params={{name:'prod_6',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}} />
+          </div>
+          <div className={styles.cartTotals}>
+            <h2>Order Summary</h2>
+            <div className={styles.subtotal}>
+              <span>SUBTOTAL</span>
+              <span>Rs. {calculateSubtotal()}</span>
             </div>
-          ))}
-        </ul>
-        <div className={styles.cartTotals}>
-          <h2>Order Summary</h2>
-          <div className={styles.subtotal}>
-            <span>SUBTOTAL</span>
-            <span>Rs. {calculateSubtotal()}</span>
+            <div className={styles.total}>
+              <span>TOTAL</span>
+              <span>Rs. {calculateSubtotal()}</span>
+            </div>
+            <button className={styles.checkoutButton}>CHECKOUT</button>
           </div>
-          <div className={styles.total}>
-            <span>TOTAL</span>
-            <span>Rs. {calculateSubtotal()}</span>
-          </div>
-          <button className={styles.checkoutButton}>CHECKOUT</button>
         </div>
+        
       </div>
     </div>
   );

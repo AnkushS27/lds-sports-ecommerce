@@ -10,6 +10,7 @@ import { FiLogOut } from "react-icons/fi";
 
 // Styles
 import style1  from './page.module.css';
+import { useState } from "react";
 
 export default function VerticalNavBar(
     {params} : {params : 
@@ -18,14 +19,21 @@ export default function VerticalNavBar(
          homePage ?: boolean,
         }
     }) {
+    const [showNavBar, setShowNavBar] = useState(false);
+    if (!showNavBar) {return(
+        <div className={style1.NavOpenContainer} onClick={() => {setShowNavBar(true)}}>
+            <div className={style1.NavHamburgerLine}></div>
+            <div className={style1.NavHamburgerLine}></div>
+        </div>
+    )} else {
     return (
         <div className={style1.NavMainWrapper}>
-            {params.homePage && <div className={style1.NavMenuCloseBtn}> Close </div>}
+            <div className={style1.NavMenuCloseBtn} onClick={() => {setShowNavBar(false)}}> Close </div>
             <div className={style1.NavMainContainer}>
 
             <div className={style1.VerticalNavSection}>
                 <div className={style1.VerticalNavSectionHead}> Dashboard </div>
-                <Link href="#" className={style1.VerticalNavSectionItem}>
+                <Link href="/" className={style1.VerticalNavSectionItem}>
                     <FaHotjar className={style1.VerticalNavSectionIcon} />
                     latest arrivals 
                 </Link>
@@ -76,7 +84,7 @@ export default function VerticalNavBar(
             </div>
             </div>
         </div>
-    )
+    )}
 }
 
 
