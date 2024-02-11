@@ -84,7 +84,7 @@ export default function Cart() {
                     />
                   </div>
                   <div className={styles.itemImage}>
-                    <Image src={item.image} alt={item.name} />
+                    <Image src={item.image} alt={item.name} width={400} height={400}/>
                   </div>
                   <div className={styles.itemDetails}>
                     <h3 className={styles.itemName}>{item.name}</h3>
