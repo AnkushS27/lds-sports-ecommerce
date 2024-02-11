@@ -1,9 +1,9 @@
 "use server";
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiResponse } from "next";
 
 ////////////// Checks whether user is loggedIn or not /////////////////import { NextApiRequest, NextApiResponse } from 'next';
 export default async function handler(
-  req: NextApiRequest,
+  req: Request,
   res: NextApiResponse
 ) {
   let user = true;
