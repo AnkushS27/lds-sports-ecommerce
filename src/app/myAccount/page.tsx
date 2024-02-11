@@ -38,7 +38,7 @@ interface EditMode {
   billing: boolean;
 }
 
-export default function myAccount() {
+export default function MyAccount() {
   const [personalInfo, setPersonalInfo] = useState<PersonalInfo>({
     name: "John Doe",
     phone: "123-456-7890",
