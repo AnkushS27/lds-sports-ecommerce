@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image";
 import styles from "./page.module.css";
 
 export default function Cart() {
@@ -83,7 +84,7 @@ export default function Cart() {
                     />
                   </div>
                   <div className={styles.itemImage}>
-                    <img src={item.image} alt={item.name} />
+                    <Image src={item.image} alt={item.name} />
                   </div>
                   <div className={styles.itemDetails}>
                     <h3 className={styles.itemName}>{item.name}</h3>
