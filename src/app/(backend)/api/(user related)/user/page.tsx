@@ -1,24 +1,22 @@
-"use server";
-import { NextApiRequest, NextApiResponse } from 'next';
+"use server"
+import { NextResponse } from "next/server";
 
 ////////////// Checks whether user is loggedIn or not /////////////////
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    let user = true;
-    let data = {};
-  
-    if (user) {
-      data = {
-        result: "success",
-        user: "Abc",
-        loggedIn: true,
-      };
-    } else {
-      data = { result: "failure", loggedIn: false };
-    }
-  
-    res.json(data);
-  }
-  
+// export async function GET(req: Request) {
+//     let user = true; // Replace with actual user login check
+//     let data = {};
+//     if (user) {
+//         data = {
+//             result: "success",
+//             user: "Abc",
+//             loggedIn: true,
+//         };
+//     } else {
+//         data = { result: "failure", loggedIn: false };
+//     }
+//     return NextResponse.json(data);
+// }
+
 
 ///////////////////////////////////
 // Works
