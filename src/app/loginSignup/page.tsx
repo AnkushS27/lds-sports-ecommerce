@@ -26,7 +26,7 @@ export default function LoginSignup() {
               </div>
               <button>Login</button>
               <p className={styles.loginSignupLogin}>
-                Don't have an account?&nbsp;
+                Don't have an account?
                 <span onClick={handleSignupClick}>Sign Up</span>
               </p>
             </>
@@ -41,7 +41,7 @@ export default function LoginSignup() {
               </div>
               <button onClick={handleLoginClick}>Continue</button>
               <p className={styles.loginSignupLogin}>
-                Already have an account?{" "}
+                Already have an account?
                 <span onClick={handleLoginClick}>Login</span>
               </p>
               <div className={styles.loginSignupAgree}>
