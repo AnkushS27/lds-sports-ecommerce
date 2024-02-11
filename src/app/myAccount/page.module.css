@@ -1,21 +1,87 @@
+.mainWrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    align-items: center;
+    background-color: #fff;
+}
+
+.mainContainer {
+    position: relative;
+    display: flex;
+    width: 100%;
+    max-width: 1280px;
+    justify-content: center;
+    border-top: 2px solid #e0e0e0;
+}
+
+.navbar {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+
+    height: 100%;
+
+    font-size: 16px;
+    font-weight: 400;
+    font-family: sans-serif;
+    overflow: hidden;
+}
+
+.navList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 250px;
+    width: 100%;
+    list-style: none;
+}
+
+.navLink {
+    border: none;
+    background-color: transparent;
+    font-size: 15px;
+    font-weight: bold;
+    color: #3a3a3a;
+    text-align: left;
+    padding: 10px 20px;
+    width: 100%;
+}
+
+.navLink:hover {
+    background-color: #e3e3e37a;
+    color: #000;
+    cursor: pointer;
+}
+
+.activeLink {
+    background-color: #2496f9;
+}
+
 .myAccount {
-    padding: 20px;
+    position: relative;
+    padding: 15px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    gap: 30px;
-    margin: auto;
-    max-width: 1280px;
+    width: 100%;
+    max-width: 550px;
+    border-left: 2px solid #e0e0e0;
 }
 
-.infoBlock {
-    width: 500px;
-    overflow: hidden;
+.seperateSection {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
 }
 
 .info {
-    border: 2px solid #9a9a9a;
+    border: 2px solid #c0c0c0;
     padding: 20px;
     border-radius: 4px;
     display: flex;
@@ -26,6 +92,7 @@
 .field {
     display: flex;
     justify-content: space-between;
+    gap: 10px;
     align-items: center;
 }
 
@@ -43,28 +110,37 @@
     font-size: 16px;
     display: flex;
     flex-wrap: wrap;
+    overflow: auto;
+    color: #484848;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
 }
 
 .title {
     font-size: 24px;
-    margin-bottom: 10px;
+    margin: 20px 0;
 }
 
 .blockTitle {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 0;
+    margin-bottom: 15px;
 }
 
 .editButton,
 .saveButton {
-    height: 30px;
-    padding: 4px 8px;
-    color: #484848;
     background-color: transparent;
     border: none;
     font-size: 14px;
+}
+
+.editButton {
+    color: rgb(129, 66, 18);
+}
+
+.saveButton {
+    color: green;
 }
 
 .editButton:hover,
@@ -87,3 +163,67 @@
 .email {
     margin-top: 10px;
 }
+
+@media screen and (max-width: 480px) {
+    .mainContainer {
+        flex-direction: column;
+        border: none;
+    }
+
+    .navbar {
+        flex-direction: row;
+        padding: 15px 8px;
+    }
+
+    .navList {
+        max-width: 100%;
+    }
+
+    .myAccount {
+        padding: 15px 8px;
+        border: none;
+    }
+
+    .blockTitle {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .editButton,
+    .saveButton {
+        font-size: 12px;
+    }
+
+    .navLink {
+        text-align: center;
+    }
+
+    .info {
+        padding: 15px 10px;
+    }
+}
+
+/* Track Order */
+ .searchBar {
+    position: relative;
+    display: flex;
+    border: 2px solid #0070f3;
+    border-radius: 3px;
+  }
+  
+  .searchInput {
+    padding: 10px 15px;
+    width: 100%;
+    border: none;
+  }
+  
+  .searchButton {
+    position: absolute;
+    right: 0;
+    padding: 10px 15px;
+    background-color: #0070f3;
+    color: #fff;
+    border: none;
+    border-radius: 0 1px 1px 0;
+    cursor: pointer;
+  }
