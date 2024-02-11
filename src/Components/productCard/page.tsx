@@ -40,7 +40,7 @@ export default function ProductCard(
                 <div className={style1.productCompany}>{params.company}</div>
                 <div className={style1.productPriceSection}>
                     <div className={style1.productPrice}>{params.price}</div>
-                    <input type='number' className={style1.productQty} min={0} max={params.stock} value={1} />
+                    {/* <input type='number' className={style1.productQty} min={0} max={params.stock} value={1} /> */}
                 </div>
                 <div className={style1.productCardBtnsContainer}>
                     {favourite ? 
