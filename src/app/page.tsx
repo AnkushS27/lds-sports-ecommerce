@@ -15,7 +15,7 @@ import VerticalNavBar from "@/Components/VerticalNavbar/page";
 //     const data = await res.json();
 //     return data.result === 'success';
 // }
-import { loggedIn } from './(backend)/api/(user related)/user/loggedIn';
+import { loggedIn } from './api/user/loggedIn';
 import ProductCard from '@/Components/productCard/page';
 
 export default function Home() {
