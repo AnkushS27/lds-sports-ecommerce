@@ -1,7 +1,7 @@
-"use server"
-import { NextResponse } from "next/server";
+// "use server"
+// import { NextResponse } from "next/server";
 
-////////////// Checks whether user is loggedIn or not /////////////////
+// ////////////// Checks whether user is loggedIn or not /////////////////
 // export async function GET(req: Request) {
 //     let user = true; // Replace with actual user login check
 //     let data = {};
@@ -18,8 +18,8 @@ import { NextResponse } from "next/server";
 // }
 
 
-///////////////////////////////////
-// Works
-/*
-1. No user searching in db
-*/
+// ///////////////////////////////////
+// // Works
+// /*
+// 1. No user searching in db
+// */
