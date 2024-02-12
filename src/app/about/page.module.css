@@ -1,0 +1,117 @@
+.aboutWrapper {
+    width: 100vw;
+    height: 100vh;
+
+    background-color: white;
+    color: black;
+
+    overflow-y: auto;
+}
+
+.verticalMainContainer {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    justify-items: center;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+}
+
+.aboutContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    justify-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+}
+
+.section {
+    position: relative;
+    padding: 50px calc(18% - 50px);
+    min-height: 50vh;
+    width: 100%;
+    text-align: center;
+}
+
+.section h1,
+.section h2 {
+    font-size: 30px;
+    padding-bottom: 30px;
+}
+
+.section p {
+    min-width: 300px;
+    width: 100%;
+    line-height: 40px;
+    font-size: 24px;
+}
+
+.section:nth-child(1), 
+.section:nth-child(3),
+.section:nth-child(5) {
+    background: #000;
+    color: #fff;
+    border-radius: 15px;
+}
+
+.section:nth-child(4){
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.whyList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex-wrap: wrap;
+    list-style: decimal;
+    text-align: left;
+    margin-left: 60px;
+    width: 100%;
+    min-width: 300px;
+}
+
+.whyListItems {
+    font-size: 20px;
+    font-weight: 600;
+    width: 100%;
+}
+  
+  .ctaButtons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 40px 0;
+  }
+  
+  .ctaButton {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #000;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .ctaButton:hover {
+    background-color: #fff;
+    color: #000;
+  }
+
+  @media screen and (max-width: 700px) {
+    .section:nth-child(4){
+        flex-direction: column;
+    }
+
+    .whyList {
+        margin: 10px;
+    }
+  }

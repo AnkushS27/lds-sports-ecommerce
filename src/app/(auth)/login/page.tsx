@@ -15,7 +15,7 @@ export default function LoginSignup() {
     <div className={styles.mainWrapper}>
       <div className={styles.loginSignup}>
         <div className={styles.loginSignupContainer}>
-              <h1>Sign Up</h1>
+              <h1>Login</h1>
               <div className={styles.loginSignupFields}>
                 {/* Add signup form fields */}
                 <input type="email" placeholder="Email Address" />
