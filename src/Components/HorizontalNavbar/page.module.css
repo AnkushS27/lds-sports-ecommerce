@@ -36,7 +36,6 @@
     font-size: 30px;
     font-weight: 800;
 
-    margin: 5px 0;
     padding: 10px;
 }
 
@@ -44,8 +43,6 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    flex-direction: row;
-    flex-wrap: wrap-reverse;
 
     width: 100%;
     min-width: fit-content;
@@ -131,3 +128,32 @@
     border-radius: 10px;
 }
 /* Responsive Design : Mobile->700px  Small Screens->1120px */
+
+@media screen and (max-width: 700px) {
+    .NavMainWrapper {
+        padding-top: 10px;
+    }
+
+    .NavMainContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navAuthenticationItem,
+    .navAuthenticationCotanier {
+        width: 100%;
+    }
+
+    .NavRightSection {
+        flex-direction: column-reverse;
+    }
+
+    .NavSearchBox {
+        margin: 0 10px;
+    }
+
+    .navSearchBtn {
+        top: 2px;
+        right: 12px;
+    }
+}
