@@ -217,6 +217,15 @@ export default function MyAccount() {
         <div className={styles.myAccount}>
           {activeSection === "mydetails" && (
             <div className={styles.seperateSection}>
+              <div className={styles.profilePicBlock}>
+                <div className={styles.profilePic}>
+                  <div className={styles.profilePicImage}></div>
+                {/* Edit button for profile picture */}
+                </div>
+                <h3>
+                  {personalInfo.name}
+                </h3>
+              </div>
               <div className={styles.infoBlock}>
                 <h2 className={styles.blockTitle}>
                   Personal Information

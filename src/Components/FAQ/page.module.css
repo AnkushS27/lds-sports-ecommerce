@@ -1,0 +1,42 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px 5px;
+    font-family: sans-serif;
+  }
+
+  .container h1 {
+    text-align: center;
+  }
+  
+  .faqList {
+    margin-top: 30px;
+    gap: 20px;
+  }
+  
+  .faqItem {
+    border: 1px solid #ccc;
+    margin-bottom: 1rem;
+  }
+  
+  .questionContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .question {
+    width: 100%;
+    padding: 16px;
+    font-weight: bold;
+  }
+
+  .answer {
+    padding: 16px;
+  }
+  
+  .dropdownIcon {
+    cursor: pointer;
+    padding: 16px;
+    font-size: 14px;
+  }

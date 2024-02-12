@@ -89,6 +89,21 @@
     gap: 15px;
 }
 
+.profilePicBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.profilePicImage {
+    border-radius: 50%;
+    width: 180px;
+    height: 180px;
+    background-color: #000;
+}
+
 .field {
     display: flex;
     justify-content: space-between;
@@ -104,7 +119,6 @@
 .value {
     width: 100%;
     max-width: 350px;
-    border: 2px solid #b9b9b9;
     padding: 10px;
     border-radius: 4px;
     font-size: 16px;
@@ -112,8 +126,12 @@
     flex-wrap: wrap;
     overflow: auto;
     color: #484848;
-  scrollbar-width: thin;
-  scrollbar-color: transparent transparent;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+}
+
+.inputField {
+    border: 2px solid #5b5b5b;
 }
 
 .title {
@@ -132,7 +150,8 @@
 .saveButton {
     background-color: transparent;
     border: none;
-    font-size: 14px;
+    font-size: 12px;
+    font-weight: 600;
 }
 
 .editButton {
@@ -204,20 +223,20 @@
 }
 
 /* Track Order */
- .searchBar {
+.searchBar {
     position: relative;
     display: flex;
     border: 2px solid #0070f3;
     border-radius: 3px;
-  }
-  
-  .searchInput {
+}
+
+.searchInput {
     padding: 10px 15px;
     width: 100%;
     border: none;
-  }
-  
-  .searchButton {
+}
+
+.searchButton {
     position: absolute;
     right: 0;
     padding: 10px 15px;
@@ -226,4 +245,4 @@
     border: none;
     border-radius: 0 1px 1px 0;
     cursor: pointer;
-  }
+}
