@@ -26,7 +26,7 @@ export default function LoginSignup() {
               </div>
               <button onClick={handleLoginClick}>Continue</button>
               <p className={styles.loginSignupLogin}>
-                Don't have an account?{" "}
+                Don&apos;t have an account?{" "}
                 <Link href='/signup'>Sign Up</Link>
               </p>
               <div className={styles.loginSignupAgree}>
