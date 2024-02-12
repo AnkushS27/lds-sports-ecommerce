@@ -6,7 +6,7 @@ import Link from "next/link"
 import { FaHotjar, FaHistory, FaShoppingCart, FaRegHeart, FaQuestion, FaUser } from "react-icons/fa";
 import { CiDiscount1 } from "react-icons/ci";
 import { MdSupervisorAccount, MdOutlineLabel } from "react-icons/md";
-import { FiLogOut } from "react-icons/fi";
+import { FiLogIn, FiLogOut } from "react-icons/fi";
 
 // Styles
 import style1  from './page.module.css';
@@ -49,7 +49,7 @@ export default function VerticalNavBar(
                     <FaShoppingCart className={style1.VerticalNavSectionIcon} />
                     Cart
                 </Link>
-                <Link href="#" className={style1.VerticalNavSectionItem}>
+                <Link href="/favourites" className={style1.VerticalNavSectionItem}>
                     <FaRegHeart className={style1.VerticalNavSectionIcon} />
                     Favourites
                 </Link>
@@ -73,6 +73,8 @@ export default function VerticalNavBar(
             
             <div className={style1.VerticalNavSection}>
                 <div className={style1.VerticalNavSectionHead}> Account Settings </div>
+                {params.loggedIn ?
+                <>
                 <Link href='#' className={style1.VerticalNavSectionItem}>
                     <MdSupervisorAccount className={style1.VerticalNavSectionIcon} />
                     Change Account
@@ -81,6 +83,19 @@ export default function VerticalNavBar(
                     <FiLogOut className={style1.VerticalNavSectionIcon} />
                     Logout
                 </Link>
+                </> :
+                <>
+                <Link href='#' className={style1.VerticalNavSectionItem}>
+                    <FiLogIn className={style1.VerticalNavSectionIcon} />
+                    Login
+                </Link>
+                <Link href='#' className={style1.VerticalNavSectionItem}>
+                    <FiLogIn className={style1.VerticalNavSectionIcon} />
+                    Signup
+                </Link>
+                </>
+
+    }
             </div>
             </div>
         </div>
