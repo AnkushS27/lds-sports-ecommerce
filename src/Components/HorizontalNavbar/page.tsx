@@ -5,7 +5,7 @@ import { useState } from 'react'
 import style1 from './page.module.css'
 
 // Imports
-import Link from 'next/link'
+import Link from 'next/link';
 
 export default function HorizontalNavBar(
     {params} : {
@@ -20,7 +20,7 @@ export default function HorizontalNavBar(
     <div className={style1.NavMainWrapper}>
         <div className={style1.NavMainContainer}>
             {/* Logo */}
-            <Link href='/' className={style1.NavLogoSection}> LDS sports </Link>
+            <Link href='/' className={style1.NavLogoSection}> <img src="./logo.svg" alt="logo" /> </Link>
             <div className={style1.NavRightSection}>
                 {/* Search bar */}
                 <div className={style1.navSearchbarContainer}>
