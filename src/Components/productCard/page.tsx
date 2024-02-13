@@ -35,9 +35,9 @@ export default function ProductCard(
     return (
         <div className={style1.productMainContainer}>
             {/* Image here */}
-            <Link href='#' className={style1.productImgSection}></Link>
+            <Link href={`/product/${params.pid}`} className={style1.productImgSection}></Link>
 
-            <Link href='#' className={style1.productBottomSection}>
+            <Link href={`/product/${params.pid}`} className={style1.productBottomSection}>
                 <div className={style1.productName}>{params.name}</div>
                 <div className={style1.productCompany}>{params.company}</div>
                 <div className={style1.productPriceSection}>

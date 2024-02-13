@@ -1,0 +1,41 @@
+.mainWrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: white;
+    color: black;
+
+    font-size: 16px;
+    font-weight: 300;
+    font-family: sans-serif;
+}
+
+.HorizontalMainContainer {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: row;
+
+    width: 100%;
+    height: 100%;
+}
+
+.VerticalMainContainer {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    width: 100%;
+    height: 100%;
+
+    overflow-y: auto;
+
+    font-size: 40px;
+    font-weight: 800;
+}
