@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 // styles.
 import style1 from './page.module.css'
 
@@ -13,7 +14,9 @@ export default function HorizontalNavBar(
             loggedIn : boolean,
         }
     }
-) { return (
+) { 
+    const [search,setSearch] = useState('');
+    return (
     <div className={style1.NavMainWrapper}>
         <div className={style1.NavMainContainer}>
             {/* Logo */}
@@ -21,8 +24,8 @@ export default function HorizontalNavBar(
             <div className={style1.NavRightSection}>
                 {/* Search bar */}
                 <div className={style1.navSearchbarContainer}>
-                    <input type="text" className={style1.NavSearchBox} placeholder='Search here' />
-                    <div className={style1.navSearchBtn}> Search </div>
+                    <input type="text" className={style1.NavSearchBox} onChange={(e) => {setSearch(e.target.value)}} placeholder='Search here' />
+                    <Link href={`/search/${search}`} className={style1.navSearchBtn}> Search </Link>
                 </div>
                 {/* Authentication Options */}
                 {params.loggedIn ?
