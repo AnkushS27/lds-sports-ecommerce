@@ -1,0 +1,280 @@
+.mainWrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  
+    width: 100vw;
+    height: 100vh;
+  
+    background-color: white;
+    color: black;
+  }
+  
+  
+  .HorizontalmainContainer {
+    position: relative;
+    top: 5px;
+    display: flex;
+    flex-direction: row;
+  
+    width: 100%;
+    height: 100%;
+  
+    overflow-y: hidden;
+  }
+  
+  .VerticalmainContainer {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+  
+    width: 100%;
+    min-width: 300px;
+    height: 100%;
+
+    gap: 10px;
+  
+    overflow-y: auto;
+  }
+
+  .updateBtnsContainer {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    width: fit-content;
+    height: 60px;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: row;
+
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .updateDetailsBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: auto;
+    height: 40px;
+
+    padding: 15px;
+    border-radius: 10px;
+
+    background-color: rgba(186, 182, 182, 0.653);
+    color: black;
+    cursor: pointer;
+  }
+
+  .profileSection {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    width: 100%;
+    min-height: fit-content;
+
+    margin-top: 60px;  /* For the Edit Button */
+
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .profileLeftSection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 280px;
+    height: auto;
+
+    padding: 10px;
+  }
+
+  .profilePic {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 150px;
+    height: 150px;
+
+    border-radius: 50%;
+    background-color: black;
+    color: white;
+    font-size: 24px;
+  }
+
+  .profileRightSection {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    width: calc(100% - 320px);
+    max-width: 600px;
+    min-width: 280px;
+  }
+
+  .profileItemsContainer {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    width: 100%;
+    height: fit-content;
+
+    border: 1px solid black;
+
+    color: black;
+    padding: 10px;
+    gap: 15px;
+    border-radius: 10px;
+  }
+
+  .profileSectionHead {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    width: 100%;
+    height: auto;
+
+    font-size: 32px;
+    font-weight: 800;
+    padding: 10px;
+  }
+
+  .profileItem {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    width: fit-content;
+    height: fit-content;
+
+    gap: 5px;
+  }
+
+  .profileItemLabel {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    width: fit-content;
+    height: fit-content;
+
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .profileItemInp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    max-width: 400px;
+    min-width: 280px;
+    height: 40px;
+
+    outline: none;
+    border: 0;
+    background-color: white;
+    color: black;
+    border-bottom: 1px solid black;
+
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  .addressSection {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    width: calc(100% - 20px);
+    min-width: 280px;
+    min-height: fit-content;
+
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+
+    gap: 20px;
+  }
+
+  .profileAddressHead {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    width: 100%;
+    height: auto;
+
+    font-size: 26px;
+    font-weight: 600;
+
+    padding: 10px;
+  }
+
+  .profileaddressContainer {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    width: 100%;
+    height: fit-content;
+
+    gap: 10px;
+    margin: 20px 0;
+  }
+
+  .profileSettingsSection {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    width: calc(100% - 20px);
+    min-width: 280px;
+    min-height: fit-content;
+
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+
+    gap: 20px;
+  }
+
+  .profileSettingsBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 180px;
+    height: 60px;
+
+    border-radius: 10px;
+    padding: 10px;
+
+    background-color: rgba(222, 217, 217, 0.589);
+    color: black;
+  }

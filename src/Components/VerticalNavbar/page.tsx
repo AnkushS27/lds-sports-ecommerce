@@ -57,10 +57,10 @@ export default function VerticalNavBar(
             
             <div className={style1.VerticalNavSection}>
                 <div className={style1.VerticalNavSectionHead}> Other Settings </div>
-                <div className={style1.VerticalNavSectionItem}>
+                <Link href='/profile' className={style1.VerticalNavSectionItem}>
                     <FaUser className={style1.VerticalNavSectionIcon} />
                     My Account
-                </div>
+                </Link>
                 <Link href='/faq' className={style1.VerticalNavSectionItem}>
                     <FaQuestion className={style1.VerticalNavSectionIcon} />
                     FAQ
