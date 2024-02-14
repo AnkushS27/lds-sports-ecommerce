@@ -3,6 +3,7 @@ import VerticalNavBar from "@/Components/VerticalNavbar/page";
 
 import style1 from './page.module.css'
 import { loggedIn } from "@/app/api/user/loggedIn";
+import { getData } from "@/db/testing";
 
 let product = {
     pid : '001',
@@ -14,8 +15,10 @@ let product = {
 
 }
 
-export default function ProductDetails({ params } : { params : { Id : string } }) {
+export default async function ProductDetails({ params } : { params : { Id : string } }) {
     const isloggedIn = loggedIn({});
+    const data = await getData();
+    console.log(data);
     return (
         <div className={style1.mainWrapper}>
             <HorizontalNavBar params={{name:'ABC',loggedIn: isloggedIn}} />
