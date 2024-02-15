@@ -1,11 +1,12 @@
 .mainWrapper {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-    align-items: center;
-    background-color: #fff;
-}
+  
+    width: 100vw;
+    height: 100vh;
+  
+    background-color: white;
+    color: black;
+  }
 
 .mainContainer {
     position: relative;
