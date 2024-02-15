@@ -1,19 +1,16 @@
 .mainWrapper {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-  
-    width: 100vw;
-    height: 100vh;
-  
-    background-color: white;
-    color: black;
-  }
-  
+  position: relative;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: white;
+  color: black;
+}
   
   .HorizontalmainContainer {
     position: relative;
-    top: 5px;
+    /* top: 5px; */
     display: flex;
     flex-direction: row;
   
@@ -186,7 +183,7 @@
 
     width: 100%;
     max-width: 400px;
-    min-width: 280px;
+    /* min-width: 280px; */
     height: 40px;
 
     outline: none;
@@ -277,4 +274,10 @@
 
     background-color: rgba(222, 217, 217, 0.589);
     color: black;
+  }
+
+  @media screen and (max-width: 700px) {
+    .profileItem {
+      width: 100%;
+    }
   }
