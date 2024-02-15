@@ -71,32 +71,32 @@ export default function Cart() {
   };
 
   return (
-    <div className={styles.cartWrapper}>
-      <HorizontalNavBar params={{name:'ABC',loggedIn: isloggedIn}} />
-      <div className={styles.verticalMainContainer}>
-        <VerticalNavBar params={{name : 'ABC', loggedIn : isloggedIn, homePage : true}} />
-        <div className={styles.cartContainer}>
-          <div className={styles.productCradWrapper}>
-            <div className={styles.productCardHead}> Cart </div>
-          <ProductCard params={{name:'prod_1',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}} />
-          <ProductCard params={{name:'prod_2',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}} />
-          <ProductCard params={{name:'prod_3',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}} />
-          <ProductCard params={{name:'prod_4',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}} />
-          <ProductCard params={{name:'prod_5',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}} />
-          <ProductCard params={{name:'prod_6',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}} />
-          </div>
-          <div className={styles.cartTotals}>
-            <h2>Order Summary</h2>
-            <div className={styles.subtotal}>
-              <span>SUBTOTAL</span>
-              <span>Rs. {calculateSubtotal()}</span>
-            </div>
-            <div className={styles.total}>
-              <span>TOTAL</span>
-              <span>Rs. {calculateSubtotal()}</span>
-            </div>
-            <button className={styles.checkoutButton}>CHECKOUT</button>
-          </div>
+    <div className={styles.mainWrapper}>
+        <HorizontalNavBar params={{name:'ABC',loggedIn: isloggedIn}} />
+        <div className={styles.HorizontalmainContainer}> 
+            <VerticalNavBar params={{name : 'ABC', loggedIn : isloggedIn, homePage : true}} />
+            <div className={styles.VerticalmainContainer}>
+              <div className={styles.productCradWrapper}>
+                <div className={styles.productCardHead}> Cart </div>
+              <ProductCard params={{name:'prod_1',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}} />
+              <ProductCard params={{name:'prod_2',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}} />
+              <ProductCard params={{name:'prod_3',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}} />
+              <ProductCard params={{name:'prod_4',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}} />
+              <ProductCard params={{name:'prod_5',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}} />
+              <ProductCard params={{name:'prod_6',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}} />
+              </div>
+              <div className={styles.cartTotals}>
+                <h2>Order Summary</h2>
+                <div className={styles.subtotal}>
+                  <span>SUBTOTAL</span>
+                  <span>Rs. {calculateSubtotal()}</span>
+                </div>
+                <div className={styles.total}>
+                  <span>TOTAL</span>
+                  <span>Rs. {calculateSubtotal()}</span>
+                </div>
+                <button className={styles.checkoutButton}>CHECKOUT</button>
+              </div>
         </div>
         
       </div>

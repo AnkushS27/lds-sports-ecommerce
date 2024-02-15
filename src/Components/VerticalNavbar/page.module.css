@@ -40,7 +40,10 @@
 }
 
 .NavMainWrapper {
-    position: relative;
+    position: absolute;
+    z-index: 1;
+    background-color: white;
+    color: black;
 
     display: flex;
     align-items: flex-start;
@@ -135,9 +138,9 @@
 
     gap: 15px;
     padding-left: 5px;
-    color: #252525d4;
+    color: #111111ad;
 }
-.VerticalNavSectionItem:hover {background-color: rgba(205, 198, 198, 0); color: green;}
+.VerticalNavSectionItem:hover {background-color: rgba(205, 198, 198, 0); color: black;}
 
 .VerticalNavSectionIcon {
     display: flex;
