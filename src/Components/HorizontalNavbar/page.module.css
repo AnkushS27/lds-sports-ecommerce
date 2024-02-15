@@ -36,6 +36,10 @@
     padding: 10px;
 }
 
+.NavLogoSection img {
+    width: 100%;
+}
+
 .NavRightSection {
     display: flex;
     align-items: center;
