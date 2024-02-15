@@ -47,25 +47,25 @@ export default function Home() {
                     <div className={style1.sectionContainer}>
                         <div className={style1.sectionHead}> Latest </div>
                         <div className={style1.categoriesContainer} style={{flexWrap:"nowrap",overflowX:"auto", maxWidth:"100%"}}>
-                            {latest.map((porduct,index) => {return(<ProductCard params={product} />)})}
+                            {latest.map((product,index) => {return(<ProductCard params={product} />)})}
                         </div>
                     </div>
                     <div className={style1.sectionContainer}>
                         <div className={style1.sectionHead}> Trending </div>
                         <div className={style1.categoriesContainer} style={{flexWrap:"nowrap",overflowX:"auto", maxWidth:"100%"}}>
-                            {trending.map((porduct,index) => {return(<ProductCard params={product} />)})}
+                            {trending.map((product,index) => {return(<ProductCard params={product} />)})}
                         </div>
                     </div>
                     <div className={style1.sectionContainer}>
                         <div className={style1.sectionHead}> For You </div>
                         <div className={style1.categoriesContainer} style={{flexWrap:"nowrap",overflowX:"auto", maxWidth:"100%"}}>
-                            {forYou.map((porduct,index) => {return(<ProductCard params={product} />)})}
+                            {forYou.map((product,index) => {return(<ProductCard params={product} />)})}
                         </div>
                     </div>
                     <div className={style1.sectionContainer}>
                         <div className={style1.sectionHead}> Others </div>
                         <div className={style1.categoriesContainer} style={{flexWrap:"nowrap",overflowX:"auto", maxWidth:"100%"}}>
-                            {others.map((porduct,index) => {return(<ProductCard params={product} />)})}
+                            {others.map((product,index) => {return(<ProductCard params={product} />)})}
                         </div>
                     </div>
                     <Footer />

@@ -21,7 +21,7 @@ export default function SearchResults({ params } : { params : { query : string }
                     </div>
                     <div className={style1.productCardWrapper}>
                         <div className={style1.resultsHead}>
-                            Results for "{params.query}"
+                            Results for &quot;{params.query}&quot;
                         </div>
                         <ProductCard params={{name:'prod_1',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}} />
                         <ProductCard params={{name:'prod_2',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}} />
