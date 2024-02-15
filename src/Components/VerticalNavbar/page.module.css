@@ -63,6 +63,9 @@
     border: 0;
     padding-top: 10px;  /* Due to close button with position : absolute */
     overflow-y: auto;
+
+    scrollbar-width: thin;
+    scrollbar-color: #d3d3d3 transparent;
 }
 
 .NavMenuCloseBtn {
