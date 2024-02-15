@@ -8,6 +8,7 @@
 
   background-color: white;
   color: black;
+  overflow: hidden;
 }
 
 
@@ -70,6 +71,8 @@
 
   padding: 10px;
   gap: 10px;
+
+  margin: 10px 0;
 }
 
 .sectionHead {
@@ -116,9 +119,3 @@
   cursor: pointer;
 }
 /* Responsive Design : Mobile->700px  Small Screens->1120px */
-
-@media screen and (max-width:700px) {
-  .HorizontalmainContainer {
-    top: 102px;
-  }
-}

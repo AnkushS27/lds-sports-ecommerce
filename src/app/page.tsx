@@ -18,6 +18,12 @@ import VerticalNavBar from "@/Components/VerticalNavbar/page";
 import { loggedIn } from './api/user/loggedIn';
 import ProductCard from '@/Components/productCard/page';
 
+let product = {name:'prod_1',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}
+
+let trending = [product, product, product, product, product, product, product]
+let forYou = [product, product, product, product, product, product, product]
+let latest = [product, product, product, product, product, product, product]
+let others = [product, product, product, product, product, product, product]
 export default function Home() {
     const isloggedIn = loggedIn({});
     return (
@@ -39,14 +45,27 @@ export default function Home() {
                         </div>
                     </div>
                     <div className={style1.sectionContainer}>
+                        <div className={style1.sectionHead}> Latest </div>
+                        <div className={style1.categoriesContainer} style={{flexWrap:"nowrap",overflowX:"auto", maxWidth:"100%"}}>
+                            {latest.map((porduct,index) => {return(<ProductCard params={product} />)})}
+                        </div>
+                    </div>
+                    <div className={style1.sectionContainer}>
                         <div className={style1.sectionHead}> Trending </div>
                         <div className={style1.categoriesContainer} style={{flexWrap:"nowrap",overflowX:"auto", maxWidth:"100%"}}>
-                            <ProductCard params={{name:'prod_1',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}} />
-                            <ProductCard params={{name:'prod_2',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}} />
-                            <ProductCard params={{name:'prod_3',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}} />
-                            <ProductCard params={{name:'prod_4',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}} />
-                            <ProductCard params={{name:'prod_5',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}} />
-                            <ProductCard params={{name:'prod_6',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}} />
+                            {trending.map((porduct,index) => {return(<ProductCard params={product} />)})}
+                        </div>
+                    </div>
+                    <div className={style1.sectionContainer}>
+                        <div className={style1.sectionHead}> For You </div>
+                        <div className={style1.categoriesContainer} style={{flexWrap:"nowrap",overflowX:"auto", maxWidth:"100%"}}>
+                            {forYou.map((porduct,index) => {return(<ProductCard params={product} />)})}
+                        </div>
+                    </div>
+                    <div className={style1.sectionContainer}>
+                        <div className={style1.sectionHead}> Others </div>
+                        <div className={style1.categoriesContainer} style={{flexWrap:"nowrap",overflowX:"auto", maxWidth:"100%"}}>
+                            {others.map((porduct,index) => {return(<ProductCard params={product} />)})}
                         </div>
                     </div>
                     <Footer />

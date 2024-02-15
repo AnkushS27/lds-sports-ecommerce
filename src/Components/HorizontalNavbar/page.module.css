@@ -3,8 +3,7 @@
     display: flex;
 
     width: 100%;
-    min-height: 60px;
-    height: fit-content;
+    min-height: fit-content;
 }
 
 .NavMainContainer {
