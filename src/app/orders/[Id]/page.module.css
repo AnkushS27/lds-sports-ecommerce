@@ -2,28 +2,20 @@
     display: flex;
     flex-direction: column;
     gap: 40px;
-    padding: 20px;
+    padding: 30px;
     font-family: sans-serif;
-    background-color: white;
-  }
-
-  .upperContainer {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
+    background-color: #fff;
     width: 100%;
+    height: 100%;
+  }
+  
+  .orderId {
+    font-size: 24px;
   }
   
   .header {
     display: flex;
     flex-direction: column;
-  }
-  
-  .orderId {
-    font-size: 24px;
   }
   
   .orderInfo {
@@ -37,22 +29,28 @@
     color: #fff;
     font-weight: bold;
     padding: 10px 20px;
-    border-radius: 5px;
     width: fit-content;
   }
   
   .summary {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    max-width: 400px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     width: 100%;
+    border: 2px solid #000;
+    border-radius: 4px;
+    overflow: hidden;
   }
   
-  .summaryRow {
+  .summaryCol{
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 5px;
+    flex-direction: column-reverse;
+    gap: 10px;
+    padding: 15px;
+  }
+
+  .summaryCol:last-child {
+    background-color: #000;
+    color: #fff;
   }
   
   .summaryLabel,
@@ -67,21 +65,50 @@
   .items {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    border: 2px solid #000;
+    border-radius: 4px;
+  }
+
+  .items h2, .items p {
+    padding: 15px;
+  }
+
+  .items p {
+    font-size: 13px;
   }
   
   .items table {
-    border-collapse: collapse;
     width: 100%;
+    border-top: 2px solid #000;
+    border-bottom: 2px solid #000;
+    padding: 15px;
   }
   
-  .items table, .items th, .items td {
-    border: 1px solid #ddd;
+  .items th, .items td {
     text-align: left;
-    padding: 8px;
+    padding: 10px 5px;
   }
-  
-  .items th {
-    background: #000;
-    color: #fff;
+
+  @media screen and (max-width:700px) {
+    .order {
+      padding: 20px 5px;
+    }
+    
+    .summary {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .summaryCol {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .items table {
+      padding: 10px;
+    }
+
+    .items h2, .items p {
+      padding: 10px;
+    }
   }

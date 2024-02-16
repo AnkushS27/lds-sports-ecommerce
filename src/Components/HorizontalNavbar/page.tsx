@@ -30,13 +30,13 @@ export default function HorizontalNavBar(
                 {/* Authentication Options */}
                 {params.loggedIn ?
                     <div className={style1.navAuthenticationCotanier}>
-                        <Link href='/' className={style1.navAuthenticationItem}> Profile </Link>
-                        <Link href='/' className={style1.navAuthenticationItem}> Logout </Link>
+                        <Link href='/' className={style1.navAuthenticationItem}> <span>Profile</span> </Link>
+                        <Link href='/' className={style1.navAuthenticationItem}> <span>Logout</span> </Link>
                     </div>
                 :    
                 <div className={style1.navAuthenticationCotanier}>
-                    <Link href='/login' className={style1.navAuthenticationItem}> Login </Link>
-                    <Link href='/signup' className={style1.navAuthenticationItem}> Sign up </Link>
+                    <Link href='/login' className={style1.navAuthenticationItem}> <span>Login</span> </Link>
+                    <Link href='/signup' className={style1.navAuthenticationItem}> <span>Signup</span> </Link>
                 </div>
                 }
             </div>
