@@ -21,7 +21,10 @@ const faqData: FaqItem[] = [
     question: "How can I get started?",
     answer: "To get started, simply follow these steps:...",
 },
-// Add more FAQ items as needed
+{
+    question: "How can I track my order?",
+    answer: "To track your order, simply follow these steps:...",
+}
 ];
 
 export default function FAQ() {
@@ -32,8 +35,8 @@ export default function FAQ() {
             <div className={style1.HorizontalmainContainer}> 
                 <VerticalNavBar params={{name : 'ABC', loggedIn : true}} />
                 <div className={style1.VerticalmainContainer}>
-                    <div className={style1.faqHead}>Frequently Asked Questions</div>
                     <div className={style1.FAQContainer}>
+                    <div className={style1.faqHead}>Frequently Asked Questions</div>
                         <div className={style1.faqSearchContainer}>
                         <input type="text" className={style1.faqQuestionInp} placeholder="Search your question here" value={search} onChange={(e) => {setSearch(e.target.value)}} />
                         <div className={style1.faqSearchBtn} onClick={() => {console.log(search); setSearch('');}}> Search </div>

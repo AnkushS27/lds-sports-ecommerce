@@ -1,8 +1,17 @@
+import HorizontalNavBar from "@/Components/HorizontalNavbar/page";
+import VerticalNavBar from "@/Components/VerticalNavbar/page";
+import Footer from "@/Components/Footer/page";
+
 import styles from "./page.module.css";
 
 export default function order({ params }: { params: { Id: string } }) {
   return (
-    <div className={styles.order}>
+    <div className={styles.mainWrapper}>
+            <HorizontalNavBar params={{name:'ABC',loggedIn:true}} />
+            <div className={styles.HorizontalmainContainer}> 
+                <VerticalNavBar params={{name : 'ABC', loggedIn : true}} />
+                <div className={styles.VerticalmainContainer}>
+                <div className={styles.order}>
       <h2 className={styles.orderId}>Order #987654</h2>
       <div className={styles.header}>
         <div className={styles.orderInfo}>
@@ -60,5 +69,10 @@ export default function order({ params }: { params: { Id: string } }) {
         <p>Has 3 items</p>
       </div>
     </div>
+                    <Footer />
+                </div>
+            </div>
+      </div>
+    
   );
 }

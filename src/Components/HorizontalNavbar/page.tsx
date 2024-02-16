@@ -6,6 +6,8 @@ import style1 from './page.module.css'
 
 // Imports
 import Link from 'next/link';
+import Image from 'next/image'
+import Logo from '../../../public/logo.svg'
 
 export default function HorizontalNavBar(
     {params} : {
@@ -20,7 +22,7 @@ export default function HorizontalNavBar(
     <div className={style1.NavMainWrapper}>
         <div className={style1.NavMainContainer}>
             {/* Logo */}
-            <Link href='/' className={style1.NavLogoSection}> <img src="./logo.svg" alt="logo" /> </Link>
+            <Link href='/' className={style1.NavLogoSection}> <Image className={style1.navLogoImage} src={Logo} alt={"logo"}/> </Link>
             <div className={style1.NavRightSection}>
                 {/* Search bar */}
                 <div className={style1.navSearchbarContainer}>

@@ -46,9 +46,8 @@
     justify-content: center;
 
     width: 100%;
-    height: auto;
 
-    margin: 10px 0;
+    margin: 20px 0;
 
     font-size: 40px;
     font-weight: 800;
@@ -58,17 +57,16 @@
 
   .FAQContainer {
     display: flex;
-    align-items: center;
-    justify-content: flex-start;
     flex-direction: column;
-
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 30px;
+    font-family: sans-serif;
+    background-color: #fff;
     width: 100%;
-    min-height: 300px;
+    color: #000;
     height: fit-content;
-
-    padding: 10px;
-    gap: 10px;
-    margin: 10px 0;
   }
 
   .faqSearchContainer {

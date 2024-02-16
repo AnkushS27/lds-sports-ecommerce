@@ -26,16 +26,19 @@
 }
 
 .NavLogoSection {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
 
-    width: 135px;
+    width: 130px;
     padding: 10px;
 }
 
-.NavLogoSection img {
+.NavLogoSection .navLogoImage {
+    position: relative;
     width: 100%;
+    height: auto;
 }
 
 .NavRightSection {
