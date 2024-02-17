@@ -3,6 +3,16 @@ import VerticalNavBar from "@/Components/VerticalNavbar/page";
 import { loggedIn } from "../api/user/loggedIn";
 
 import style1 from './page.module.css'
+import Link from "next/link";
+
+let ordersItems = [
+    {id:'001',createdDate:'12,june,2024',shipping:'Delivered', price: '₹12,000'},
+    {id:'002',createdDate:'12,june,2024',shipping:'Delivered', price: '₹12,000'},
+    {id:'003',createdDate:'12,june,2024',shipping:'Delivered', price: '₹12,000'},
+    {id:'004',createdDate:'12,june,2024',shipping:'Delivered', price: '₹12,000'},
+    {id:'005',createdDate:'12,june,2024',shipping:'Delivered', price: '₹12,000'},
+]
+
 
 export default function Orders() {
     const isloggedIn = loggedIn({});
@@ -12,7 +22,26 @@ export default function Orders() {
             <div className={style1.HorizontalmainContainer}> 
                 <VerticalNavBar params={{name : 'ABC', loggedIn : isloggedIn, homePage : true}} />
                 <div className={style1.VerticalmainContainer}>
-                    Your Orders here.
+                    <div className={style1.ordersHolder}>
+                        {ordersItems.map((item,index) => {
+                            return(
+                                <Link href={`/orders/${item.id}`} className={style1.orderItemContainer} key={index}>
+                                    <div className={style1.orderItemLeft}>
+                                        <div className={style1.ImgContainer}></div>
+                                    </div>
+                                    <div className={style1.orderItemRight}>
+                                        <div className={style1.orderRightItemId}> Order Id : {item.id}</div>
+                                        <div className={style1.orderRightItemTitle}>
+                                            <div className={style1.orderTitleLabel}>Ordered on : </div>
+                                            {item.createdDate}
+                                        </div>
+                                        <div className={style1.orderRightItemPrice}> {item.price}</div>
+                                        <div className={style1.orderRightItemShipping}>{item.shipping}</div>
+                                    </div>
+                                </Link>
+                            )
+                        })}
+                    </div>
                 </div>
             </div>
         </div>

@@ -40,3 +40,136 @@
     overflow-y: auto;
   }
   
+.ordersHolder {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  width: 100%;
+  height: fit-content;
+
+  padding: 10px;
+  gap: 20px;
+}
+
+.orderItemContainer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: row;
+
+  min-width: 300px;
+  max-width: 400px;
+  width: 100%;
+  height: fit-content;
+  min-height: 150px;
+
+  padding: 10px;
+  background-color: white;
+  box-shadow: 0px 0px 16px rgba(20,20,20,0.2);
+}
+
+.orderItemLeft {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  padding-top: 20px;
+
+  width: 100px;
+  height: 100%;
+}
+
+.ImgContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 80px;
+  height: 80px;
+
+  border: 2px solid grey;
+  border-radius: 10px;
+  background-color: black;
+}
+
+.orderItemRight {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+
+  width: calc(100% - 100px);
+  height: fit-content;
+
+  padding: 5px;
+}
+
+.orderRightItemId {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: auto;
+  height: 30px;
+
+  padding: 0 5px;
+  font-size: 14px;
+  color: grey;
+}
+
+.orderTitleLabel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: auto;
+
+  margin: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  color: grey;
+}
+.orderRightItemTitle {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+
+  width: 100%;
+  height: fit-content;
+
+  font-size: 22px;
+  font-weight: 700;
+  color: black;
+}
+
+.orderRightItemPrice {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  
+  width: 100%;
+  height: fit-content;
+
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+.orderRightItemShipping {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: auto;
+  height: auto;
+
+  border: 1px solid black;
+  border-radius: 5px;
+  color: black;
+
+  padding: 10px;
+  font-size: 16px;
+}

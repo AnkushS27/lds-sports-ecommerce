@@ -37,7 +37,7 @@ export default function VerticalNavBar(
                     <FaHotjar className={style1.VerticalNavSectionIcon} />
                     latest arrivals 
                 </Link>
-                <Link href="#" className={style1.VerticalNavSectionItem}> 
+                <Link href="/orders" className={style1.VerticalNavSectionItem}> 
                     <FaHistory className={style1.VerticalNavSectionIcon} />
                     Orders
                 </Link>
