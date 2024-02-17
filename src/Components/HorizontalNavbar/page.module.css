@@ -19,7 +19,6 @@
     font-size: 16px;
     font-family: sans-serif;
     font-weight: 300;
-    padding: 0 10px;
     border-bottom: 1px solid black;
     background-color: #fff;
     margin-bottom: 2px;
@@ -28,17 +27,25 @@
 .NavLogoSection {
     position: relative;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-
-    width: 130px;
     padding: 10px;
+}
+
+.iconsContainer {
+    display: none;
+    gap: 10px;
+}
+
+.navbarIcon {
+    width: 30px;
+    height: 30px;
 }
 
 .NavLogoSection .navLogoImage {
     position: relative;
-    width: 100%;
-    height: auto;
+    width: auto;
+    height: 40px;
 }
 
 .NavRightSection {
@@ -121,9 +128,9 @@
     width: auto;
     height: 40px;
 
-    padding: 10px 15px;
+    padding: 10px;
     border: 1px solid black;
-    border-radius: 20px;
+    border-radius: 10px;
     overflow: hidden;
 }
 
@@ -148,7 +155,6 @@
     position: relative;
     z-index: 2;
     color: #000;
-    font-weight: 600;
 }
 
 .navAuthenticationItem:hover span{
@@ -165,18 +171,16 @@
         padding: 0 0 3px 0;
     }
 
-    .navAuthenticationCotanier {
-        padding: 0 10px;
-    }
-
-    .navAuthenticationItem,
-    .navAuthenticationCotanier {
+    .NavLogoSection {
         width: 100%;
     }
 
-    .NavRightSection {
-        flex-direction: column-reverse;
-        gap: 10px;
+    .iconsContainer {
+        display: flex;
+    }
+
+    .navAuthenticationCotanier {
+        display: none;
     }
 
     .navSearchbarContainer {
@@ -189,7 +193,6 @@
     }
 
     .navSearchBtn {
-        top: 2px;
         right: 12px;
     }
 }

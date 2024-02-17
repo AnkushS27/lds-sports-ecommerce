@@ -4,6 +4,9 @@ import { useState } from 'react'
 // styles.
 import style1 from './page.module.css'
 
+// Icons
+import { FaShoppingCart, FaRegUserCircle } from 'react-icons/fa';
+
 // Imports
 import Link from 'next/link';
 import Image from 'next/image'
@@ -22,7 +25,17 @@ export default function HorizontalNavBar(
     <div className={style1.NavMainWrapper}>
         <div className={style1.NavMainContainer}>
             {/* Logo */}
-            <Link href='/' className={style1.NavLogoSection}> <Image className={style1.navLogoImage} src={Logo} alt={"logo"}/> </Link>
+            <Link href='/' className={style1.NavLogoSection}> 
+                <Image className={style1.navLogoImage} src={Logo} alt={"logo"}/> 
+                <div className={style1.iconsContainer}>
+                    <Link href="/cart">
+                        <FaShoppingCart className={style1.navbarIcon} />
+                    </Link>
+                    <Link href="/cart">
+                        <FaRegUserCircle className={style1.navbarIcon} />
+                    </Link>
+                </div>
+            </Link>
             <div className={style1.NavRightSection}>
                 {/* Search bar */}
                 <div className={style1.navSearchbarContainer}>
