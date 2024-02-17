@@ -42,12 +42,12 @@ export default function Product({ params } : {
                         <div className={style1.ImgsControllBtn}>v</div>
                       </div>
                     </div>
-                    <div className={style1.ImgContainer}> Active Image here </div>
+                    <input type="image" className={style1.ImgContainer} placeholder="Active Image here" />
                   </div>
                   <div className={style1.RightSection}>
-                    <div className={style1.productTitleHead}>{product.name}</div>
-                    <div className={style1.productCompany}>{product.company}</div>
-                    <div className={style1.productTitleDesc}>{product.desc}</div>
+                    <input type='text' className={style1.productTitleHead} placeholder="Product Name" />
+                    <input type='text' className={style1.productCompany} placeholder="Company" />
+                    <textarea className={style1.productTitleDesc} placeholder="Description about your product..."></textarea>
                     <div className={style1.productDiversityContainer}>
                       {Object.entries(product.DiversityInfo).map(
                         ([k, value], index) => {
@@ -56,7 +56,7 @@ export default function Product({ params } : {
                               className={style1.productDiversityOptionsContainer}
                               key={index}
                             >
-                                {k}
+                                <div className={style1.DiversityItemHead}>{k}</div>
                               {(value as string[]).map((item, idx1) => {
                                 return (
                                   <div
@@ -73,10 +73,10 @@ export default function Product({ params } : {
                       )}
                     </div>
                     <div className={style1.productButtons}>
-                      <div className={style1.productCartBtn}>+ Add to Cart</div>
+                      <div className={style1.productBuyBtn}>{" "} Save {" "}</div>
                       <div className={style1.productBuyBtn}>
                         {" "}
-                        Add to Favourites{" "}
+                        Cancel {" "}
                       </div>
                     </div>
                   </div>
