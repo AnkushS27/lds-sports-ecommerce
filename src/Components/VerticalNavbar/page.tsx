@@ -74,7 +74,7 @@ export default function VerticalNavBar(
             <div className={style1.VerticalNavSection}>
                 <div className={style1.VerticalNavSectionHead}> Account Settings </div>
                 {params.loggedIn ?
-                <>
+                <div>
                 <Link href='#' className={style1.VerticalNavSectionItem}>
                     <MdSupervisorAccount className={style1.VerticalNavSectionIcon} />
                     Change Account
@@ -83,8 +83,8 @@ export default function VerticalNavBar(
                     <FiLogOut className={style1.VerticalNavSectionIcon} />
                     Logout
                 </Link>
-                </> :
-                <>
+                </div> :
+                <div>
                 <Link href='#' className={style1.VerticalNavSectionItem}>
                     <FiLogIn className={style1.VerticalNavSectionIcon} />
                     Login
@@ -93,7 +93,7 @@ export default function VerticalNavBar(
                     <FiLogIn className={style1.VerticalNavSectionIcon} />
                     Signup
                 </Link>
-                </>
+                </div>
 
     }
             </div>

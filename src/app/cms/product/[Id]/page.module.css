@@ -181,7 +181,10 @@
     height: auto;
 
     font-size: 40px;
-    font-weight: 800;
+    background-color: white;
+    color: black;
+    outline: none;
+    border: 1px solid;
 }
 
 .productCompany {
@@ -196,8 +199,10 @@
     margin: 10px;
 
     border-radius: 5px;
-    background-color: rgba(190, 183, 183, 0.614);
     color: black;
+    background-color: white;
+    outline: none;
+    border: 1px solid;
 }
 
 .productTitleDesc {

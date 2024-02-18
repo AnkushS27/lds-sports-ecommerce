@@ -25,17 +25,19 @@ export default function HorizontalNavBar(
     <div className={style1.NavMainWrapper}>
         <div className={style1.NavMainContainer}>
             {/* Logo */}
-            <Link href='/' className={style1.NavLogoSection}> 
-                <Image className={style1.navLogoImage} src={Logo} alt={"logo"}/> 
+            <div className={style1.NavLogoSection}> 
+                <Link href='/'>
+                    <Image className={style1.navLogoImage} src={Logo} alt={"logo"}/> 
+                </Link>
                 <div className={style1.iconsContainer}>
                     <Link href="/cart">
                         <FaShoppingCart className={style1.navbarIcon} />
                     </Link>
-                    <Link href="/cart">
+                    <Link href="/profile">
                         <FaRegUserCircle className={style1.navbarIcon} />
                     </Link>
                 </div>
-            </Link>
+            </div>
             <div className={style1.NavRightSection}>
                 {/* Search bar */}
                 <div className={style1.navSearchbarContainer}>
