@@ -1,8 +1,11 @@
+"use client"
 import styles from "./page.module.css";
+
 
 import Link from "next/link";
 import Image from "next/image";
-import Logo from "../../../../../public/logo.svg";
+import Logo from "../../../../public/logo.svg";
+import { useState } from "react";
 
 export default function VerticalNavBar({
   params,
@@ -12,8 +15,16 @@ export default function VerticalNavBar({
     loggedIn: boolean;
   };
 }) {
+  const [showNavBar, setShowNavBar] = useState(false);
+  if (!showNavBar) {return(
+    <div className={styles.NavOpenContainer} onClick={() => {setShowNavBar(true)}}>
+        <div className={styles.NavHamburgerLine}></div>
+        <div className={styles.NavHamburgerLine}></div>
+    </div>
+)}
   return (
     <div className={styles.navWrapper}>
+      <div className={styles.NavMenuCloseBtn} onClick={() => {setShowNavBar(false)}}> Close </div>
       <div className={styles.verticalNavContainer}>
         <Link href="/cms" className={styles.logoContainer}>
           <Image className={styles.logoImage} src={Logo} alt="Logo" />
@@ -22,7 +33,7 @@ export default function VerticalNavBar({
           <Link href="#" className={styles.menuItem}>
             Dashboard
           </Link>
-          <Link href="#" className={styles.menuItem}>
+          <Link href="/cms/product/001" className={styles.menuItem}>
             Products
           </Link>
           <Link href="#" className={styles.menuItem}>
