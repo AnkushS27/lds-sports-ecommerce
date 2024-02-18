@@ -1,4 +1,4 @@
-import VerticalNavBar from './Components/VerticalNavbar/page';
+import VerticalNavBar from '@/Components/CMS/VerticalNavbar/page';
 import styles from './page.module.css';
 
 import { loggedIn } from '../api/user/loggedIn';
@@ -12,6 +12,10 @@ export default function Home() {
             <h2>Dashboard</h2>
             <div className={styles.mainContent}>
                 Main content of CMS will be displayed here.
+            </div>
+            <div className="recentSectionContainer">
+              <div className="sectionHead"> Recent Activity </div>
+              <div className="sectionContainer"> No recent activity here. </div>
             </div>
         </div>
     </div>

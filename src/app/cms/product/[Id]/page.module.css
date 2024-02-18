@@ -181,7 +181,12 @@
     height: auto;
 
     font-size: 40px;
-    font-weight: 800;
+    background-color: white;
+    color: black;
+    outline: none;
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 10px;
 }
 
 .productCompany {
@@ -196,8 +201,12 @@
     margin: 10px;
 
     border-radius: 5px;
-    background-color: rgba(190, 183, 183, 0.614);
     color: black;
+    background-color: white;
+    outline: none;
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 10px;
 }
 
 .productTitleDesc {
@@ -206,10 +215,17 @@
     justify-content: flex-start;
 
     width: 100%;
-    height: auto;
+    height: 200px;
 
     padding: 10px;
     text-align: left;
+    resize: none;
+    background-color: white;
+    color: black;
+
+    border: 1px solid black;
+    border-radius: 10px;
+    font-family: sans-serif;
 }
 
 .productDiversityContainer {
@@ -219,10 +235,28 @@
     flex-direction: column;
 
     width: 100%;
-    height: fit-content;
+    height: 200px;
 
     gap: 10px;
-    padding: 10px 0;
+    padding: 10px;
+    overflow: auto;
+    border: 1px solid;
+    border-radius: 10px;
+}
+
+.addDiversityBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    width: auto;
+    height: auto;
+
+    padding: 15px;
+    border-radius: 10px;
+    background-color: rgba(181, 178, 178, 0.639);
+    color: black;
+    cursor: pointer;
 }
 
 .productDiversityOptionsContainer {

@@ -1,0 +1,115 @@
+
+.NavOpenContainer {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+
+    width: 60px;
+    height: 60px;
+
+    padding: 10px;
+    border-radius: 50%;
+    z-index: 1;
+    /* background-color: rgba(210,210,210,0.4); */
+    /* backdrop-filter: blur(20px); */
+    background-color: white;
+    box-shadow: 0px 0px 6px rgba(40,40,40,0.4);
+
+    font-size: 16px;
+    font-weight: 400;
+    font-family: sans-serif;
+
+    cursor: pointer;
+}
+.NavOpenContainer:hover {color: green;}
+
+.NavHamburgerLine {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 35px;
+    height: 2px;
+
+    border-radius: 1px;
+    background-color: black;
+}
+
+.NavMenuCloseBtn {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    z-index: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 80px;
+    height: 40px;
+
+    background-color: red;
+    color: black;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.navWrapper {
+    position: absolute;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background-color: white;
+    z-index: 1;
+    min-width: 300px;
+    width: 300px;
+    height: 100%;
+    padding: 10px;
+    border-right: 1px solid;
+    color: black;
+    overflow-y: auto;
+}
+
+.verticalNavContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 0 15px 0 5px;
+    min-height: 100%;
+    background-color: #fff;
+    scrollbar-width: thin;
+    scrollbar-color: #b7b7b7 transparent;
+}
+
+.logoContainer {
+    position: relative;
+    width: 100%;
+    height: fit-content;
+}
+
+.logoImage {
+    width: 90px;
+    height: fit-content;
+}
+
+.menuItemsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.menuItem {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 15px;
+    width: 100%;
+    box-shadow: 2px 2px 5px 0 #b7b7b7;
+    color: black;
+    background-color: white;
+}

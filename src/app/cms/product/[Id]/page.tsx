@@ -1,7 +1,8 @@
-import HorizontalNavBar from "@/Components/HorizontalNavbar/page"
-import VerticalNavBar from "@/Components/VerticalNavbar/page"
+'use client'
+import VerticalNavBar from "@/Components/CMS/VerticalNavbar/page"
 
 import style1 from './page.module.css'
+import { useState } from "react";
 
 let product = {
     pid: "001",
@@ -17,11 +18,11 @@ export default function Product({ params } : {
         Id : string,
     }
 }) {
-
+    const [addChoice, setAddChoice] = useState(false);
     return (
         <div className={style1.mainWrapper}>
             <VerticalNavBar
-              params={{ name: "ABC", loggedIn: true, homePage: true }}
+              params={{ name: "ABC", loggedIn: true }}
             />
             <div className={style1.VerticalMainContainer}>
               <div className={style1.productContainer}>
@@ -42,13 +43,15 @@ export default function Product({ params } : {
                         <div className={style1.ImgsControllBtn}>v</div>
                       </div>
                     </div>
-                    <input type="image" className={style1.ImgContainer} placeholder="Active Image here" />
+                    <input type="image" className={style1.ImgContainer} alt="Active Image here" />
                   </div>
                   <div className={style1.RightSection}>
                     <input type='text' className={style1.productTitleHead} placeholder="Product Name" />
                     <input type='text' className={style1.productCompany} placeholder="Company" />
                     <textarea className={style1.productTitleDesc} placeholder="Description about your product..."></textarea>
                     <div className={style1.productDiversityContainer}>
+                      <div className={style1.addDiversityBtn} onClick={() => {setAddChoice(true)}}> + Add Choice </div>
+                      {/* Diversity choices here */}
                       {Object.entries(product.DiversityInfo).map(
                         ([k, value], index) => {
                           return (
