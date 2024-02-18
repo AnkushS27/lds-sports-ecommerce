@@ -1,5 +1,4 @@
 "use client";
-import axios from "axios";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
@@ -15,13 +14,17 @@ export default function LoginSignup() {
 
   const onLogin = async () => {
     try {
-      const response = await axios.post("/api/user/login", user);
-      console.log("Login success", response.data);
+      const response = await fetch("/api/user/login",{
+        method : 'POST',
+        headers : {'Content-Type' : 'application/json',},
+        body : JSON.stringify(user),
+      });
+      console.log("Login success", await response.json());
       router.push("/");
     } catch (error: any) {
       console.log("Login failed", error.message);
-    }
-  };
+    }
+  };
 
   return (
     <div className={styles.mainWrapper}>

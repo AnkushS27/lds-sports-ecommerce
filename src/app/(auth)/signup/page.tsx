@@ -3,7 +3,6 @@ import styles from "./page.module.css";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import axios from "axios";
 // import { getCsrfToken } from "next-auth/react";
 
 export default function LoginSignup() {
@@ -17,13 +16,17 @@ export default function LoginSignup() {
 
   const onSignup = async () => {
     try {
-      const response = await axios.post("/api/user/signup", user);
-      console.log("Signup success", response.data);
-      router.push("/login");
+      const response = await fetch("/api/user/signup",{
+        method : 'POST',
+        headers : {'Content-Type' : 'application/json',},
+        body : JSON.stringify(user),
+      });
+      console.log("Login success", await response.json());
+      router.push("/");
     } catch (error: any) {
-      console.log("Signup failed..", error.response?.data || error.message);
-    }
-  };
+      console.log("Login failed", error.message);
+    }
+  };
 
   // const csrfToken = await getCsrfToken;
   // console.log(csrfToken);

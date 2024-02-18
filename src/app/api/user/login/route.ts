@@ -2,10 +2,8 @@ import { ConnectDatabase } from '@/db/testing';
 import User from "@/db/models/userModel";
 import { NextRequest, NextResponse } from 'next/server';
 import bcryptjs from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 
 ConnectDatabase();
-const secretToken: string = process.env.TOKEN_SECRET as string;
 
 export async function POST(request: NextRequest){
     try {
@@ -27,26 +25,12 @@ export async function POST(request: NextRequest){
             return NextResponse.json({error: "Invalid password"}, {status: 400})
         }
         console.log(user);
-        
-        //create token data
-        const tokenData = {
-            id: user._id,
-            username: user.username,
-            email: user.email
-        }
-        //create token
-        const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET!, {expiresIn: "1d"})
 
-        const response = NextResponse.json({
-            message: "Login successful",
+        return NextResponse.json({
+            message: "User loged in successfully",
             success: true,
+            user
         })
-        response.cookies.set("token", token, {
-            httpOnly: true, 
-            
-        })
-        return response;
-
     } catch (error: any){
         return NextResponse.json({error: error.message},{status:500});
     }

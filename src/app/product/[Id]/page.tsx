@@ -4,7 +4,7 @@ import Footer from "@/Components/Footer/page";
 
 import style1 from "./page.module.css";
 import { loggedIn } from "@/app/api/user/loggedIn";
-import { getData } from "@/db/testing";
+// import { getData } from "@/db/testing";
 
 let product = {
   pid: "001",
@@ -21,8 +21,8 @@ export default async function ProductDetails({
   params: { Id: string };
 }) {
   const isloggedIn = loggedIn({});
-  const data = await getData();
-  console.log(data);
+  // const data = await getData();
+  // console.log(data);
   return (
     <div className={style1.mainWrapper}>
       <HorizontalNavBar params={{ name: "ABC", loggedIn: isloggedIn }} />
