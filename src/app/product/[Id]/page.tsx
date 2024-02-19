@@ -11,8 +11,15 @@ let product = {
   name: "cricket Bat",
   company: "kokabura",
   price: "₹1000",
+  tags: ['bat', 'cricket bat', 'cricket','kokabura'],
   desc: "Product 1 is one the most selled products from the company 1. Limited products so buy soon.",
-  DiversityInfo: { sizes: [6, 7, 8, 9, 10], color: ["black", "red"] },
+  DiversityInfo:[
+    {size: 6, color: 'black', stock: 40, price: '₹120'},
+    {size: 7, color: 'black', stock: 40, price: '₹120'},
+    {size: 8, color: 'black', stock: 40, price: '₹120'},
+    {size: 6, color: 'white', stock: 40, price: '₹120'},
+    {size: 6, stock: 40, price: '₹120'},
+  ],
 };
 
 export default async function ProductDetails({
@@ -53,30 +60,39 @@ export default async function ProductDetails({
               </div>
               <div className={style1.RightSection}>
                 <div className={style1.productTitleHead}>{product.name}</div>
+                <div className={style1.productTagsContainer}>
+                  {product.tags.map((tag,index) => {
+                    return(
+                      <div className={style1.productTagItem} key={index}>{tag}</div>
+                    )
+                  })}
+                </div>
                 <div className={style1.productCompany}>{product.company}</div>
                 <div className={style1.productTitleDesc}>{product.desc}</div>
                 <div className={style1.productDiversityContainer}>
-                  {Object.entries(product.DiversityInfo).map(
-                    ([key, value], index) => {
-                      return (
-                        <div
-                          className={style1.productDiversityOptionsContainer}
-                          key={index}
-                        >
-                          {(value as string[]).map((item, idx1) => {
+                  {product.DiversityInfo.map((diversity, index) => {
+                    return (
+                      <div className={style1.productDiversityOptionsContainer} key={index}>
+                        {/* Common information */}
+                        <div className={style1.DiversityItemHead}>Size: {diversity.size}</div>
+                        <div className={style1.DiversityItem}>Color: {diversity.color || 'N/A'}</div>
+                        <div className={style1.DiversityItem}>Stock: {diversity.stock}</div>
+                        <div className={style1.DiversityItem}>Price: {diversity.price}</div>
+                        
+                        {/* Optional attributes */}
+                        {Object.entries(diversity).map(([key, value], idx) => {
+                          if (!['size', 'color', 'stock', 'price'].includes(key)) {
                             return (
-                              <div
-                                className={style1.productDiversityItem}
-                                key={idx1}
-                              >
-                                {item}
+                              <div className={style1.DiversityItem} key={idx}>
+                                {key}: {value}
                               </div>
                             );
-                          })}
-                        </div>
-                      );
-                    }
-                  )}
+                          }
+                          return null;
+                        })}
+                      </div>
+                    );
+                  })}
                 </div>
                 <div className={style1.productButtons}>
                   <div className={style1.productCartBtn}>+ Add to Cart</div>

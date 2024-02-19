@@ -12,7 +12,13 @@ let prod = {
     price: "₹1000",
     tags: ['bat', 'cricket bat', 'cricket','kokabura'],
     desc: "Product 1 is one the most selled products from the company 1. Limited products so buy soon.",
-    DiversityInfo: { sizes: [6, 7, 8, 9, 10], color: ["black", "red"] },
+    DiversityInfo:[
+      {size: 6, color: 'black', stock: 40, price: '₹120'},
+      {size: 7, color: 'black', stock: 40, price: '₹120'},
+      {size: 8, color: 'black', stock: 40, price: '₹120'},
+      {size: 6, color: 'white', stock: 40, price: '₹120'},
+      {size: 6, stock: 40, price: '₹120'},
+    ],
   };
 
 export default function Product({ params } : {
@@ -116,28 +122,30 @@ export default function Product({ params } : {
                     <div className={style1.productDiversityContainer}>
                     <div className={style1.addDiversityBtn} onClick={() => {setAddChoice(true)}}> + Add Choice </div>
                       {/* Diversity choices here */}
-                      {Object.entries(product.DiversityInfo).map(
-                        ([k, value], index) => {
-                          return (
-                            <div
-                              className={style1.productDiversityOptionsContainer}
-                              key={index}
-                            >
-                                <div className={style1.DiversityItemHead}>{k}</div>
-                              {(value as string[]).map((item, idx1) => {
-                                return (
-                                  <div
-                                    className={style1.productDiversityItem}
-                                    key={idx1}
-                                  >
-                                    {item}
-                                  </div>
-                                );
-                              })}
-                            </div>
-                          );
-                        }
-                      )}
+                      {product.DiversityInfo.map((diversity, index) => {
+                      return (
+                        <div className={style1.productDiversityOptionsContainer} key={index}>
+                          {/* Common information */}
+                          <div className={style1.DiversityItemHead}>Size: {diversity.size}</div>
+                          <div className={style1.DiversityItem}>Color: {diversity.color || 'N/A'}</div>
+                          <div className={style1.DiversityItem}>Stock: {diversity.stock}</div>
+                          <div className={style1.DiversityItem}>Price: {diversity.price}</div>
+                          
+                          {/* Optional attributes */}
+                          {Object.entries(diversity).map(([key, value], idx) => {
+                            if (!['size', 'color', 'stock', 'price'].includes(key)) {
+                              return (
+                                <div className={style1.DiversityItem} key={idx}>
+                                  {key}: {value}
+                                </div>
+                              );
+                            }
+                            return null;
+                          })}
+                        </div>
+                      );
+                    })}
+
                     </div>
                   </div>
                   <div className={style1.prodBR}>

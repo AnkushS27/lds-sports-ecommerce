@@ -41,7 +41,7 @@ export default function VerticalNavBar(
                     <FaHistory className={style1.VerticalNavSectionIcon} />
                     Orders
                 </Link>
-                <Link href="#" className={style1.VerticalNavSectionItem}> 
+                <Link href="/offers" className={style1.VerticalNavSectionItem}> 
                     <CiDiscount1 className={style1.VerticalNavSectionIcon} />
                     Offers
                 </Link>
