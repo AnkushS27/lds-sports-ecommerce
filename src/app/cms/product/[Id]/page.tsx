@@ -3,6 +3,7 @@ import VerticalNavBar from "@/Components/CMS/VerticalNavbar/page"
 
 import style1 from './page.module.css'
 import { useState } from "react";
+import Link from "next/link";
 
 let prod = {
     pid: "001",
@@ -23,10 +24,14 @@ export default function Product({ params } : {
     const [product, setProduct] = useState(prod);
     const [activeTagIndex, setActiveTagIndex] = useState(-1);
     
+    const SendUpdateToBackend = () => {
+      console.log(product);
+    }
+
     const AddProductTag = () => {
       setProduct((prevProduct) => ({
         ...prevProduct,
-        tags: [...prevProduct.tags, ""], // Add an empty string to the tags array
+        tags: [...prevProduct.tags,""], // Add an empty string to the tags array
       }));
       setActiveTagIndex(product.tags.length);
     };
@@ -39,12 +44,26 @@ export default function Product({ params } : {
       if (activeTagIndex !== -1 && product.tags[activeTagIndex] === '') {
         setProduct(prevProduct => ({
           ...prevProduct,
-          tags: prevProduct.tags.filter((tag, index) => index !== activeTagIndex)
+          tags: prevProduct.tags.filter((tag, index) => {if (index !== activeTagIndex) return tag;})
         }));
       }
     
       // Set this new tag as active.
       setActiveTagIndex(idx);
+    }
+    
+    const updateTag = (idx: number, str: string) => {
+      setProduct(prevProduct => ({
+        ...prevProduct,
+        tags: prevProduct.tags.map((tag, index) => (index === idx ? str : tag))
+      }));
+      console.log(product);
+    }
+    const updateProductDetail = (key: string, value: string) => {
+      setProduct(prevProduct => ({
+        ...prevProduct,
+        [key]: value
+      }));
     }
     
     return (
@@ -71,28 +90,25 @@ export default function Product({ params } : {
                         <div className={style1.ImgsControllBtn}>v</div>
                       </div>
                     </div>
-                    <input type="image" className={style1.ImgContainer} alt="Active Image here" />
+                    <input type="file" accept="image/*" className={style1.ImgContainer} alt="Active Image here" />
                   </div>
                   <div className={style1.RightSection}>
-                    <input type='text' className={style1.productTitleHead} placeholder="Product Name" />
-                    <input type='text' className={style1.productCompany} placeholder="Company" />
+                    <input type='text' className={style1.productTitleHead} value={product.name}
+                    placeholder="Product Name" onChange={(e) => {updateProductDetail('name',e.target.value)}} />
+                    <input type='text' className={style1.productCompany} value={product.company}
+                    placeholder="Company" onChange={(e) => {updateProductDetail('company',e.target.value)}} />
                     {/* Tags here. */}
                     <div className={style1.productTagsSection}>
                       <div className={style1.addProductTagBtn} onClick={() => {AddProductTag()}}> + Add Tag </div>
-                      <div className={style1.tagsWrapper}>
                         {product.tags.map((tag,index) => {
                         return(<input type="text" className={style1.productTagsInput} placeholder="NewTag"
-                          onChange={()=>{changeActiveTagIndex(index)}} defaultValue={tag} />)})}
-                      </div>
+                          onClick={()=>{changeActiveTagIndex(index)}} value = {tag} key={index}
+                          onChange={(e)=>{updateTag(index, e.target.value)}} />)})}
                     </div>
-                    <textarea className={style1.productTitleDesc} placeholder="Description about your product..."></textarea>
-                    <div className={style1.productButtons}>
-                      <div className={style1.productBuyBtn}>{" "} Save {" "}</div>
-                      <div className={style1.productBuyBtn}>
-                        {" "}
-                        Cancel {" "}
-                      </div>
-                    </div>
+
+                    <textarea className={style1.productTitleDesc} placeholder="Description about your product..."
+                    onChange={(e) => {updateProductDetail('desc',e.target.value)}}>{product.desc}</textarea>
+                    
                   </div>
                 </div>
                 <div className={style1.productBottomContainer}>
@@ -122,6 +138,16 @@ export default function Product({ params } : {
                           );
                         }
                       )}
+                    </div>
+                  </div>
+                  <div className={style1.prodBR}>
+                    <input type="text" className={style1.productPrice} value={product.price}
+                    placeholder="Price in ₹" onChange={(e) => {updateProductDetail('price',e.target.value)}} />
+                    <div className={style1.productButtons}>
+                      <div className={style1.productBuyBtn} onClick={() => SendUpdateToBackend()}>{" "} Save {" "}</div>
+                      <Link href='/cms' className={style1.productBuyBtn}>
+                        {" "}Cancel {" "}
+                      </Link>
                     </div>
                   </div>
                 </div>
