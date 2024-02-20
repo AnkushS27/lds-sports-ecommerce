@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import axios from "axios";
 
 export default function LoginSignup() {
   const router = useRouter();
@@ -14,15 +14,16 @@ export default function LoginSignup() {
   const [showPass, setShowPass] = useState(false);
 
   const onLogin = async () => {
-    console.log(useSession);
     try {
-      const response = await fetch("/api/user/login",{
-        method : 'POST',
-        headers : {'Content-Type' : 'application/json',},
-        body : JSON.stringify(user),
-      });
-      console.log("Login success", await response.json());
-      // router.push("/");
+      // const response = await fetch("/api/user/login",{
+      //   method : 'POST',
+      //   headers : {'Content-Type' : 'application/json',},
+      //   body : JSON.stringify(user),
+      // });
+      const resp = (await axios.post('/api/user/login',user)).data;
+      // console.log("Login success", await resp.data);
+      if (resp.success) router.push("/");
+      else console.log('Some error at API');
     } catch (error: any) {
       console.log("Login failed", error.message);
     }

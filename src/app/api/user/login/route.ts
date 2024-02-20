@@ -2,18 +2,16 @@ import { ConnectDatabase } from '@/db/testing';
 import User from "@/db/models/userModel";
 import { NextRequest, NextResponse } from 'next/server';
 import bcryptjs from 'bcryptjs';
-import { authenticate } from '@/app/lib/actions';
+import { signIn } from '@/auth';
 
-ConnectDatabase();
+// ConnectDatabase();
 
 export async function POST(request: NextRequest) {
-    const data = await request.json();
-
-    console.log(await authenticate(undefined,data));  
-    return NextResponse.json({
-        success: true,
-        data,
-    })  
+    const { email, password}:any = await request.json();
+    console.log(`Data recieved in /api/login`);
+    console.log({ email, password });
+    const resp = await signIn('credentials',{ email, password }); 
+    return NextResponse.json({message:'success'});
 }
 
 // export async function POST(request: NextRequest){
