@@ -24,6 +24,7 @@ export default function VerticalNavBar(
         <div className={style1.NavOpenContainer} onClick={() => {setShowNavBar(true)}}>
             <div className={style1.NavHamburgerLine}></div>
             <div className={style1.NavHamburgerLine}></div>
+            <div className={style1.NavHamburgerLine}></div>
         </div>
     )} else {
     return (
