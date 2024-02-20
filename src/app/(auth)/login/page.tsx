@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 export default function LoginSignup() {
   const router = useRouter();
@@ -13,6 +14,7 @@ export default function LoginSignup() {
   const [showPass, setShowPass] = useState(false);
 
   const onLogin = async () => {
+    console.log(useSession);
     try {
       const response = await fetch("/api/user/login",{
         method : 'POST',
@@ -20,10 +22,12 @@ export default function LoginSignup() {
         body : JSON.stringify(user),
       });
       console.log("Login success", await response.json());
-      router.push("/");
+      // router.push("/");
     } catch (error: any) {
       console.log("Login failed", error.message);
     }
+    // const resp = await authenticate(undefined,user);
+    // console.log(resp);
   };
 
   return (
