@@ -11,6 +11,7 @@ import { FaShoppingCart, FaRegUserCircle } from 'react-icons/fa';
 import Link from 'next/link';
 import Image from 'next/image'
 import Logo from '../../../public/logo.svg'
+import axios from 'axios';
 
 export default function HorizontalNavBar(
     {params} : {
@@ -48,7 +49,7 @@ export default function HorizontalNavBar(
                 {params.loggedIn ?
                     <div className={style1.navAuthenticationCotanier}>
                         <Link href='/profile' className={style1.navAuthenticationItem}> <span>Profile</span> </Link>
-                        <Link href='/' className={style1.navAuthenticationItem}> <span>Logout</span> </Link>
+                        <div className={style1.navAuthenticationItem}> <span>Logout</span> </div>
                     </div>
                 :    
                 <div className={style1.navAuthenticationCotanier}>
