@@ -6,67 +6,13 @@
     flex-direction: column;
   
     width: 100vw;
-    height: 100vh;
+    height: 100%;
   
     background-color: white;
     color: black;
 
     overflow: hidden;
   }
-
-.mainContainer {
-    position: relative;
-    display: flex;
-    width: 100%;
-    max-width: 1280px;
-    justify-content: center;
-    border-top: 2px solid #e0e0e0;
-}
-
-.navbar {
-    position: relative;
-
-    display: flex;
-    flex-direction: column;
-    padding: 15px;
-
-    height: 100%;
-
-    font-size: 16px;
-    font-weight: 400;
-    font-family: sans-serif;
-    overflow: hidden;
-}
-
-.navList {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    min-width: 250px;
-    width: 100%;
-    list-style: none;
-}
-
-.navLink {
-    border: none;
-    background-color: transparent;
-    font-size: 15px;
-    font-weight: bold;
-    color: #3a3a3a;
-    text-align: left;
-    padding: 10px 20px;
-    width: 100%;
-}
-
-.navLink:hover {
-    background-color: #e3e3e37a;
-    color: #000;
-    cursor: pointer;
-}
-
-.activeLink {
-    background-color: #2496f9;
-}
 
 .myAccount {
     position: relative;
@@ -76,8 +22,8 @@
     align-items: center;
     padding: 20px;
     width: 100%;
-    max-width: 550px;
-    border-left: 2px solid #e0e0e0;
+    max-width: 1280px;
+    margin: 0 auto;
 }
 
 .seperateSection {
@@ -88,12 +34,9 @@
 }
 
 .info {
-    border: 2px solid #c0c0c0;
-    padding: 20px;
-    border-radius: 4px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
 }
 
 .profilePicBlock {
@@ -106,39 +49,50 @@
 
 .profilePicImage {
     border-radius: 50%;
-    width: 180px;
-    height: 180px;
+    width: 160px;
+    height: 160px;
     background-color: #000;
 }
 
-.field {
+.personalInfo {
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
+    gap: 50px;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.infoBlock {
+    width: 100%;
+    border: 1px solid #000;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.field {
     gap: 10px;
     align-items: center;
 }
 
 .label {
     font-weight: 600;
+    padding-bottom: 3px;
+    font-size: 13px;
 }
 
 .inputField,
 .value {
     width: 100%;
-    max-width: 350px;
     padding: 10px;
-    border-radius: 4px;
     font-size: 16px;
     display: flex;
     flex-wrap: wrap;
     overflow: auto;
     color: #484848;
     scrollbar-width: thin;
+    border: 1px solid #000;
     scrollbar-color: transparent transparent;
-}
-
-.inputField {
-    border: 2px solid #5b5b5b;
 }
 
 .title {
