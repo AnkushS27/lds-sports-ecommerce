@@ -10,8 +10,8 @@ export async function POST(request: NextRequest) {
     const { email, password}:any = await request.json();
     console.log(`Data recieved in /api/login`);
     console.log({ email, password });
-    const resp = await signIn('credentials',{ email, password }); 
-    return NextResponse.json({message:'success'});
+    const resp = await signIn('credentials',{ email, password, redirect: false });
+    return Response.json({result:'success', redirectUrl : resp});
 }
 
 // export async function POST(request: NextRequest){

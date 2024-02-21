@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import Link from "next/link";
 import axios from "axios";
+import { signIn } from "next-auth/react";
+
 
 export default function LoginSignup() {
   const router = useRouter();
@@ -14,21 +16,23 @@ export default function LoginSignup() {
   const [showPass, setShowPass] = useState(false);
 
   const onLogin = async () => {
+    // try {
+    //   signIn('credentials', {
+    //     user,
+    //     callbackUrl: '/',
+    //     redirect: true,
+    //   });
+    // } catch (error: any) {
+    //   console.log('Login Failed', error.message);
+    // }
     try {
-      // const response = await fetch("/api/user/login",{
-      //   method : 'POST',
-      //   headers : {'Content-Type' : 'application/json',},
-      //   body : JSON.stringify(user),
-      // });
-      const resp = (await axios.post('/api/user/login',user)).data;
-      // console.log("Login success", await resp.data);
-      if (resp.success) router.push("/");
+      const resp =  (await axios.post('/api/user/login',user)).data;
+      console.log(resp)
+      if (resp.result) router.push("/");
       else console.log('Some error at API');
     } catch (error: any) {
       console.log("Login failed", error.message);
     }
-    // const resp = await authenticate(undefined,user);
-    // console.log(resp);
   };
 
   return (

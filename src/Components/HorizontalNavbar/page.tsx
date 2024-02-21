@@ -12,6 +12,7 @@ import Link from 'next/link';
 import Image from 'next/image'
 import Logo from '../../../public/logo.svg'
 import axios from 'axios';
+import { signOut } from 'next-auth/react';
 
 export default function HorizontalNavBar(
     {params} : {
@@ -22,6 +23,10 @@ export default function HorizontalNavBar(
     }
 ) { 
     const [search,setSearch] = useState('');
+    const handleLogout = async () => {
+        const resp = (await axios.post('/api/user/logout')).data;
+        console.log(resp);
+    }
     return (
     <div className={style1.NavMainWrapper}>
         <div className={style1.NavMainContainer}>
@@ -49,7 +54,7 @@ export default function HorizontalNavBar(
                 {params.loggedIn ?
                     <div className={style1.navAuthenticationCotanier}>
                         <Link href='/profile' className={style1.navAuthenticationItem}> <span>Profile</span> </Link>
-                        <div className={style1.navAuthenticationItem}> <span>Logout</span> </div>
+                        <div className={style1.navAuthenticationItem} onClick={() => {handleLogout()}}> <span>Logout</span> </div>
                     </div>
                 :    
                 <div className={style1.navAuthenticationCotanier}>

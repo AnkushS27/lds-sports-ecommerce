@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 const allowedOrigins = ["*"]
 
 export default function corsHandler(req: NextRequest) {
+    console.log('Cors Headers is being invoked');
     // retrieve the current response
     const res = NextResponse.next()
   
@@ -14,7 +15,7 @@ export default function corsHandler(req: NextRequest) {
     // add it to the 'Access-Control-Allow-Origin' header
     if (origin && (allowedOrigins.includes("*") || allowedOrigins.includes(origin))) {
       res.headers.append('Access-Control-Allow-Origin', origin);
-    }
+    } else {return res;}
   
     // add the remaining CORS headers to the response
     res.headers.append('Access-Control-Allow-Credentials', "true")
