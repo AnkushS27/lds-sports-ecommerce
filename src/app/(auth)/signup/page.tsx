@@ -83,7 +83,7 @@ export default function LoginSignup() {
           </div>
           <button onClick={onSignup}>Continue</button>
           <p className={styles.loginSignupLogin}>
-            Already have an account? <Link href="/login">Login</Link>
+            Already have an account? <Link href="/login" className={styles.changePage}>Login</Link>
           </p>
           <div className={styles.loginSignupAgree}>
             <input
@@ -91,8 +91,8 @@ export default function LoginSignup() {
               name=""
               id=""
               style={{
-                width: "30px",
-                height: "30px",
+                width: "25px",
+                height: "25px",
                 background: "white",
                 color: "black",
                 borderRadius: "10px",

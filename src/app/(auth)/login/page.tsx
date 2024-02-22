@@ -70,26 +70,8 @@ export default function LoginSignup() {
           </div>
           <button onClick={onLogin}>Login</button>
           <p className={styles.loginSignupLogin}>
-            Don&apos;t have an account? <Link href="/signup">Sign Up</Link>
+            Don&apos;t have an account? <Link href="/signup" className={styles.changePage}>Sign Up</Link>
           </p>
-          <div className={styles.loginSignupAgree}>
-            <input
-              type="checkbox"
-              name=""
-              id=""
-              style={{
-                width: "30px",
-                height: "30px",
-                background: "white",
-                color: "black",
-                borderRadius: "10px",
-              }}
-            />
-            <p>
-              By continuing, I agree to the <Link href="#">terms</Link> of use &{" "}
-              <Link href="#">privacy ploicy</Link>
-            </p>
-          </div>
         </div>
       </div>
     </div>
