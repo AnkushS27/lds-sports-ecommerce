@@ -5,6 +5,7 @@ import Footer from "@/Components/Footer/page";
 
 import style1 from "./page.module.css";
 import { useState } from "react";
+import { useSession } from "next-auth/react";
 
 type addressObj = {
   city: string;
@@ -43,9 +44,11 @@ let sampleUser = {
 
 export default function Profile() {
   const [edit, setEdit] = useState(false);
+  const { data: session } = useSession();
   const updateDetails = () => {
     // Send the details to the backend
     setEdit(!edit);
+    console.log(session);
   };
   const cancelUpdate = () => {
     // Request the previous details from the backend

@@ -16,23 +16,24 @@ export default function LoginSignup() {
   const [showPass, setShowPass] = useState(false);
 
   const onLogin = async () => {
-    // try {
-    //   signIn('credentials', {
-    //     user,
-    //     callbackUrl: '/',
-    //     redirect: true,
-    //   });
-    // } catch (error: any) {
-    //   console.log('Login Failed', error.message);
-    // }
+    const { email, password } = user;
     try {
-      const resp =  (await axios.post('/api/user/login',user)).data;
-      console.log(resp)
-      if (resp.result) router.push("/");
-      else console.log('Some error at API');
+      signIn('credentials', {
+        email,  password,
+        callbackUrl: '/',
+        redirect: true,
+      });
     } catch (error: any) {
-      console.log("Login failed", error.message);
-    }
+      console.log('Login Failed', error.message);
+    }
+//     try {
+//       const resp =  (await axios.post('/api/user/login',user)).data;
+//       console.log(resp)
+//       if (resp.result) router.push("/");
+//       else console.log('Some error at API');
+//     } catch (error: any) {
+//       console.log("Login failed", error.message);
+//     }
   };
 
   return (

@@ -9,7 +9,7 @@ async function getUser(email: string): Promise<User | undefined> {
     return {email, id: '101',};
 }
 
-export const { auth, signIn, signOut } = NextAuth({
+export const { handlers : { GET, POST}, auth, signIn, signOut, update } = NextAuth({
   ...authConfig,
   providers: [
     Credentials({
