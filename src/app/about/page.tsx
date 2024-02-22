@@ -7,16 +7,16 @@ import HorizontalNavBar from "@/Components/HorizontalNavbar/page";
 import VerticalNavBar from "@/Components/VerticalNavbar/page";
 
 import { loggedIn } from "@/app/api/user/loggedIn";
+import { auth } from "@/auth";
 
-export default function About() {
-  const isloggedIn = loggedIn({});
-
+export default async function About() {
+  const session = await auth();
   return (
     <div className={styles.aboutWrapper}>
-      <HorizontalNavBar params={{ name: "ABC", loggedIn: isloggedIn }} />
+      <HorizontalNavBar params={{ name: "ABC", loggedIn: session?true:false }} />
       <div className={styles.verticalMainContainer}>
         <VerticalNavBar
-          params={{ name: "ABC", loggedIn: isloggedIn, homePage: true }}
+          params={{ name: "ABC", loggedIn: session?true:false }}
         />
 
         <main className={styles.aboutContainer}>

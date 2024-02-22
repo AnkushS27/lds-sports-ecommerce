@@ -11,8 +11,7 @@ import { FaShoppingCart, FaRegUserCircle } from 'react-icons/fa';
 import Link from 'next/link';
 import Image from 'next/image'
 import Logo from '../../../public/logo.svg'
-import axios from 'axios';
-import { signOut, useSession } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
 
 export default function HorizontalNavBar(
     {params} : {
@@ -23,11 +22,6 @@ export default function HorizontalNavBar(
     }
 ) { 
     const [search,setSearch] = useState('');
-    const handleLogout = async () => {
-        const resp = (await axios.post('/api/user/logout')).data;
-        console.log(resp);
-    }
-    const {data: session} = useSession();
     return (
     <div className={style1.NavMainWrapper}>
         <div className={style1.NavMainContainer}>
@@ -36,14 +30,20 @@ export default function HorizontalNavBar(
                 <Link href='/'>
                     <Image className={style1.navLogoImage} src={Logo} alt={"logo"}/> 
                 </Link>
-                <div className={style1.iconsContainer}>
-                    <Link href="/cart">
-                        <FaShoppingCart className={style1.navbarIcon} />
-                    </Link>
-                    <Link href="/profile">
-                        <FaRegUserCircle className={style1.navbarIcon} />
-                    </Link>
-                </div>
+                {params.loggedIn ?
+                    <div className={style1.iconsContainer}>
+                        <Link href="/cart">
+                            <FaShoppingCart className={style1.navbarIcon} />
+                        </Link>
+                        <Link href="/profile">
+                            <FaRegUserCircle className={style1.navbarIcon} />
+                        </Link>
+                    </div>
+                    :
+                    <div className={style1.iconsContainer}>
+                        <Link href='/login' className={style1.navAuthenticationItem}> <span>Login</span> </Link>
+                    </div>
+                }
             </div>
             <div className={style1.NavRightSection}>
                 {/* Search bar */}
@@ -52,10 +52,10 @@ export default function HorizontalNavBar(
                     <Link href={`/search/${search}`} className={style1.navSearchBtn}> Search </Link>
                 </div>
                 {/* Authentication Options */}
-                {session?.user ?
+                {params.loggedIn ?
                     <div className={style1.navAuthenticationCotanier}>
                         <Link href='/profile' className={style1.navAuthenticationItem}> <span>Profile</span> </Link>
-                        <div className={style1.navAuthenticationItem} onClick={() => {signOut()}}> <span>Logout</span> </div>
+                        <div className={style1.navAuthenticationItem} onClick={() => {signOut({callbackUrl:'/'})}}> <span>Logout</span> </div>
                     </div>
                 :    
                 <div className={style1.navAuthenticationCotanier}>

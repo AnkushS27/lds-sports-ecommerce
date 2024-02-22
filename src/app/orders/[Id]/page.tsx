@@ -3,13 +3,15 @@ import VerticalNavBar from "@/Components/VerticalNavbar/page";
 import Footer from "@/Components/Footer/page";
 
 import styles from "./page.module.css";
+import { auth } from "@/auth";
 
-export default function order({ params }: { params: { Id: string } }) {
+export default async function order({ params }: { params: { Id: string } }) {
+  const session = await auth();
   return (
     <div className={styles.mainWrapper}>
-            <HorizontalNavBar params={{name:'ABC',loggedIn:true}} />
+            <HorizontalNavBar params={{name:'ABC',loggedIn: session?true:false}} />
             <div className={styles.HorizontalmainContainer}> 
-                <VerticalNavBar params={{name : 'ABC', loggedIn : true}} />
+                <VerticalNavBar params={{name : 'ABC', loggedIn : session?true:false}} />
                 <div className={styles.VerticalmainContainer}>
                 <div className={styles.order}>
       <h2 className={styles.orderId}>Order #987654</h2>

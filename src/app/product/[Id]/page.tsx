@@ -35,7 +35,7 @@ export default async function ProductDetails({
       <HorizontalNavBar params={{ name: "ABC", loggedIn: isloggedIn }} />
       <div className={style1.HorizontalMainContainer}>
         <VerticalNavBar
-          params={{ name: "ABC", loggedIn: isloggedIn, homePage: true }}
+          params={{ name: "ABC", loggedIn: isloggedIn }}
         />
         <div className={style1.VerticalMainContainer}>
           <div className={style1.productContainer}>

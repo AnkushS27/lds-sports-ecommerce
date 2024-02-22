@@ -4,6 +4,8 @@ import { loggedIn } from "../api/user/loggedIn";
 
 import style1 from './page.module.css'
 import Link from "next/link";
+import { useEffect } from "react";
+import { auth } from "@/auth";
 
 let ordersItems = [
     {id:'001',createdDate:'12,june,2024',shipping:'Delivered', price: '₹12,000'},
@@ -14,13 +16,13 @@ let ordersItems = [
 ]
 
 
-export default function Orders() {
-    const isloggedIn = loggedIn({});
+export default async function Orders() {
+    const session = await auth();
     return (
         <div className={style1.mainWrapper}>
-            <HorizontalNavBar params={{name:'ABC',loggedIn: isloggedIn}} />
+            <HorizontalNavBar params={{name:'ABC',loggedIn: session?true:false}} />
             <div className={style1.HorizontalmainContainer}> 
-                <VerticalNavBar params={{name : 'ABC', loggedIn : isloggedIn, homePage : true}} />
+                <VerticalNavBar params={{name : 'ABC', loggedIn : session?true:false}} />
                 <div className={style1.VerticalmainContainer}>
                     <div className={style1.ordersHolder}>
                         {ordersItems.map((item,index) => {

@@ -8,9 +8,9 @@ import VerticalNavBar from "@/Components/VerticalNavbar/page";
 
 import { loggedIn } from '@/app/api/user/loggedIn';
 import HorizontalNavBar from "@/Components/HorizontalNavbar/page";
+import { useSession } from "next-auth/react";
 
 export default function Cart() {
-  const isloggedIn = loggedIn({});
   const [cartItems, setCartItems] = useState([
     {
       id: 1,
@@ -70,11 +70,12 @@ export default function Cart() {
     return subtotal.toFixed(2);
   };
 
+  const { data: session } = useSession();
   return (
     <div className={styles.mainWrapper}>
-        <HorizontalNavBar params={{name:'ABC',loggedIn: isloggedIn}} />
+        <HorizontalNavBar params={{name:'ABC',loggedIn: session? true:false}} />
         <div className={styles.HorizontalmainContainer}> 
-            <VerticalNavBar params={{name : 'ABC', loggedIn : isloggedIn, homePage : true}} />
+            <VerticalNavBar params={{name : 'ABC', loggedIn : session? true:false}} />
             <div className={styles.VerticalmainContainer}>
               <div className={styles.productCradWrapper}>
                 <div className={styles.productCardHead}> Cart </div>

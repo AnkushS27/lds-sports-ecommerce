@@ -1,14 +1,4 @@
-// import NextAuth from 'next-auth'
-
-// export const {
-//     handlers : { GET, POST },
-//     auth,
-// } = NextAuth({
-//     providers:[],
-// });
-
 import type { NextAuthConfig } from 'next-auth';
-import corsHandler from './corsHandler';
  
 export const authConfig = {
   pages: {

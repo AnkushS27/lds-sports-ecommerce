@@ -3,14 +3,15 @@ import HorizontalNavBar from "@/Components/HorizontalNavbar/page";
 import VerticalNavBar from "@/Components/VerticalNavbar/page";
 
 import style1 from './page.module.css'
+import { auth } from "@/auth";
 
-export default function Offers() {
-    let isloggedIn = true;
+export default async function Offers() {
+    const session = await auth();
     return (
         <div className={style1.mainWrapper}>
-            <HorizontalNavBar params={{name:'ABC',loggedIn: isloggedIn}} />
+            <HorizontalNavBar params={{name:'ABC',loggedIn:session?true:false}} />
             <div className={style1.HorizontalmainContainer}> 
-                <VerticalNavBar params={{name : 'ABC', loggedIn : isloggedIn, homePage : true}} />
+                <VerticalNavBar params={{name : 'ABC', loggedIn :session?true:false}} />
                 <div className={style1.VerticalmainContainer}>
                     <div className="OffersHead"> Offer </div>
                     <div className="OfferSection">

@@ -57,9 +57,9 @@ export default function Profile() {
   const [user, setUser] = useState<userType>(sampleUser);
   return (
     <div className={style1.mainWrapper}>
-      <HorizontalNavBar params={{ name: "ABC", loggedIn: true }} />
+      <HorizontalNavBar params={{ name: "ABC", loggedIn: session?true:false }} />
       <div className={style1.HorizontalmainContainer}>
-        <VerticalNavBar params={{ name: "ABC", loggedIn: true }} />
+        <VerticalNavBar params={{ name: "ABC", loggedIn: session?true:false }} />
         <div className={style1.VerticalmainContainer}>
           <div className={style1.updateBtnsContainer}>
             <div

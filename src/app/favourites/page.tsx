@@ -6,14 +6,15 @@ import { loggedIn } from "../api/user/loggedIn";
 
 import style1 from './page.module.css'
 import ProductCard from "@/Components/productCard/page";
+import { auth } from "@/auth";
 
-export default function Favourites() {
-    const isloggedIn = loggedIn({});
+export default async function Favourites() {
+    const session = await auth();
     return (
         <div className={style1.mainWrapper}>
-            <HorizontalNavBar params={{name:'ABC',loggedIn: isloggedIn}} />
+            <HorizontalNavBar params={{name:'ABC',loggedIn: session? true:false}} />
             <div className={style1.HorizontalMainContainer}>
-                <VerticalNavBar params={{name : 'ABC', loggedIn : isloggedIn, homePage : true}} />
+                <VerticalNavBar params={{name : 'ABC', loggedIn : session? true:false}} />
                 <div className={style1.VerticalMainContainer}>
                     <div className={style1.productCardWrapper}>
                         <div className={style1.productCardHead}> Favourites </div>

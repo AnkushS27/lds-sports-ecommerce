@@ -14,9 +14,9 @@ import VerticalNavBar from "@/Components/VerticalNavbar/page";
 //     var res = await fetch('http://localhost:3000/api/user',{method:'GET',});
 //     const data = await res.json();
 //     return data.result === 'success';
-// }
-import { loggedIn } from './api/user/loggedIn';
+// }\
 import ProductCard from '@/Components/productCard/page';
+import { auth } from '@/auth';
 
 let product = {name:'prod_1',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}
 
@@ -24,13 +24,13 @@ let trending = [product, product, product, product, product, product, product]
 let forYou = [product, product, product, product, product, product, product]
 let latest = [product, product, product, product, product, product, product]
 let others = [product, product, product, product, product, product, product]
-export default function Home() {
-    const isloggedIn = loggedIn({});
+export default async function Home() {
+    const session = await auth();
     return (
         <div className={style1.mainWrapper}>
-            <HorizontalNavBar params={{name:'ABC',loggedIn: isloggedIn}} />
+            <HorizontalNavBar params={{name:'ABC',loggedIn: session? true : false}} />
             <div className={style1.HorizontalmainContainer}> 
-                <VerticalNavBar params={{name : 'ABC', loggedIn : isloggedIn, homePage : true}} />
+                <VerticalNavBar params={{name : 'ABC', loggedIn : session? true : false}} />
                 <div className={style1.VerticalmainContainer}>
                     <div className={style1.brandAdsDisplayContainer}>
                         Display your brand ads here.

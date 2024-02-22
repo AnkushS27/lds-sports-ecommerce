@@ -4,14 +4,15 @@ import { loggedIn } from '../../api/user/loggedIn'
 import style1 from './page.module.css'
 import VerticalNavBar from '@/Components/VerticalNavbar/page';
 import ProductCard from '@/Components/productCard/page';
+import { auth } from '@/auth';
 
-export default function SearchResults({ params } : { params : { query : string } }) {
-    const isloggedIn = loggedIn({});
+export default async function SearchResults({ params } : { params : { query : string } }) {
+    const session = await auth();
     return (
         <div className={style1.mainWrapper}>
-            <HorizontalNavBar params={{name:'ABC',loggedIn: isloggedIn}} />
+            <HorizontalNavBar params={{name:'ABC',loggedIn: session?true:false}} />
             <div className={style1.HorizontalmainContainer}>
-                <VerticalNavBar params={{name : 'ABC', loggedIn : isloggedIn, homePage : true}} />
+                <VerticalNavBar params={{name : 'ABC', loggedIn : session?true:false}} />
                 <div className={style1.VerticalmainContainer}>
                     <div className={style1.optionsSection}>
                         <div className={style1.optionItem}>sort by price low to high </div>

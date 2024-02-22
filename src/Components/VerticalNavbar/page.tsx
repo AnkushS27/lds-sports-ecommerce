@@ -11,12 +11,12 @@ import { FiLogIn, FiLogOut } from "react-icons/fi";
 // Styles
 import style1  from './page.module.css';
 import { useState } from "react";
+import { FcAbout } from "react-icons/fc";
 
 export default function VerticalNavBar(
     {params} : {params : 
         {name : string,
          loggedIn : boolean,
-         homePage ?: boolean,
         }
     }) {
     const [showNavBar, setShowNavBar] = useState(false);
@@ -65,6 +65,10 @@ export default function VerticalNavBar(
                 <Link href='/faq' className={style1.VerticalNavSectionItem}>
                     <FaQuestion className={style1.VerticalNavSectionIcon} />
                     FAQ
+                </Link>
+                <Link href='/about' className={style1.VerticalNavSectionItem}>
+                    <FcAbout className={style1.VerticalNavSectionIcon} />
+                    About
                 </Link>
                 <div className={style1.VerticalNavSectionItem}>
                     <MdOutlineLabel className={style1.VerticalNavSectionIcon} />
