@@ -4,6 +4,7 @@ const userSchema = new mongoose.Schema({
     username: {type: String, required: true,},
     email:{type: String, required: true,   unique: true,},
     password: {type: String, required: true,}, // Hash and salt password before storing
+    profileCompletion: {type: Boolean, required: true}, // In case if user sign up but not sharing address and all.
     addresses: [{type: {
           firstName: {type: String, required: true,},
           lastName:  {type: String, required: true,},
@@ -19,6 +20,9 @@ const userSchema = new mongoose.Schema({
     forgotPasswordTokenExpiry: {type:Date},
     createdAt: {type: Date,default: Date.now,},
     updatedAt: {type: Date,default: Date.now,},
+
+    favourites: [{type: {type: String,}}],  // FavouriteId[]
+    cart: [{type: {type: String}}],  // Cart[]
 });
 
 const UserModel = mongoose.models.User || mongoose.model('User', userSchema);
