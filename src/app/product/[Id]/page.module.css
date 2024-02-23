@@ -296,16 +296,14 @@
     cursor: pointer;
 }
 
-.productCommentsContainer {
+.QNAContainer {
     display: flex;
-    align-items: center;
-    justify-content: center;
-
+    flex-direction: column;
+    gap: 30px;
+    max-width: 1100px;
     width: 100%;
-    height: 200px;
-
-    font-size: 40px;
-    font-weight: 800;
+    margin: 40px auto;
+    padding: 0 10px;
 }
 
 .productTagsContainer {
