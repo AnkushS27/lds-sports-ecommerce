@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema({
     productId: {type: String, required: true, unique: true},
+    img: {type: [String],}, // URLs of the images
     name: {type: String, required: true},
     desc: {type: String, required: true},
     companyId: {type: String, required: true},  // Contains the copmany Id.

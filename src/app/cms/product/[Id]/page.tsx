@@ -5,31 +5,36 @@ import style1 from './page.module.css'
 import { useState } from "react";
 import Link from "next/link";
 
+
 let prod = {
-    pid: "001",
-    name: "cricket Bat",
-    company: "kokabura",
-    price: "₹1000",
-    tags: ['bat', 'cricket bat', 'cricket','kokabura'],
-    desc: "Product 1 is one the most selled products from the company 1. Limited products so buy soon.",
-    DiversityInfo:[
-      {size: 6, color: 'black', stock: 40, price: '₹120'},
-      {size: 7, color: 'black', stock: 40, price: '₹120'},
-      {size: 8, color: 'black', stock: 40, price: '₹120'},
-      {size: 6, color: 'white', stock: 40, price: '₹120'},
-      {size: 6, stock: 40, price: '₹120'},
-    ],
-  };
+  pid: "001",
+  name: "cricket Bat",
+  company: "kokabura",
+  price: "₹1000",
+  tags: ['bat', 'cricket bat', 'cricket','kokabura'],
+  desc: "Product 1 is one the most selled products from the company 1. Limited products so buy soon.",
+  variations: { name: '', variations: [{ diff: '', stock: 0, price: 0 }] },
+};
+
 
 export default function Product({ params } : {
     params : {
         Id : string,
     }
 }) {
-    const [addChoice, setAddChoice] = useState(false);
     const [product, setProduct] = useState(prod);
     const [activeTagIndex, setActiveTagIndex] = useState(-1);
     
+    const AddVariation = () => {
+        let newVariation = {diff:'', stock:0, price: 0};
+        setProduct((prevProd) => ({
+          ...prevProd,
+          variations: {
+            ...prevProd.variations,
+            variations: [newVariation,...prevProd.variations.variations],
+          },
+        }));
+    }
     const SendUpdateToBackend = () => {
       console.log(product);
     }
@@ -41,6 +46,35 @@ export default function Product({ params } : {
       }));
       setActiveTagIndex(product.tags.length);
     };
+
+    const updateProductVariationName = (name: string) => {
+      setProduct((prevProd) => ({
+        ...prevProd,
+        variations: {
+          ...prevProd.variations,
+          name: name,
+        },
+      }));
+    };
+    
+    const updateProductVariation = (idx: number, key: string, value: string | number) => {
+      setProduct((prevProd) => ({
+        ...prevProd,
+        variations: {
+          ...prevProd.variations,
+          variations: prevProd.variations.variations.map((variation, i) => {
+            if (i === idx) {
+              return {
+                ...variation,
+                [key]: value,
+              };
+            }
+            return variation;
+          }),
+        },
+      }));
+    };
+    
 
     const changeActiveTagIndex = (idx: number) => {
       // Check if the active index is current index.
@@ -113,39 +147,32 @@ export default function Product({ params } : {
                     </div>
 
                     <textarea className={style1.productTitleDesc} placeholder="Description about your product..."
-                    onChange={(e) => {updateProductDetail('desc',e.target.value)}}>{product.desc}</textarea>
+                    onChange={(e) => {updateProductDetail('desc',e.target.value)}} defaultValue={product.desc}></textarea>
                     
                   </div>
                 </div>
                 <div className={style1.productBottomContainer}>
                   <div className={style1.prodBL}>
                     <div className={style1.productDiversityContainer}>
-                    <div className={style1.addDiversityBtn} onClick={() => {setAddChoice(true)}}> + Add Choice </div>
-                      {/* Diversity choices here */}
-                      {product.DiversityInfo.map((diversity, index) => {
-                      return (
-                        <div className={style1.productDiversityOptionsContainer} key={index}>
-                          {/* Common information */}
-                          <div className={style1.DiversityItemHead}>Size: {diversity.size}</div>
-                          <div className={style1.DiversityItem}>Color: {diversity.color || 'N/A'}</div>
-                          <div className={style1.DiversityItem}>Stock: {diversity.stock}</div>
-                          <div className={style1.DiversityItem}>Price: {diversity.price}</div>
-                          
-                          {/* Optional attributes */}
-                          {Object.entries(diversity).map(([key, value], idx) => {
-                            if (!['size', 'color', 'stock', 'price'].includes(key)) {
-                              return (
-                                <div className={style1.DiversityItem} key={idx}>
-                                  {key}: {value}
-                                </div>
-                              );
-                            }
-                            return null;
-                          })}
-                        </div>
-                      );
-                    })}
-
+                      <div className={style1.productVariationsTop}>
+                        <input type="text" className={style1.productVariationsName} defaultValue={product.variations.name}
+                        onChange={(e) => {updateProductVariationName(e.target.value)}} placeholder="Variation Name" />
+                        <div className={style1.addVariationBtn} onClick={() => {AddVariation()}}> + Add Variation </div>
+                      </div>
+                      <div className={style1.variationsHolder}>
+                        {product.variations.variations.map((diff, index) => {
+                          return (
+                            <div className={style1.variationItemContainer} key={index}>
+                              <input type="text" className={style1.variationItemDiff} onChange={(e) => {updateProductVariation(index,'diff',e.target.value)}}
+                              defaultValue={diff.diff !== ''? diff.diff:undefined} placeholder="diff value" />
+                              <input type="numeric" className={style1.variationItemDiff} onChange={(e) => {updateProductVariation(index,'stock',e.target.value)}}
+                              defaultValue={diff.stock? diff.stock:undefined} placeholder="diff stock" />
+                              <input type="numeric" className={style1.variationItemDiff} onChange={(e) => {updateProductVariation(index,'price',e.target.value)}}
+                              defaultValue={diff.price? diff.price:undefined} placeholder="diff price" />
+                            </div>
+                          )
+                        })}
+                      </div>
                     </div>
                   </div>
                   <div className={style1.prodBR}>
