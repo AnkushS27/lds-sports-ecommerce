@@ -1,0 +1,65 @@
+.commentContainer {
+    display: flex;
+    flex-direction: column;
+    color: #000;
+}
+
+.commentBox {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.userImageContainer {
+    display: flex;
+}
+
+.userImage {
+    background-color: #000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.commentDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.commentDetails p{
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.commentDetails p span {
+    font-size: 15px;
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+.commentDetails .buttonsContainer {
+    display: flex;
+    gap: 20px;
+}
+
+.buttonsContainer button, .repliesDropdown {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.buttonsContainer button:hover, .repliesDropdown:hover {
+    background-color: #e7e7e7;
+}
+
+.likeButton {
+    font-size: 20px;
+}

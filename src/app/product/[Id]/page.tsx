@@ -4,6 +4,9 @@ import Footer from "@/Components/Footer/page";
 
 import style1 from "./page.module.css";
 import { loggedIn } from "@/app/api/user/loggedIn";
+import Comment from "@/Components/Comment/page";
+import Chatbox from "@/Components/Chatbox/page";
+
 // import { getData } from "@/db/testing";
 
 let product = {
@@ -11,14 +14,14 @@ let product = {
   name: "cricket Bat",
   company: "kokabura",
   price: "₹1000",
-  tags: ['bat', 'cricket bat', 'cricket','kokabura'],
+  tags: ["bat", "cricket bat", "cricket", "kokabura"],
   desc: "Product 1 is one the most selled products from the company 1. Limited products so buy soon.",
-  DiversityInfo:[
-    {size: 6, color: 'black', stock: 40, price: '₹120'},
-    {size: 7, color: 'black', stock: 40, price: '₹120'},
-    {size: 8, color: 'black', stock: 40, price: '₹120'},
-    {size: 6, color: 'white', stock: 40, price: '₹120'},
-    {size: 6, stock: 40, price: '₹120'},
+  DiversityInfo: [
+    { size: 6, color: "black", stock: 40, price: "₹120" },
+    { size: 7, color: "black", stock: 40, price: "₹120" },
+    { size: 8, color: "black", stock: 40, price: "₹120" },
+    { size: 6, color: "white", stock: 40, price: "₹120" },
+    { size: 6, stock: 40, price: "₹120" },
   ],
 };
 
@@ -34,9 +37,7 @@ export default async function ProductDetails({
     <div className={style1.mainWrapper}>
       <HorizontalNavBar params={{ name: "ABC", loggedIn: isloggedIn }} />
       <div className={style1.HorizontalMainContainer}>
-        <VerticalNavBar
-          params={{ name: "ABC", loggedIn: isloggedIn }}
-        />
+        <VerticalNavBar params={{ name: "ABC", loggedIn: isloggedIn }} />
         <div className={style1.VerticalMainContainer}>
           <div className={style1.productContainer}>
             <div className={style1.productDetailsContainer}>
@@ -61,10 +62,12 @@ export default async function ProductDetails({
               <div className={style1.RightSection}>
                 <div className={style1.productTitleHead}>{product.name}</div>
                 <div className={style1.productTagsContainer}>
-                  {product.tags.map((tag,index) => {
-                    return(
-                      <div className={style1.productTagItem} key={index}>{tag}</div>
-                    )
+                  {product.tags.map((tag, index) => {
+                    return (
+                      <div className={style1.productTagItem} key={index}>
+                        {tag}
+                      </div>
+                    );
                   })}
                 </div>
                 <div className={style1.productCompany}>{product.company}</div>
@@ -72,16 +75,29 @@ export default async function ProductDetails({
                 <div className={style1.productDiversityContainer}>
                   {product.DiversityInfo.map((diversity, index) => {
                     return (
-                      <div className={style1.productDiversityOptionsContainer} key={index}>
+                      <div
+                        className={style1.productDiversityOptionsContainer}
+                        key={index}
+                      >
                         {/* Common information */}
-                        <div className={style1.DiversityItemHead}>Size: {diversity.size}</div>
-                        <div className={style1.DiversityItem}>Color: {diversity.color || 'N/A'}</div>
-                        <div className={style1.DiversityItem}>Stock: {diversity.stock}</div>
-                        <div className={style1.DiversityItem}>Price: {diversity.price}</div>
-                        
+                        <div className={style1.DiversityItemHead}>
+                          Size: {diversity.size}
+                        </div>
+                        <div className={style1.DiversityItem}>
+                          Color: {diversity.color || "N/A"}
+                        </div>
+                        <div className={style1.DiversityItem}>
+                          Stock: {diversity.stock}
+                        </div>
+                        <div className={style1.DiversityItem}>
+                          Price: {diversity.price}
+                        </div>
+
                         {/* Optional attributes */}
                         {Object.entries(diversity).map(([key, value], idx) => {
-                          if (!['size', 'color', 'stock', 'price'].includes(key)) {
+                          if (
+                            !["size", "color", "stock", "price"].includes(key)
+                          ) {
                             return (
                               <div className={style1.DiversityItem} key={idx}>
                                 {key}: {value}
@@ -103,8 +119,18 @@ export default async function ProductDetails({
                 </div>
               </div>
             </div>
-            <div className={style1.productCommentsContainer}>
-              No Comments Yet !
+            <div className={style1.QNAContainer}>
+              <h3>45 Comments</h3>
+              <div className={style1.productChatContainer}>
+                <Chatbox />
+              </div>
+              <div className={style1.productCommentsContainer}>
+                <Comment
+                  content="This is a sample comment."
+                  authorId="user1234"
+                  createdDate="2021-08-01"
+                />
+              </div>
             </div>
           </div>
           <Footer />
