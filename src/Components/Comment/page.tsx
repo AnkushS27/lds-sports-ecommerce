@@ -4,17 +4,21 @@ import styles from "./page.module.css";
 import { commentType } from "@/TypeInterfaces/TypeInterfaces";
 import Chatbox from "@/Components/Chatbox/page";
 
-import { AiOutlineLike } from "react-icons/ai";
+import { AiFillLike, AiOutlineLike } from "react-icons/ai";
 
 export default function Comment(props: commentType) {
-  const [showChatbox, setShowChatbox] = useState(false);
-  const [replyButtonText, setReplyButtonText] = useState('Reply');
+  const [showReplies, setShowReplies] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
+  const [liked, setliked] = useState(false);
+  const [replyCount, setReplyCount] = useState(5);
 
-  const handleReplyClick = () => {
-    setShowChatbox(!showChatbox);
-    setReplyButtonText(showChatbox ? 'Reply' : 'Cancel');
-  };
+  const updateLike = () => {
+    if (liked) {setLikeCount(likeCount-1); setliked(false);}
+    else {setLikeCount(likeCount+1); setliked(true);}
 
+    // Send the update request to backend.
+    console.log(likeCount);
+  }
   return (
     <div className={styles.commentContainer}>
       <div className={styles.commentBox}>
@@ -28,15 +32,17 @@ export default function Comment(props: commentType) {
           </p>
           <p>{props.content}</p>
           <div className={styles.buttonsContainer}>
-            <button><AiOutlineLike className={styles.likeButton}/>1</button>
-            <button onClick={handleReplyClick}>{replyButtonText}</button>
+            <button onClick={() => {updateLike()}}>
+              {liked? <AiFillLike className={styles.likeButton} />: <AiOutlineLike className={styles.likeButton} />}{likeCount}
+            </button>
+            <button onClick={() => {setShowReplies(!showReplies)}}>{replyCount} replies</button>
           </div>
-          {showChatbox && <Chatbox />}
-          <div className={styles.repliesContainer}>
-            <button className={styles.repliesDropdown}>
+          {showReplies && <Chatbox />}
+          {/* <div className={styles.repliesContainer}>
+            <button className={styles.repliesDropdown} >
               🔻 2 replies
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

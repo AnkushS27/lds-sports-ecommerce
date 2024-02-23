@@ -1,3 +1,4 @@
+"use client";
 import HorizontalNavBar from "@/Components/HorizontalNavbar/page";
 import VerticalNavBar from "@/Components/VerticalNavbar/page";
 import Footer from "@/Components/Footer/page";
@@ -6,6 +7,7 @@ import style1 from "./page.module.css";
 import { loggedIn } from "@/app/api/user/loggedIn";
 import Comment from "@/Components/Comment/page";
 import Chatbox from "@/Components/Chatbox/page";
+import { useState } from "react";
 
 // import { getData } from "@/db/testing";
 
@@ -16,21 +18,22 @@ let product = {
   price: "₹1000",
   tags: ["bat", "cricket bat", "cricket", "kokabura"],
   desc: "Product 1 is one the most selled products from the company 1. Limited products so buy soon.",
-  DiversityInfo: [
-    { size: 6, color: "black", stock: 40, price: "₹120" },
-    { size: 7, color: "black", stock: 40, price: "₹120" },
-    { size: 8, color: "black", stock: 40, price: "₹120" },
-    { size: 6, color: "white", stock: 40, price: "₹120" },
+  Variations: {name:'Sizes', variations: [
     { size: 6, stock: 40, price: "₹120" },
-  ],
+    { size: 7, stock: 40, price: "₹10" },
+    { size: 8, stock: 40, price: "₹130" },
+    { size: 9, stock: 40, price: "₹180" },
+    { size: 10, stock: 40, price: "₹210" },
+  ]},
 };
 
-export default async function ProductDetails({
+export default function ProductDetails({
   params,
 }: {
   params: { Id: string };
 }) {
   const isloggedIn = loggedIn({});
+  const [variationIdx, setVariationIdx] = useState(0);
   // const data = await getData();
   // console.log(data);
   return (
@@ -73,42 +76,26 @@ export default async function ProductDetails({
                 <div className={style1.productCompany}>{product.company}</div>
                 <div className={style1.productTitleDesc}>{product.desc}</div>
                 <div className={style1.productDiversityContainer}>
-                  {product.DiversityInfo.map((diversity, index) => {
+                  <div className={style1.productVaritionsName}>{product.Variations.name}</div>
+                  <div className={style1.productVariationsHolder}>
+                  {product.Variations.variations.map((diversity, index) => {
                     return (
-                      <div
-                        className={style1.productDiversityOptionsContainer}
-                        key={index}
-                      >
-                        {/* Common information */}
-                        <div className={style1.DiversityItemHead}>
-                          Size: {diversity.size}
-                        </div>
-                        <div className={style1.DiversityItem}>
-                          Color: {diversity.color || "N/A"}
-                        </div>
-                        <div className={style1.DiversityItem}>
-                          Stock: {diversity.stock}
-                        </div>
-                        <div className={style1.DiversityItem}>
-                          Price: {diversity.price}
-                        </div>
-
-                        {/* Optional attributes */}
-                        {Object.entries(diversity).map(([key, value], idx) => {
-                          if (
-                            !["size", "color", "stock", "price"].includes(key)
-                          ) {
-                            return (
-                              <div className={style1.DiversityItem} key={idx}>
-                                {key}: {value}
-                              </div>
-                            );
-                          }
-                          return null;
-                        })}
-                      </div>
+                        <div className={style1.productDiversityItem} style={index==variationIdx ? {backgroundColor:'white',color:'black'}:{}}
+                        key={index} onClick={() => {setVariationIdx(index)}}>{diversity.size}</div>
                     );
                   })}
+                  </div>
+                </div>
+                <div className="productPriceContainer">
+                  <div className="productPriceHolder">
+                    {/* Previous Product Price */}
+                    <div className={style1.productPrice}>{product.Variations.variations[variationIdx].price}</div>
+                    {/* Price After the discount */}
+                  </div>
+                  <div className="productDiscountOptions">
+                    {/* <div className="productDiscountHead">Discount</div> */}
+                    {/* Discount percentage */}
+                  </div>
                 </div>
                 <div className={style1.productButtons}>
                   <div className={style1.productCartBtn}>+ Add to Cart</div>
@@ -123,13 +110,6 @@ export default async function ProductDetails({
               <h3>45 Comments</h3>
               <div className={style1.productChatContainer}>
                 <Chatbox />
-              </div>
-              <div className={style1.productCommentsContainer}>
-                <Comment
-                  content="This is a sample comment."
-                  authorId="user1234"
-                  createdDate="2021-08-01"
-                />
               </div>
             </div>
           </div>

@@ -1,7 +1,8 @@
 .chatBoxContainer {
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
     gap: 20px;
 }
 
@@ -30,15 +31,51 @@
     font-size: 18px;
     border: none;
     outline: none;
+    background-color: white;
+    color: black;
 }
 
 .inputContainer button {
-    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: auto;
+    height: 40px;
+
+    padding: 20px;
+
+    background: rgba(228, 228, 228, 0.747);
+    color: black;
     outline: none;
     border: none;
+    border-radius: 10px;
+    margin: 10px;
     cursor: pointer;
 }
 
 .inputContainer button:hover {
     font-weight: 600;
+}
+
+.productCommentsWrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    width: 100%;
+    height: fit-content;
+
+    gap: 30px;
+}
+
+.productCommentsContainer {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    width: 100%;
+    height: fit-content;
 }
