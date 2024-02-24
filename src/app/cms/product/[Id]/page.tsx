@@ -4,10 +4,12 @@ import VerticalNavBar from "@/Components/CMS/VerticalNavbar/page"
 import style1 from './page.module.css'
 import { useState } from "react";
 import Link from "next/link";
-
+import Image from "next/image";
+import Logo from '../../../../../public/logo.svg'
 
 let prod = {
   pid: "001",
+  imgs: [Logo,Logo],
   name: "cricket Bat",
   company: "kokabura",
   price: "₹1000",
@@ -24,6 +26,8 @@ export default function Product({ params } : {
 }) {
     const [product, setProduct] = useState(prod);
     const [activeTagIndex, setActiveTagIndex] = useState(-1);
+    const imgWindowSize = 3; // 3 + 1 (Add Image Btn)
+    const [activeImgIndex, setActiveImgIndex] = useState(0);
     
     const AddVariation = () => {
         let newVariation = {diff:'', stock:0, price: 0};
@@ -38,6 +42,28 @@ export default function Product({ params } : {
     const SendUpdateToBackend = () => {
       console.log(product);
     }
+
+    const AddNewImg = () => {
+      setProduct((prevProduct) => ({
+        ...prevProduct,
+        imgs: [...prevProduct.imgs,""],
+      }));
+
+      setActiveImgIndex(product.imgs.length-1);
+    }
+
+    const UpdateImg = (img: FileList | null) => {
+      if (!img) return;
+      const link = URL.createObjectURL(img[0]);
+      setProduct((prevProduct) => ({
+        ...prevProduct,
+        imgs: [
+          ...prevProduct.imgs.map((img, idx) => {
+            return idx === activeImgIndex ? link : img;
+          }),
+        ],
+      }));
+    };    
 
     const AddProductTag = () => {
       setProduct((prevProduct) => ({
@@ -117,20 +143,34 @@ export default function Product({ params } : {
                   <div className={style1.LeftSection}>
                     <div className={style1.ImgsContainer}>
                       <div className={style1.ImgsHolder}>
-                        <div className={style1.ImgSmallBox}></div>
-                        <div
-                          className={`${style1.ImgSmallBox} ${style1.activeImgBox}`}
-                        ></div>
-                        <div className={style1.ImgSmallBox}></div>
-                        <div className={style1.ImgSmallBox}></div>
+                        {product.imgs.map((img,idx) => {
+                          if (product.imgs.length - activeImgIndex >= imgWindowSize && idx < activeImgIndex) {
+                            return NaN;
+                          }
+                          return (
+                            <div className={`${style1.ImgSmallBox} ${idx === activeImgIndex ? style1.activeImgBox : ''}`}
+                            key={idx} onClick={() => {setActiveImgIndex(idx)}}>
+                              <Image src={img} alt="" className={style1.smallImg} />
+                            </div>
+
+                          )
+                        })}
+                        <div className={style1.ImgSmallBox} onClick={() => {AddNewImg()}}> + Add </div>
                       </div>
                       <div className={style1.ImgsController}>
-                        <div className={style1.ImgsControllBtn}>^</div>
+                        <div className={style1.ImgsControllBtn} onClick={() => {setActiveImgIndex(activeImgIndex-1)}}
+                        style={activeImgIndex > 0 ? {}:{display:'none'}}>^</div>
                         see more
-                        <div className={style1.ImgsControllBtn}>v</div>
+                        <div className={style1.ImgsControllBtn} onClick={() => {setActiveImgIndex(activeImgIndex+1)}}
+                        style={activeImgIndex < product.imgs.length-1 ? {}:{display:'none'}}>v</div>
                       </div>
                     </div>
-                    <input type="file" accept="image/*" className={style1.ImgContainer} alt="Active Image here" />
+                    <div className={style1.ImgContainer} onClick={() => {document.getElementById('activeInpImg')?.click()}}>
+                        <input type="file" accept="image/*" alt="Active Image here"  hidden id="activeInpImg" onChange={(e) => {UpdateImg(e.target.files)}} />
+                        <div className={style1.smallImg}>
+                          <Image src={product.imgs[activeImgIndex]} alt=" Add your Image" fill />
+                        </div>
+                    </div>
                   </div>
                   <div className={style1.RightSection}>
                     <input type='text' className={style1.productTitleHead} value={product.name}

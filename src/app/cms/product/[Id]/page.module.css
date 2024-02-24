@@ -110,6 +110,22 @@
     border-radius: 15px;
     border: 2px solid grey;
     background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+.smallImg {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+
+    border-radius: 10px;
+    background-color: white;
 }
 
 .activeImgBox { width: 90px; height: 90px; border-radius: 15px; border: 4px solid grey;}
@@ -154,7 +170,6 @@
     background-color: rgba(41, 40, 40, 0.461);
     backdrop-filter: blur(20px);
     color: white;
-
 }
 
 .RightSection {
