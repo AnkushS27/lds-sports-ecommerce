@@ -31,6 +31,9 @@ export default function Cart() {
     // Initial list of products, replace this with your actual data
     { name: "prod_1", company: "c1", pid: "001", price: "₹1500", stock: "50" },
     { name: "prod_2", company: "c1", pid: "002", price: "₹2000", stock: "30" },
+    { name: "prod_3", company: "c1", pid: "003", price: "₹6500", stock: "30" },
+    { name: "prod_4", company: "c1", pid: "004", price: "₹1000", stock: "30" },
+    { name: "prod_5", company: "c1", pid: "005", price: "₹1500", stock: "30" },
     // ... add more products as needed
   ]);
 
@@ -91,7 +94,7 @@ export default function Cart() {
               <span>TOTAL</span>
               <span>Rs. {calculateSubtotal()}</span>
             </div>
-            <button className={styles.checkoutButton}>CHECKOUT</button>
+            <button className={styles.checkoutButton}>PROCEED TO PAYMENT</button>
           </div>
         </div>
       </div>
