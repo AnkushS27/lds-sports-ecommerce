@@ -50,19 +50,40 @@ export default function ProductDetails({ params }: { params: { Id: string } }) {
                 <div className={style1.imageContainer}>
                   <div className={style1.ImgsContainer}>
                     <div className={style1.ImgsHolder}>
-                      <div className={style1.ImgSmallBox}></div>
-                      <div
-                        className={`${style1.ImgSmallBox} ${style1.activeImgBox}`}
-                      ></div>
-                      <div className={style1.ImgSmallBox}></div>
-                      <div className={style1.ImgSmallBox}></div>
-                    </div>
-                    <div className={style1.ImgsController}>
-                      <div className={style1.ImgsControllBtn}><BsCaretUpFill /></div>
-                      <div className={style1.ImgsControllBtn}><BsCaretDownFill/></div>
+                      <div>
+                        <div className={style1.ImgSmallBox}></div>
+                      </div>
+                      <div>
+                        <div
+                          className={`${style1.ImgSmallBox} ${style1.activeImgBox}`}
+                        ></div>
+                      </div>
+                      <div>
+                        <div className={style1.ImgSmallBox}></div>
+                      </div>
+                      <div>
+                        <div className={style1.ImgSmallBox}></div>
+                      </div>
+                      <div>
+                        <div className={style1.ImgSmallBox}></div>
+                      </div>
+                      <div>
+                        <div className={style1.ImgSmallBox}></div>
+                      </div>
+                      <div>
+                        <div className={style1.ImgSmallBox}></div>
+                      </div>
+                      <div>
+                        <div className={style1.ImgSmallBox}></div>
+                      </div>
                     </div>
                   </div>
-                  <div className={style1.ImgContainer}> Active Image here </div>
+                  <div className={style1.biggestImage}>
+                    <div className={style1.ImgContainer}>
+                      {" "}
+                      Active Image here{" "}
+                    </div>
+                  </div>
                 </div>
                 <div className={style1.productButtons}>
                   <div className={style1.productCartBtn}>+ Add to Cart</div>
@@ -87,7 +108,7 @@ export default function ProductDetails({ params }: { params: { Id: string } }) {
                 <div className={style1.productTitleDesc}>{product.desc}</div>
                 <div className={style1.productDiversityContainer}>
                   <div className={style1.productVaritionsName}>
-                    {product.Variations.name}
+                    {product.Variations.name}:
                   </div>
                   <div className={style1.productVariationsHolder}>
                     {product.Variations.variations.map((diversity, index) => {
