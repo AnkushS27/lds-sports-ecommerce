@@ -1,0 +1,81 @@
+.mainWrapper {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: white;
+  color: black;
+  overflow: hidden;
+}
+
+.VerticalMainContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  min-width: 300px;
+  height: 100%;
+
+  overflow-y: auto;
+}
+
+.VerticalMainContainer h1 {
+  padding-top: 30px;
+  text-align: center;
+}
+
+.usersContainer {
+  width: 100%;
+  max-width: 1340px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  overflow-x: auto;
+}
+
+.userTable {
+  width: 100%;
+  margin-top: 20px;
+  border-radius: 10px;
+  border: 2px solid #a5a5a5;
+  padding-bottom: 40px;
+  /* overflow-x: auto; */
+}
+
+.userTable th,
+.userTable td {
+  padding: 8px;
+  text-align: center;
+}
+
+.userTable th {
+  border-bottom: 2px solid #a5a5a5;
+}
+
+.userTable td {
+  padding-top: 40px;
+}
+
+.userTable td:last-child {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.userTable td button {
+  padding: 5px 10px;
+  border: none;
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+.userTable th {
+  background-color: #f2f2f2;
+}
