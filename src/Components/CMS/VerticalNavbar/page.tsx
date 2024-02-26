@@ -30,13 +30,13 @@ export default function VerticalNavBar({
           <Image className={styles.logoImage} src={Logo} alt="Logo" />
         </Link>
         <div className={styles.menuItemsContainer}>
-          <Link href="#" className={styles.menuItem}>
+          <Link href="/cms" className={styles.menuItem}>
             Dashboard
           </Link>
           <Link href="/cms/product/001" className={styles.menuItem}>
             Products
           </Link>
-          <Link href="#" className={styles.menuItem}>
+          <Link href="/cms/customers" className={styles.menuItem}>
             Customers
           </Link>
           <Link href="#" className={styles.menuItem}>
