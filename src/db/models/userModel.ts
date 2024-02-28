@@ -23,7 +23,8 @@ const userSchema = new mongoose.Schema({
     updatedAt: {type: Date,default: Date.now,},
 
     favourites: [{type: {type: String,}}],  // FavouriteId[]
-    cart: [{type: {type: String}}],  // Cart[]
+    cart: [{type: {type: String}}],  // CartId[]
+    orders: [{type: {type: String}}], // OrderId[]
 });
 
 const UserModel = mongoose.models.User || mongoose.model('User', userSchema);
