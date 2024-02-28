@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ConnectDatabase } from "@/db/testing";
+import { ConnectDatabase } from "@/db/db_connections/Connector";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
 

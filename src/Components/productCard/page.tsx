@@ -73,7 +73,7 @@ export default function ProductCard({
       </Link>
 
       {isCart && (
-        <div className={style1.productCardBtnsContainer}>
+        <div className={style1.productCardBtnsContainer} style={{bottom:'40px'}}>
           <div className={style1.productQtyContainer}>
             <div className={style1.productQtyBtn} onClick={handleDecreaseQty}>
               -
@@ -83,49 +83,31 @@ export default function ProductCard({
               +
             </div>
           </div>
-          <div
-            onClick={handleRemoveFromCart}
-            className={style1.removeFromCartBtn}
-          >
-            Remove
-          </div>
         </div>
       )}
 
-      {!isCart && (
         <div className={style1.productCardBtnsContainer}>
-          {favourite ? (
-            <FaHeart
-              className={style1.productCardBtn}
-              onClick={() => {
-                setFavourite(false);
-              }}
-            />
-          ) : (
-            <CiHeart
-              className={style1.productCardBtn}
-              onClick={() => {
-                setFavourite(true);
-              }}
-            />
-          )}
-          {cart ? (
+          {favourite ?
+            <FaHeart className={style1.productCardBtn} onClick={() => {setFavourite(false);}} />
+          :
+            <CiHeart className={style1.productCardBtn} onClick={() => { setFavourite(true);}} />
+          }
+          {cart ?
             <IoCartSharp
               className={style1.productCardBtn}
               onClick={() => {
                 setCart(false);
               }}
-            />
-          ) : (
+            /> :
             <IoCartOutline
               className={style1.productCardBtn}
               onClick={() => {
                 setCart(true);
               }}
             />
-          )}
+          }
         </div>
-      )}
+      
     </div>
   );
 }
