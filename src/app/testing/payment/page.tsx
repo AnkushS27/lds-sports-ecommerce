@@ -1,7 +1,6 @@
 "use client"
 import axios from "axios"
 import { useRouter } from "next/navigation"
-import { v4 as uuid } from 'uuid'
 import sha256 from 'crypto-js/sha256'
 import style1 from './page.module.css'
 
@@ -10,7 +9,7 @@ export default function PaymentTesting() {
     const apiKey = '099eb0cd-02cf-4e2a-8aca-3e6c6aff0399'
     const saltIndex = 1;
     // Self generated transaction id.
-    const transactionId = "MT-"+uuid().toString(36).slice(-6);
+    const transactionId = "MT-517485";
     const payload = JSON.stringify({
         "merchantId": "PGTESTPAYUAT",
         "merchantTransactionId": "MT7850590068188104",
