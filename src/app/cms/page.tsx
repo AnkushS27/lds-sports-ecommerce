@@ -16,27 +16,29 @@ export default function Home() {
         <div className={styles.homeContainer}>
           <div className={styles.cmsContent}>
             <h2>Dashboard</h2>
-            <div className={styles.topContainer}>
-              <div className={styles.card}>
-                <h3>
-                  Total Revenue
-                  <FaSackDollar />
-                </h3>
-                <p>Rs. 1,512.00</p>
-              </div>
-              <div className={styles.card}>
-                <h3>
-                  Total Orders
-                  <AiFillCreditCard />
-                </h3>
-                <p>+62</p>
-              </div>
-              <div className={styles.card}>
-                <h3>
-                  Products in Stock
-                  <MdInventory />
-                </h3>
-                <p>2</p>
+            <div className={styles.topWrapper}>
+              <div className={styles.topContainer}>
+                <div className={styles.card}>
+                  <h3>
+                    Total Revenue
+                    <FaSackDollar />
+                  </h3>
+                  <p>Rs. 1,512.00</p>
+                </div>
+                <div className={styles.card}>
+                  <h3>
+                    Total Orders
+                    <AiFillCreditCard />
+                  </h3>
+                  <p>+62</p>
+                </div>
+                <div className={styles.card}>
+                  <h3>
+                    Products in Stock
+                    <MdInventory />
+                  </h3>
+                  <p>2</p>
+                </div>
               </div>
             </div>
             <div className={styles.graph}>

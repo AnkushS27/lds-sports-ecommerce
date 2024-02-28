@@ -47,17 +47,21 @@
     overflow-y: auto;
 }
 
+.cmsContent h2 {
+    text-align: center;
+}
+
 .topContainer {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
-    margin: 20px 0;
 }
 
 .card {
     background-color: #dcdcdc;
     border-radius: 8px;
     padding: 20px;
+    min-width: 200px;
 }
 
 .card h3 {
@@ -85,6 +89,12 @@
     gap: 12px;
 }
 
+.topWrapper , .table {
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #e5e5e5 transparent;
+}
+
 .table table {
     width: 100%;
     border: 1px solid #000;
@@ -97,6 +107,8 @@
 }
 
 .table td, .table th {
-    padding: 20px 0;
+    min-width: 140px;
+    padding: 20px 10px;
+    text-align: left;
 }
 
