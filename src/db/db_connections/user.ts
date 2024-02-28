@@ -1,5 +1,6 @@
 import { ConnectDatabase } from "./Connector";
 import UserModel from "../models/userModel";
+import { UserType } from "@/TypeInterfaces/TypeInterfaces";
 
 export async function getUser(email: string) {
     await ConnectDatabase();
@@ -9,9 +10,23 @@ export async function getUser(email: string) {
 }
 
 
-export async function addUser(email: string, password: string) {
+export async function addUser(name: string, email: string, password: string) {
     await ConnectDatabase();
 
-    const res = await UserModel.create({email,password,username:'abc', profileCompletion:false});
+    const res = await UserModel.create({email,password,username:name, profileCompletion:false});
+    return res;
+}
+
+export async function updateUser(user: UserType) {
+    await ConnectDatabase();
+
+    const res = await UserModel.updateOne({email:user.email},{user});
+    return res;
+}
+
+export async function deleteUser(user: UserType) {
+    await ConnectDatabase();
+
+    const res = await UserModel.deleteOne({email:user.email});
     return res;
 }

@@ -9,6 +9,7 @@ const orderSchema = new mongoose.Schema({
         qty: {type: Number, required: true, default: 1},
         unique: true
     },},],
+    offersApplied: [{type:{type:String},},], // Offers applied at the checkout time offerId[]
     price: {type: Number, required: true},
     createdAt: {type: Date,default: Date.now,},
     status: {type: String, required: true},
