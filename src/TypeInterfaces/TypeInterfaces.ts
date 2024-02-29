@@ -1,5 +1,3 @@
-
-
 export type CommentType = {
     commentId: string;
     userId: string;
@@ -52,6 +50,26 @@ export type ProductType = {
 
     comments?: string[]; // CommentId[]
     offers?: string[]; // OfferId[]
+};
+
+export type FavouritesType = {
+    favouriteId: string;
+    userId: string;
+    products: {
+        productId: string;
+        variations?: string;
+        qty: number;
+    }[];
+}
+
+export type CartType = {
+    cartId: string;
+    userId: string;
+    products: {
+        productId: string;
+        variations?: string;
+        qty: number;
+    }[];
 };
 
 export type OrderType = {

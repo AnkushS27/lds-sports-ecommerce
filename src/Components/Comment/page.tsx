@@ -1,12 +1,12 @@
 "use client";
 import { useState } from "react";
 import styles from "./page.module.css";
-import { commentType } from "@/TypeInterfaces/TypeInterfaces";
+import { CommentType } from "@/TypeInterfaces/TypeInterfaces";
 import Chatbox from "@/Components/Chatbox/page";
 
 import { AiFillLike, AiOutlineLike } from "react-icons/ai";
 
-export default function Comment(props: commentType) {
+export default function Comment(props: CommentType) {
   const [showReplies, setShowReplies] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
   const [liked, setliked] = useState(false);
@@ -27,7 +27,7 @@ export default function Comment(props: commentType) {
         </div>
         <div className={styles.commentDetails}>
           <p>
-            <span>{props.authorId}</span>
+            <span>{props.userId}</span>
             <span>{props.createdDate}</span>
           </p>
           <p>{props.content}</p>
