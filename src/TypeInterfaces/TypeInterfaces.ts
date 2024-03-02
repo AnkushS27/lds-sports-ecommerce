@@ -1,3 +1,10 @@
+import { Document } from "mongodb";
+
+export interface ImageDocument extends Document {
+    data: Buffer;
+    contentType: string;
+  }
+
 export type CommentType = {
     commentId: string;
     userId: string;
