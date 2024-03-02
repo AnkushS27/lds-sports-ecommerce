@@ -41,6 +41,7 @@ export default function MyAccount() {
   const [editPersonalInfo, setEditPersonalInfo] = useState(false);
   const [editAddressIndex, setEditAddressIndex] = useState<number | null>(null);
   const [showAddAddressButton, setShowAddAddressButton] = useState(true);
+  const [originalAddresses, setOriginalAddresses] = useState<Address[]>([]);
 
   const handlePersonalInfoChange = (
     field: keyof PersonalInfo,
@@ -48,6 +49,11 @@ export default function MyAccount() {
   ) => {
     setPersonalInfo((prevInfo) => ({ ...prevInfo, [field]: value }));
   };
+
+  const handleEditAddress = (index: number) => {
+    setOriginalAddresses(addresses); // Copy current addresses to originalAddresses
+    setEditAddressIndex(index);
+   };
 
   const handleAddressChange = (
     index: number,
@@ -102,31 +108,14 @@ export default function MyAccount() {
   };
 
   const handleCancelAddress = (index: number) => {
-    // Check if the address is the last one (the one being added)
-    if (index === addresses.length - 1) {
-      if (isEmptyAddress(addresses[index])) {
-        // If it's an unsaved new address, remove it from the addresses array
-        setAddresses((prevAddresses) => prevAddresses.slice(0, -1));
-        // Show the "Add Address" button again
-        setShowAddAddressButton(true);
-      } else {
-        // Revert the changes made during editing by resetting the address to its original state
-        setAddresses((prevAddresses) => {
-          const updatedAddresses = [...prevAddresses];
-          updatedAddresses[index] = { ...addresses[index] };
-          return updatedAddresses;
-        });
-      }
+    if (originalAddresses.length > 0) {
+      setAddresses(originalAddresses);
     } else {
-      // Revert the changes made during editing by resetting the address to its original state
-      setAddresses((prevAddresses) => {
-        const updatedAddresses = [...prevAddresses];
-        updatedAddresses[index] = { ...addresses[index] };
-        return updatedAddresses;
-      });
+      // Handle reverting to initial state
     }
     setEditAddressIndex(null);
-  };  
+    setShowAddAddressButton(true);
+ };
 
   const isEmptyAddress = (address: Address): boolean => {
     return Object.values(address).every((value) => value === "");
@@ -221,7 +210,7 @@ export default function MyAccount() {
                     </button>
                   </div>
                 ) : (
-                  <button onClick={() => setEditAddressIndex(index)}>
+                  <button onClick={() => {setEditAddressIndex(index); handleEditAddress(index)}}>
                     Edit
                   </button>
                 )}
