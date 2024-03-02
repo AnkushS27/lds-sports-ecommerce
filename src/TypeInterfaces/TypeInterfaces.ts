@@ -7,7 +7,7 @@ export interface ImageDocument extends Document {
 
 export type CommentType = {
     commentId: string;
-    userId: string;
+    authorId: string;
     content: string;
     createdDate: string;
     subComments: string[];

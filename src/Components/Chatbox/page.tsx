@@ -5,10 +5,22 @@ import styles from "./page.module.css";
 import { useSession } from "next-auth/react";
 
 let prevValues = [
-  {content: "This is a sample comment.", authorId: "user1234", createdDate: "2024-02-23T17:12:26.474Z"},
-  {content: "This is a sample comment.", authorId: "user1234", createdDate: "2024-02-23T17:12:26.474Z"},
-  {content: "This is a sample comment.", authorId: "user1234", createdDate: "2024-02-23T17:12:26.474Z"},
-  {content: "This is a sample comment.", authorId: "user1234", createdDate: "2024-02-23T17:12:26.474Z"},
+  {content: "This is a sample comment.", authorId: "user1234", createdDate: "2024-02-23T17:12:26.474Z",
+  level: 0,
+  commentId: '012',
+  subComments: [],},
+  {content: "This is a sample comment.", authorId: "user1234", createdDate: "2024-02-23T17:12:26.474Z",
+  level: 0,
+  commentId: '012',
+  subComments: [],},
+  {content: "This is a sample comment.", authorId: "user1234", createdDate: "2024-02-23T17:12:26.474Z",
+  level: 0,
+  commentId: '012',
+  subComments: [],},
+  {content: "This is a sample comment.", authorId: "user1234", createdDate: "2024-02-23T17:12:26.474Z",
+  level: 0,
+  commentId: '012',
+  subComments: [],},
 ]
 
 export default function Chatbox() {
@@ -16,7 +28,10 @@ export default function Chatbox() {
     let cmt = {
       content: comment,
       authorId: session && session.user?.id ? session.user?.id : 'auth123',
-      createdDate: new Date().toISOString()
+      createdDate: new Date().toISOString(),
+      level: 0,
+      commentId: '012',
+      subComments: [],
     };
     // Send the comment to server.
     console.log(cmt);
@@ -35,14 +50,14 @@ export default function Chatbox() {
     <div className={styles.chatBoxContainer}>
       <div className={styles.inputContainer}>
         <input type="text" placeholder="Type a comment"
-        onChange={(e) => {setComment(e.target.value)}} />
+        onChange={(e) => {setComment(e.target.value)}} value={comment} />
         <button onClick={() => {sendComment()}}>Post</button>
       </div>
       <div className={styles.productCommentsWrapper}>
       {prevComments.map((cmt,idx) => {
         return(
           <div className={styles.productCommentsContainer} key={idx}>
-            <Comment content={cmt.content} authorId={cmt.authorId}  createdDate={cmt.createdDate} />
+            <Comment {...cmt} />
           </div>
         )
       })}

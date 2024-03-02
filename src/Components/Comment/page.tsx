@@ -27,7 +27,7 @@ export default function Comment(props: CommentType) {
         </div>
         <div className={styles.commentDetails}>
           <p>
-            <span>{props.userId}</span>
+            <span>{props.authorId}</span>
             <span>{props.createdDate}</span>
           </p>
           <p>{props.content}</p>

@@ -2,22 +2,32 @@
 import VerticalNavBar from "@/Components/CMS/VerticalNavbar/page"
 
 import style1 from './page.module.css'
-import { useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Logo from '../../../../../public/logo.svg'
+import axios from "axios";
 
-let prod = {
-  pid: "001",
-  imgs: [Logo,Logo],
-  name: "cricket Bat",
-  company: "kokabura",
+export interface FrontendProductType {
+  productId: string;
+  imgs: File[];
+  name: string;
+  companyId: string;
+  price: string;
+  tags: string[];
+  desc: string;
+  variations: { name: string; variations: { diff: string; stock: number; price: number }[] };
+}
+
+let prod: FrontendProductType = {
+  productId: "001",
+  imgs: [],
+  name: "Cricket Bat",
+  companyId: "Kookaburra",
   price: "₹1000",
-  tags: ['bat', 'cricket bat', 'cricket','kokabura'],
-  desc: "Product 1 is one the most selled products from the company 1. Limited products so buy soon.",
+  tags: ['bat', 'cricket bat', 'cricket', 'kookaburra'],
+  desc: "Product 1 is one of the most sold products from the company. Limited products, so buy soon.",
   variations: { name: '', variations: [{ diff: '', stock: 0, price: 0 }] },
 };
-
 
 export default function Product({ params } : {
     params : {
@@ -39,31 +49,73 @@ export default function Product({ params } : {
           },
         }));
     }
-    const SendUpdateToBackend = () => {
+    const SendUpdateToBackend = async () => {
       console.log(product);
+      const formData = new FormData();
+
+      // Append product details to FormData
+      Object.entries(product).forEach(([key, value]) => {
+        if (key === 'imgs') {
+          // Filter out empty files before appending to FormData
+          const nonEmptyImgs = value.filter((img:File) => img.size > 0);
+          nonEmptyImgs.forEach((img:File, index:number) => {
+            formData.append(`imgs`, img);
+          });
+        } else if (typeof value === 'object') {
+          if (key === 'variations') {
+            let filteredValues = [];
+            for (const val in product.variations.variations) {
+                if (product.variations.variations[val].diff !== '') {
+                    filteredValues.push(product.variations.variations[val]);
+                }
+            }
+            formData.append(key, JSON.stringify({name:product.variations.name, variations:filteredValues}));
+          } else {
+              formData.append(key, JSON.stringify(value));
+          }
+        } else {
+          formData.append(key, value);
+        }
+      });
+
+      const res = await axios.post('/api/cms/product',formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      console.log(res.data);
     }
 
     const AddNewImg = () => {
       setProduct((prevProduct) => ({
         ...prevProduct,
-        imgs: [...prevProduct.imgs,""],
+        imgs: [...prevProduct.imgs,new File([],"")],
       }));
 
-      setActiveImgIndex(product.imgs.length-1);
+      setActiveImgIndex(product.imgs.length);
     }
 
-    const UpdateImg = (img: FileList | null) => {
-      if (!img) return;
-      const link = URL.createObjectURL(img[0]);
+    const UpdateImg = (newImg: FileList | null) => {
+      if (!newImg) return;
       setProduct((prevProduct) => ({
         ...prevProduct,
         imgs: [
           ...prevProduct.imgs.map((img, idx) => {
-            return idx === activeImgIndex ? link : img;
+            return idx === activeImgIndex ? newImg[0] : img;
           }),
         ],
       }));
     };    
+
+    const removeImg = (e: React.SyntheticEvent) => {
+      e.stopPropagation();
+      if (activeImgIndex === 0) return;
+    
+      setProduct((prevProduct) => ({
+        ...prevProduct,
+        imgs: prevProduct.imgs.filter((img, idx) => idx !== activeImgIndex),
+      }));
+    };
 
     const AddProductTag = () => {
       setProduct((prevProduct) => ({
@@ -144,13 +196,13 @@ export default function Product({ params } : {
                     <div className={style1.ImgsContainer}>
                       <div className={style1.ImgsHolder}>
                         {product.imgs.map((img,idx) => {
-                          if (product.imgs.length - activeImgIndex >= imgWindowSize && idx < activeImgIndex) {
-                            return NaN;
-                          }
+                          if (idx < activeImgIndex - imgWindowSize || 
+                            (activeImgIndex >= imgWindowSize ? idx > activeImgIndex: idx > imgWindowSize)
+                            ) return "";
                           return (
                             <div className={`${style1.ImgSmallBox} ${idx === activeImgIndex ? style1.activeImgBox : ''}`}
                             key={idx} onClick={() => {setActiveImgIndex(idx)}}>
-                              <Image src={img} alt="" className={style1.smallImg} />
+                              <Image src={img.size > 0 ? URL.createObjectURL(img): ""} alt="Add Your Image" fill className={style1.smallImg} />
                             </div>
 
                           )
@@ -168,14 +220,16 @@ export default function Product({ params } : {
                     <div className={style1.ImgContainer} onClick={() => {document.getElementById('activeInpImg')?.click()}}>
                         <input type="file" accept="image/*" alt="Active Image here"  hidden id="activeInpImg" onChange={(e) => {UpdateImg(e.target.files)}} />
                         <div className={style1.smallImg}>
-                          <Image src={product.imgs[activeImgIndex]} alt=" Add your Image" fill />
+                          <Image src={product.imgs[activeImgIndex]?URL.createObjectURL(product.imgs[activeImgIndex]):""} 
+                          alt=" Add your Image" fill />
+                          <div className={style1.removeImgBtn} onClick={(e:React.SyntheticEvent)=>{removeImg(e)}}> Remove </div>
                         </div>
                     </div>
                   </div>
                   <div className={style1.RightSection}>
                     <input type='text' className={style1.productTitleHead} value={product.name}
                     placeholder="Product Name" onChange={(e) => {updateProductDetail('name',e.target.value)}} />
-                    <input type='text' className={style1.productCompany} value={product.company}
+                    <input type='text' className={style1.productCompany} value={product.companyId}
                     placeholder="Company" onChange={(e) => {updateProductDetail('company',e.target.value)}} />
                     {/* Tags here. */}
                     <div className={style1.productTagsSection}>
