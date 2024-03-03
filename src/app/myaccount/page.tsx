@@ -42,6 +42,7 @@ export default function MyAccount() {
   const [editAddressIndex, setEditAddressIndex] = useState<number | null>(null);
   const [showAddAddressButton, setShowAddAddressButton] = useState(true);
   const [originalAddresses, setOriginalAddresses] = useState<Address[]>([]);
+  const [isAddressBeingEdited, setIsAddressBeingEdited] = useState(false);
 
   const handlePersonalInfoChange = (
     field: keyof PersonalInfo,
@@ -53,6 +54,7 @@ export default function MyAccount() {
   const handleEditAddress = (index: number) => {
     setOriginalAddresses(addresses); // Copy current addresses to originalAddresses
     setEditAddressIndex(index);
+    setIsAddressBeingEdited(true); // Set the flag to true when an address is being edited
    };
 
   const handleAddressChange = (
@@ -89,6 +91,7 @@ export default function MyAccount() {
     }
   
     setEditAddressIndex(null);
+    setIsAddressBeingEdited(false); // Reset the flag when saving the address
   };
 
   const handleAddAddress = () => {
@@ -105,6 +108,7 @@ export default function MyAccount() {
       },
     ]);
     setEditAddressIndex(addresses.length);
+    setIsAddressBeingEdited(true); // Set the flag to true when an address is being added
   };
 
   const handleCancelAddress = (index: number) => {
@@ -112,14 +116,16 @@ export default function MyAccount() {
       setAddresses(originalAddresses);
     } else {
       // Handle reverting to initial state
+      setAddresses((prevAddresses) => {
+        const updatedAddresses = [...prevAddresses];
+        updatedAddresses.splice(index, 1); // Remove the newly added address
+        return updatedAddresses;
+      });
     }
     setEditAddressIndex(null);
     setShowAddAddressButton(true);
+    setIsAddressBeingEdited(false); // Reset the flag when cancelling the address
  };
-
-  const isEmptyAddress = (address: Address): boolean => {
-    return Object.values(address).every((value) => value === "");
-  };
 
   return (
     <div className={styles.container}>
@@ -193,7 +199,7 @@ export default function MyAccount() {
           <h2>
             Manage Addresses
             {showAddAddressButton && (
-              <button onClick={handleAddAddress}>+ Add Address</button>
+              <button onClick={ () => {if(editAddressIndex === null){handleAddAddress();}}}>+ Add Address</button>
             )}
           </h2>
           {addresses.map((address, index) => (
@@ -210,7 +216,7 @@ export default function MyAccount() {
                     </button>
                   </div>
                 ) : (
-                  <button onClick={() => {setEditAddressIndex(index); handleEditAddress(index)}}>
+                  <button onClick={() => {if (!isAddressBeingEdited) {setEditAddressIndex(index);handleEditAddress(index);}}}>
                     Edit
                   </button>
                 )}
