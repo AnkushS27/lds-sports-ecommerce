@@ -3,6 +3,7 @@ import styles from "./page.module.css";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
 // import { getCsrfToken } from "next-auth/react";
 
 export default function LoginSignup() {
@@ -22,7 +23,17 @@ export default function LoginSignup() {
         body : JSON.stringify(user),
       });
       console.log("Login success", await response.json());
-      router.push("/");
+      
+      const { email, password } = user;
+      try {
+        signIn('credentials', {
+          email,  password,
+          callbackUrl: '/',
+          redirect: true,
+        });
+      } catch (error: any) {
+        console.log('Login Failed', error.message);
+      }
     } catch (error: any) {
       console.log("Login failed", error.message);
     }

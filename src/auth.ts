@@ -3,10 +3,11 @@ import { authConfig } from './auth.config';
 import Credentials from 'next-auth/providers/credentials';
 import { z } from 'zod';
 import { User } from 'next-auth';
+import { getUser } from './db/db_connections/user';
  
-async function getUser(email: string): Promise<User | undefined> {
-  console.log(`Requesting user for email ${email}`);
-    return {email, id: '101',};
+async function getUserInfo(email: string): Promise<User | undefined> {
+  const res = await getUser(email);
+  if (res) {return {email:res.email, id: res.id};}
 }
 
 export const { handlers : { GET, POST}, auth, signIn, signOut, update } = NextAuth({
@@ -14,13 +15,9 @@ export const { handlers : { GET, POST}, auth, signIn, signOut, update } = NextAu
   providers: [
     Credentials({
       async authorize(credentials) {
-        // const parsedCredentials = z
-        //   .object({ email: z.string().email(), password: z.string().min(6) })
-        //   .safeParse(credentials);
           const parsedCredentials = credentials;
           if (parsedCredentials) {
-            // const { email, password } = parsedCredentials;
-            const user = await getUser(parsedCredentials['email'] as string);
+            const user = await getUserInfo(parsedCredentials['email'] as string);
             console.log(`User Extracted:${user?.email}`);
             if (!user) return null;
             return user;
