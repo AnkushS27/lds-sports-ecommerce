@@ -8,7 +8,7 @@ const productSchema = new mongoose.Schema({
     companyId: {type: String, required: true},  // Contains the copmany Id.
     tags: {type: [String],},
 
-    variations: [{type: {tpye: String}, }], // Can be used via JSON.parse() and JSON.stringify()
+    variations: [{type: {type: String}, }], // Can be used via JSON.parse() and JSON.stringify()
     createdAt: {type: Date,default: Date.now,},
     updatedAt: {type: Date,default: Date.now,},
 

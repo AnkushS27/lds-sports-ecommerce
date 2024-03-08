@@ -19,7 +19,7 @@ export interface FrontendProductType {
 }
 
 let prod: FrontendProductType = {
-  productId: "001",
+  productId: "002",
   imgs: [],
   name: "Cricket Bat",
   companyId: "Kookaburra",
@@ -34,6 +34,7 @@ export default function Product({ params } : {
         Id : string,
     }
 }) {
+    prod.productId = params.Id;
     const [product, setProduct] = useState(prod);
     const [activeTagIndex, setActiveTagIndex] = useState(-1);
     const imgWindowSize = 3; // 3 + 1 (Add Image Btn)

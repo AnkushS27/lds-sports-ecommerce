@@ -22,18 +22,18 @@ export async function POST(req: NextRequest) {
         // Store images on the server path
         let imgPaths = [];
         let imgs = formData.getAll('imgs');
+        let prodId = res.productId;
+        console.log(prodId);
         for (let index = 0; index < imgs.length; index++) {
             const img = imgs[index];
             if (img instanceof File) {
                 const byteData = await img.arrayBuffer();
                 const buffer = Buffer.from(byteData);
-                const path = `./public/product-imgs/${img.name}`;
+                const path = `./public/product-imgs/${img.name}_${prodId}`;
                 imgPaths.push(path);
                 await writeFile(path, buffer);
             }
         }
-
-        
 
         // Prepare product object to send to MongoDB
         const { productId, name, desc, companyId } = res;

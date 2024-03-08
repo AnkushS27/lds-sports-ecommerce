@@ -51,7 +51,7 @@ export type ProductType = {
     companyId: string; // Contains the company Id.
     tags: string[];
 
-    variations: { type: string }[]; // Can be used via JSON.parse() and JSON.stringify()
+    variations: string[]; // Can be used via JSON.parse() and JSON.stringify()
     createdAt: Date;
     updatedAt: Date;
 

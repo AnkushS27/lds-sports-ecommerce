@@ -17,13 +17,26 @@ import VerticalNavBar from "@/Components/VerticalNavbar/page";
 // }\
 import ProductCard from '@/Components/productCard/page';
 import { auth } from '@/auth';
+import { ProductType } from '@/TypeInterfaces/TypeInterfaces';
 
-let product = {name:'prod_1',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}
+const product: ProductType = {
+    productId: "ABC123",
+    img: ["https://example.com/image1.jpg", "https://example.com/image2.jpg"],
+    name: "Sample Product",
+    desc: "This is a sample product description.",
+    companyId: "XYZ456",
+    tags: ["tag1", "tag2", "tag3"],
+    variations: [JSON.stringify({diff:'',stock:20,price:'₹120'})],
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    comments: ["comment1", "comment2"],
+    offers: ["offer1", "offer2"]
+};
 
-let trending = [product, product, product, product, product, product, product]
-let forYou = [product, product, product, product, product, product, product]
-let latest = [product, product, product, product, product, product, product]
-let others = [product, product, product, product, product, product, product]
+let trending: ProductType[] = []
+let forYou: ProductType[] = []
+let latest: ProductType[] = []
+let others: ProductType[] = []
 export default async function Home() {
     const session = await auth();
     return (
@@ -47,25 +60,37 @@ export default async function Home() {
                     <div className={style1.sectionContainer}>
                         <div className={style1.sectionHead}> Latest </div>
                         <div className={style1.categoriesContainer} style={{flexWrap:"nowrap",overflowX:"auto", maxWidth:"100%"}}>
-                            {latest.map((product,index) => {return(<ProductCard key={index} params={product} />)})}
+                            {latest ?
+                            latest.map((product,index) => {return(<ProductCard key={index} params={product} />)}) :
+                            <h2 style={{display:'flex',justifyContent:'center',width:'100%'}}>No Products available at this moment.</h2>
+                            }
                         </div>
                     </div>
                     <div className={style1.sectionContainer}>
                         <div className={style1.sectionHead}> Trending </div>
                         <div className={style1.categoriesContainer} style={{flexWrap:"nowrap",overflowX:"auto", maxWidth:"100%"}}>
-                            {trending.map((product,index) => {return(<ProductCard key={index} params={product} />)})}
+                            {trending ?
+                            trending.map((product,index) => {return(<ProductCard key={index} params={product} />)}) :
+                            <h2 style={{display:'flex',justifyContent:'center',width:'100%'}}>No Products available at this moment.</h2>
+                            }
                         </div>
                     </div>
                     <div className={style1.sectionContainer}>
                         <div className={style1.sectionHead}> For You </div>
                         <div className={style1.categoriesContainer} style={{flexWrap:"nowrap",overflowX:"auto", maxWidth:"100%"}}>
-                            {forYou.map((product,index) => {return(<ProductCard key={index} params={product} />)})}
+                            {forYou && forYou.length > 0 ?
+                            forYou.map((product,index) => {return(<ProductCard key={index} params={product} />)}) :
+                            <h2 style={{display:'flex',justifyContent:'center',width:'100%'}}>No Products available at this moment.</h2>
+                            }
                         </div>
                     </div>
                     <div className={style1.sectionContainer}>
                         <div className={style1.sectionHead}> Others </div>
                         <div className={style1.categoriesContainer} style={{flexWrap:"nowrap",overflowX:"auto", maxWidth:"100%"}}>
-                            {others.map((product,index) => {return(<ProductCard key={index} params={product} />)})}
+                            {others ?
+                            others.map((product,index) => {return(<ProductCard key={index} params={product} />)}) :
+                            <h2 style={{display:'flex',justifyContent:'center',width:'100%'}}>No Products available at this moment.</h2>
+                            }
                         </div>
                     </div>
                     <Footer />

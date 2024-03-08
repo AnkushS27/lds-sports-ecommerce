@@ -1,5 +1,6 @@
 "use client";
 
+import { ProductType } from "@/TypeInterfaces/TypeInterfaces";
 // style
 import style1 from "./page.module.css";
 
@@ -14,30 +15,30 @@ import { IoCartOutline, IoCartSharp } from "react-icons/io5";
 
 export default function ProductCard({
   params,
+  checkFavourite,
+  checkCart,
   isCart = false,
   handleRemoveFromCart,
   handleQuantityChange,
 }: {
-  params: {
-    pid: string;
-    name: string;
-    img?: string;
-    price: string;
-    stock: string;
-    company: string;
-    offer?: {
-      discount: string;
-      newPrice?: string;
-    };
-  };
+  params: ProductType;
+  checkFavourite?: boolean,
+  checkCart?: boolean,
   isCart?: boolean; // Add isCart to the type definition
   handleRemoveFromCart?: () => void;
   handleQuantityChange?: (quantity: number) => void;
 }) {
-  const [favourite, setFavourite] = useState(false);
-  const [cart, setCart] = useState(false);
+  const [favourite, setFavourite] = useState(checkFavourite);
+  const [cart, setCart] = useState(checkCart);
   const [qty, setQty] = useState(1);
   const stock = 10;
+  const price = JSON.parse(params.variations[0]).price;
+
+  const updateChoice = async (choice: string) => {
+      // Backend function call is left.
+      if (choice === 'favourite') {setFavourite(!favourite);}
+      else {setCart(!cart);}
+  }
 
   const handleDecreaseQty = () => {
     if (qty > 1) {
@@ -56,22 +57,20 @@ export default function ProductCard({
   return (
     <div className={style1.productMainContainer}>
       {/* Image here */}
-      <Link
-        href={`/product/${params.pid}`}
+      <Link href={`/product/${params.productId}`}
         className={style1.productImgSection}
-      ></Link>
-
-      <Link
-        href={`/product/${params.pid}`}
+      > No Image Currently </Link>
+      <Link href={`/product/${params.productId}`}
         className={style1.productBottomSection}
       >
         <div className={style1.productName}>{params.name}</div>
-        <div className={style1.productCompany}>{params.company}</div>
+        <div className={style1.productCompany}>{params.companyId}</div>
         <div className={style1.productPriceSection}>
-          <div className={style1.productPrice}>{params.price}</div>
+          <div className={style1.productPrice}>{price}</div>
         </div>
       </Link>
 
+      {/* Data here will be appeared from the cart page */}
       {isCart && (
         <div className={style1.productCardBtnsContainer} style={{bottom:'40px'}}>
           <div className={style1.productQtyContainer}>
@@ -88,22 +87,16 @@ export default function ProductCard({
 
         <div className={style1.productCardBtnsContainer}>
           {favourite ?
-            <FaHeart className={style1.productCardBtn} onClick={() => {setFavourite(false);}} />
+            <FaHeart className={style1.productCardBtn} onClick={() => {updateChoice('favourite')}} />
           :
-            <CiHeart className={style1.productCardBtn} onClick={() => { setFavourite(true);}} />
+            <CiHeart className={style1.productCardBtn} onClick={() => {updateChoice('favourite')}} />
           }
           {cart ?
-            <IoCartSharp
-              className={style1.productCardBtn}
-              onClick={() => {
-                setCart(false);
-              }}
+            <IoCartSharp className={style1.productCardBtn}
+              onClick={() => {updateChoice('cart')}}
             /> :
-            <IoCartOutline
-              className={style1.productCardBtn}
-              onClick={() => {
-                setCart(true);
-              }}
+            <IoCartOutline className={style1.productCardBtn}
+              onClick={() => {updateChoice('cart')}}
             />
           }
         </div>
