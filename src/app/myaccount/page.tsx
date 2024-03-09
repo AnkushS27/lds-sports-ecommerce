@@ -25,7 +25,7 @@ export default function MyAccount() {
       const email = 'sampleuser@example.com'; // for testing purpose email will be taken from session
 
       try {
-        const response = await fetch('/api/user', {
+        const response = await fetch('/api/user/getUser', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -74,6 +74,36 @@ export default function MyAccount() {
     // Add more addresses as needed
   ]);
 
+  const handleUpdateUser = async () => {
+    try {
+      const response = await fetch('/api/user/updateUser', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: personalInfo.email,
+          username: personalInfo.name,
+          phone: personalInfo.phone,
+          addresses,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error updating user data');
+      }
+
+      const updatedUserData = await response.json();
+
+      console.log('User details updated successfully:', updatedUserData);
+
+      // Add any further actions or state updates here if needed
+
+    } catch (error) {
+      console.error('Error updating user details:', error);
+    }
+  };
+
   const [editPersonalInfo, setEditPersonalInfo] = useState(false);
   const [editAddressIndex, setEditAddressIndex] = useState<number | null>(null);
   const [showAddAddressButton, setShowAddAddressButton] = useState(true);
@@ -107,17 +137,22 @@ export default function MyAccount() {
 
   const handleSavePersonalInfo = () => {
     // Implement your save logic for personal info here
+    handleUpdateUser();
     setEditPersonalInfo(false);
     console.log("Saving personal info:", personalInfo);
   };
 
-  const handleSaveAddress = (index: number) => {
+  const handleSaveAddress = async (index: number) => {
     const editedAddress = addresses[index];
-  
+
     // Check if all fields in the address are filled
     if (Object.values(editedAddress).every((value) => value.trim() !== '')) {
-      // Implement your save logic for individual address here
-      console.log('Saving address:', editedAddress);
+      setAddresses((prevAddresses) => {
+        const updatedAddresses = [...prevAddresses];
+        updatedAddresses[index] = { ...editedAddress };
+        return updatedAddresses;
+      });
+
       setShowAddAddressButton(true);
     } else {
       // Display an error message or handle the case where not all fields are filled
@@ -125,9 +160,10 @@ export default function MyAccount() {
       // Optionally, you may choose to return or not save the address based on your requirements.
       return;
     }
-  
+
     setEditAddressIndex(null);
     setIsAddressBeingEdited(false); // Reset the flag when saving the address
+    handleUpdateUser(); // Call the common update function after saving the address
   };
 
   const handleAddAddress = () => {

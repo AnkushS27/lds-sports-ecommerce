@@ -17,11 +17,12 @@ export async function addUser(name: string, email: string, password: string) {
     return res;
 }
 
-export async function updateUser(user: UserType) {
+export async function updateUser(email: string, updatedUserData: UserType) {
     await ConnectDatabase();
 
-    const res = await UserModel.updateOne({email:user.email},{user});
-    return res;
+      const res = await UserModel.findOneAndUpdate({ email }, { $set: updatedUserData });
+
+      return res;
 }
 
 export async function deleteUser(user: UserType) {
