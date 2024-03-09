@@ -20,20 +20,9 @@ export async function POST(req: NextRequest, res: NextResponse) {
                 }
             );
         }
-
-        // Retrieve the existing user data
-        const existingUserData = await getUser(email);
-
-        // Create a new user object with updated fields
-        const updatedUser: UserType = {
-            ...existingUserData,
-            username,
-            phone,
-            addresses,
-        };
-
+        
         // Update the user data in the database
-        const updatedUserData = await updateUser(email, updatedUser);
+        const updatedUserData = await updateUser(email, {username, phone, addresses} as UserType);
         console.log('Updated User Data:', updatedUserData);
 
         return new NextResponse(JSON.stringify(updatedUserData), {

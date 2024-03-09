@@ -17,11 +17,11 @@ export async function addUser(name: string, email: string, password: string) {
     return res;
 }
 
-export async function updateUser(email: string, updatedUserData: UserType) {
+export async function updateUser(email: string, { username, phone, addresses }: UserType) {
     await ConnectDatabase();
 
-      const res = await UserModel.findOneAndUpdate({ email }, { $set: updatedUserData });
-
+      const res = await UserModel.updateOne({ email }, { $set: { username, phone, addresses } });
+        
       return res;
 }
 

@@ -240,6 +240,7 @@ export default function MyAccount() {
                 <input
                     type="email"
                     value={personalInfo.email}
+                    readOnly
                     onChange={(e) =>
                     handlePersonalInfoChange("email", e.target.value)
                     }
