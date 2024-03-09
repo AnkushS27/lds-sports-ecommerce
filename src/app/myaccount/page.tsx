@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./page.module.css";
 import { userAgent } from "next/server";
 
@@ -11,29 +11,65 @@ type PersonalInfo = {
 };
 
 type Address = {
-  houseNo: string;
+  houseno: string;
   street: string;
   landmark: string;
   city: string;
   state: string;
-  pincode: string;
+  postalCode: string;
 };
 
 export default function MyAccount() {
+  useEffect(() => {
+    const fetchData = async () => {
+      const email = 'sampleuser@example.com'; // for testing purpose email will be taken from session
+
+      try {
+        const response = await fetch('/api/user', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        console.log('Data:', data);
+        setPersonalInfo({
+          name: data.username,
+          email: data.email,
+          phone: data.phone,
+        });
+        setAddresses(data.addresses);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData(); // Fetch data when the component mounts
+
+    // You can add dependencies to the array below if needed
+  }, []); // The empty dependency array ensures this effect runs only once when the component mounts
+
+
   const [personalInfo, setPersonalInfo] = useState<PersonalInfo>({
-    name: "John Doe",
-    email: "john@example.com",
-    phone: "123-456-7890",
+    name: "username",
+    email: "email",
+    phone: "phone",
   });
 
   const [addresses, setAddresses] = useState<Address[]>([
     {
-      houseNo: "123",
-      street: "Main Street",
-      landmark: "Near Park",
-      city: "Cityville",
-      state: "Stateville",
-      pincode: "12345",
+      houseno: "houseno",
+      street: "street",
+      landmark: "landmark",
+      city: "city",
+      state: "state",
+      postalCode: "postalCode",
     },
     // Add more addresses as needed
   ]);
@@ -99,12 +135,12 @@ export default function MyAccount() {
     setAddresses((prevAddresses) => [
       ...prevAddresses,
       {
-        houseNo: "",
+        houseno: "",
         street: "",
         landmark: "",
         city: "",
         state: "",
-        pincode: "",
+        postalCode: "",
       },
     ]);
     setEditAddressIndex(addresses.length);
@@ -227,13 +263,13 @@ export default function MyAccount() {
                   {editAddressIndex === index ? (
                     <input
                       type="text"
-                      value={address.houseNo}
+                      value={address.houseno}
                       onChange={(e) =>
-                        handleAddressChange(index, "houseNo", e.target.value)
+                        handleAddressChange(index, "houseno", e.target.value)
                       }
                     />
                   ) : (
-                    <span>{address.houseNo}</span>
+                    <span>{address.houseno}</span>
                   )}
                 </div>
                 <div className={styles.inputContainerItem}>
@@ -297,13 +333,13 @@ export default function MyAccount() {
                   {editAddressIndex === index ? (
                     <input
                       type="text"
-                      value={address.pincode}
+                      value={address.postalCode}
                       onChange={(e) =>
-                        handleAddressChange(index, "pincode", e.target.value)
+                        handleAddressChange(index, "postalCode", e.target.value)
                       }
                     />
                   ) : (
-                    <span>{address.pincode}</span>
+                    <span>{address.postalCode}</span>
                   )}
                 </div>
               </div>

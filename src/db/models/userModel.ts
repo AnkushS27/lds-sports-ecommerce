@@ -7,12 +7,14 @@ const userSchema = new mongoose.Schema({
     password: {type: String, required: true,}, // Hash and salt password before storing
     profileCompletion: {type: Boolean, required: true}, // In case if user sign up but not sharing address and all.
     addresses: [{type: {
-          firstName: {type: String, required: true,},
-          lastName:  {type: String, required: true,},
-          address:   {type: String, required: true,},
+        //   firstName: {type: String, required: true,},
+        //   lastName:  {type: String, required: true,},
+          houseno:   {type: String, required: true,},
+          street:    {type: String, required: true,},
+          landmark:  {type: String, required: true,},
           city:      {type: String, required: true,},
           state:     {type: String, required: true,},
-          country:   {type: String, required: true,},
+        //   country:   {type: String, required: true,},
           postalCode:{type: String, required: true,},
         },},],
     phone: {type: String},

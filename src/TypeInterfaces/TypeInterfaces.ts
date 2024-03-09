@@ -15,12 +15,14 @@ export type CommentType = {
 };
 
 export type AddressType = {
-    firstName: string;
-    lastName: string;
-    address: string;
+    // firstName: string;
+    // lastName: string;
+    houseno: string;
+    street: string;
+    landmark: string;
     city: string;
     state: string;
-    country: string;
+    // country: string;
     postalCode: string;
 }
 
