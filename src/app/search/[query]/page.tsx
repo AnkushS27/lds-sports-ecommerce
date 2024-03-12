@@ -24,12 +24,11 @@ export default async function SearchResults({ params } : { params : { query : st
                         <div className={style1.resultsHead}>
                             Results for &quot;{params.query}&quot;
                         </div>
-                        <ProductCard params={{name:'prod_1',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}} />
-                        <ProductCard params={{name:'prod_2',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}} />
-                        <ProductCard params={{name:'prod_3',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}} />
-                        <ProductCard params={{name:'prod_4',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}} />
-                        <ProductCard params={{name:'prod_5',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}} />
-                        <ProductCard params={{name:'prod_6',"company" : "c1", "pid" : "001", "price" : "₹1500", "stock" : "50"}} />
+                        <ProductCard params={{name:'prod_1', "companyId" : "c1", "productId" : "001", "desc": "", "tags": [], "variations": [], }} />
+                        <ProductCard params={{name:'prod_1', "companyId" : "c1", "productId" : "001", "desc": "", "tags": [], "variations": [], }} />
+                        <ProductCard params={{name:'prod_1', "companyId" : "c1", "productId" : "001", "desc": "", "tags": [], "variations": [], }} />
+                        <ProductCard params={{name:'prod_1', "companyId" : "c1", "productId" : "001", "desc": "", "tags": [], "variations": [], }} />
+                        <ProductCard params={{name:'prod_1', "companyId" : "c1", "productId" : "001", "desc": "", "tags": [], "variations": [], }} />
                     </div>
                 </div>
             </div>
