@@ -16,6 +16,7 @@ export default function Cart() {
     pid: string;
     name: string;
     img?: string;
+    desc: string
     price: string;
     stock: string;
     quantity?: number;
@@ -29,11 +30,11 @@ export default function Cart() {
   // State to store the list of products in the cart
   const [cartProducts, setCartProducts] = useState<Product[]>([
     // Initial list of products, replace this with your actual data
-    { name: "prod_1", company: "c1", pid: "001", price: "₹1500", stock: "50" },
-    { name: "prod_2", company: "c1", pid: "002", price: "₹2000", stock: "30" },
-    { name: "prod_3", company: "c1", pid: "003", price: "₹6500", stock: "30" },
-    { name: "prod_4", company: "c1", pid: "004", price: "₹1000", stock: "30" },
-    { name: "prod_5", company: "c1", pid: "005", price: "₹1500", stock: "30" },
+    { name: "prod_1", company: "c1", pid: "001", desc:"sample desc", price: "₹1500", stock: "50" },
+    { name: "prod_2", company: "c1", pid: "002", desc:"sample desc", price: "₹2000", stock: "30" },
+    { name: "prod_3", company: "c1", pid: "003", desc:"sample desc", price: "₹6500", stock: "30" },
+    { name: "prod_4", company: "c1", pid: "004", desc:"sample desc", price: "₹1000", stock: "30" },
+    { name: "prod_5", company: "c1", pid: "005", desc:"sample desc", price: "₹1500", stock: "30" },
     // ... add more products as needed
   ]);
 
@@ -49,14 +50,16 @@ export default function Cart() {
   const handleQuantityChange = (productId: string, newQuantity: number) => {
     // Update the quantity in the cartProducts array
     const updatedCart = cartProducts.map((product) =>
-      product.pid === productId ? { ...product, quantity: newQuantity } : product
+      product.pid === productId
+        ? { ...product, quantity: newQuantity }
+        : product
     );
     setCartProducts(updatedCart);
   };
 
   const calculateSubtotal = () => {
     return cartProducts.reduce((subtotal, product) => {
-      const productPrice = parseInt(product.price.replace(/[^\d]/g, ''), 10);
+      const productPrice = parseInt(product.price.replace(/[^\d]/g, ""), 10);
       return subtotal + productPrice * (product.quantity || 1);
     }, 0);
   };
@@ -77,10 +80,22 @@ export default function Cart() {
             {cartProducts.map((product) => (
               <ProductCard
                 key={product.pid}
-                params={product}
+                params={{
+                  productId: product.pid,
+                  img: [product.img || ""],
+                  name: product.name,
+                  desc: product.desc, // Add the description if available
+                  companyId: product.company,
+                  tags: [], // Add tags if available
+                  variations: [], // Add variations if available
+                  createdAt: new Date(),
+                  updatedAt: new Date(),
+                }}
                 isCart={true}
                 handleRemoveFromCart={() => handleRemoveFromCart(product.pid)}
-                handleQuantityChange={(quantity) => handleQuantityChange(product.pid, quantity)}
+                handleQuantityChange={(quantity) =>
+                  handleQuantityChange(product.pid, quantity)
+                }
               />
             ))}
           </div>
@@ -94,7 +109,9 @@ export default function Cart() {
               <span>TOTAL</span>
               <span>Rs. {calculateSubtotal()}</span>
             </div>
-            <button className={styles.checkoutButton}>PROCEED TO PAYMENT</button>
+            <button className={styles.checkoutButton}>
+              PROCEED TO PAYMENT
+            </button>
           </div>
         </div>
       </div>

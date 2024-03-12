@@ -7,12 +7,14 @@ import style1 from "./page.module.css";
 import { loggedIn } from "@/app/api/user/loggedIn";
 import Comment from "@/Components/Comment/page";
 import Chatbox from "@/Components/Chatbox/page";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { ProductType } from "@/TypeInterfaces/TypeInterfaces";
 
 // import { getData } from "@/db/testing";
 
 //icons import
 import { BsCaretUpFill, BsCaretDownFill } from "react-icons/bs";
+import Product from "@/app/cms/product/[Id]/page";
 
 let product = {
   pid: "001",
@@ -38,6 +40,36 @@ export default function ProductDetails({ params }: { params: { Id: string } }) {
   const [variationIdx, setVariationIdx] = useState(0);
   // const data = await getData();
   // console.log(data);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const productId = params.Id;
+
+      try {
+        const response = await fetch('/api/product/getProduct', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ productId }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        console.log('Data:', data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData(); // Fetch data when the component mounts
+
+    // You can add dependencies to the array below if needed
+  }, []); // The empty dependency array ensures this effect runs only once when the component mounts
+
   return (
     <div className={style1.mainWrapper}>
       <HorizontalNavBar params={{ name: "ABC", loggedIn: isloggedIn }} />
