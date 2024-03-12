@@ -54,8 +54,8 @@ export type ProductType = {
     tags: string[];
 
     variations: string[]; // Can be used via JSON.parse() and JSON.stringify()
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt?: Date;
+    updatedAt?: Date;
 
     comments?: string[]; // CommentId[]
     offers?: string[]; // OfferId[]

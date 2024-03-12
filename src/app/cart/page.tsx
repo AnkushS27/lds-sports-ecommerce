@@ -88,8 +88,6 @@ export default function Cart() {
                   companyId: product.company,
                   tags: [], // Add tags if available
                   variations: [], // Add variations if available
-                  createdAt: new Date(),
-                  updatedAt: new Date(),
                 }}
                 isCart={true}
                 handleRemoveFromCart={() => handleRemoveFromCart(product.pid)}
