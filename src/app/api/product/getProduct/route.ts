@@ -6,10 +6,10 @@ export async function POST(req: NextRequest) {
         // Parse the JSON data from the request body
         const requestBody = await req.json();
         
-        // Retrieve the 'email' field from the parsed JSON data
+        // Retrieve the 'productId' field from the parsed JSON data
         const productId = requestBody?.productId;
 
-        // Check if 'productId' is present before calling getUser
+        // Check if 'productId' is present before calling getProduct
         if (!productId) {
             return new NextResponse(JSON.stringify({ error: 'ProductId is required' }), {
                 status: 400, // Bad Request
@@ -19,8 +19,18 @@ export async function POST(req: NextRequest) {
             });
         }
 
-        // Call the getProduct function with the email parameter
+        // Call the getProduct function with the productId parameter
         const product = await getProduct(productId);
+
+        // Check if the product exists
+        if (!product) {
+            return new NextResponse(JSON.stringify({ error: 'Product not found' }), {
+                status: 404, // Not Found
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+        }
 
         // Return the product data
         return new NextResponse(JSON.stringify(product), {
@@ -30,8 +40,10 @@ export async function POST(req: NextRequest) {
             },
         });
     } catch (error) {
-        // Handle parsing errors
-        return new NextResponse(JSON.stringify({ error: 'Error parsing the request body' }), {
+        // Handle errors
+        console.error('Error processing request:', error);
+
+        return new NextResponse(JSON.stringify({ error: 'Internal Server Error' }), {
             status: 500, // Internal Server Error
             headers: {
                 'Content-Type': 'application/json',

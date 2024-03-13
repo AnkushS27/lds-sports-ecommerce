@@ -45,6 +45,12 @@ export type UserType = {
     comments: string[]; // CommentId[]
 }
 
+interface variation {
+    type: string;
+    size?: number;
+    price?: number;
+}
+
 export type ProductType = {
     productId: string;
     img?: string[]; // URLs of the images
@@ -53,7 +59,10 @@ export type ProductType = {
     companyId: string; // Contains the company Id.
     tags: string[];
 
-    variations: string[]; // Can be used via JSON.parse() and JSON.stringify()
+    variations: {
+        name: string;
+        variations: variation[];
+    };
     createdAt?: Date;
     updatedAt?: Date;
 

@@ -4,46 +4,46 @@
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
-  
+
     width: 100vw;
     height: 100vh;
-  
+
     background-color: white;
     color: black;
     overflow: hidden;
-  }
-  
-  .HorizontalMainContainer {
+}
+
+.HorizontalMainContainer {
     position: relative;
     display: flex;
     flex-direction: row;
-  
+
     width: 100%;
     height: 100%;
-  
+
     overflow-y: hidden;
-  }
-  
-  .VerticalMainContainer {
+}
+
+.VerticalMainContainer {
     position: relative;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
-  
+
     width: 100%;
     min-width: 300px;
     height: 100%;
-  
+
     overflow-y: auto;
-  }
+}
 
 .productContainer {
     margin-top: 20px;
     display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: fit-content;
+    flex-direction: column;
+    width: 100%;
+    height: fit-content;
 }
 
 .productDetailsContainer {
@@ -69,45 +69,46 @@
     width: 100%;
     max-width: 590px;
     height: auto;
-    max-height: 590px;
+    max-height: 620px;
 }
 
 .imageContainer {
     position: relative;
     display: flex;
     width: 100%;
-    height: 100%;
+    height:  100%;
     gap: 10px;
 }
 
 .ImgsContainer {
-width: 90px;
-  height: 100%;
-  max-height: 500px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  scrollbar-width: none;
+    position: relative;
+    width: 110px;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
 }
 
 .ImgsHolder {
-    width: auto;
+    width: 90px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 0 auto;
     gap: 10px;
 }
 
-.ImgSmallBox {
-    width: 70px;
-    height: 70px;
-
-    border-radius: 15px;
-    border: 2px solid grey;
-    background-color: black;
+.smallImage {
+    position: relative;
+    overflow: hidden;
+    width: 90px;
+    height: 90px;
+    border-radius: 4px;
 }
 
 .activeImgBox {
-    box-shadow: 0 0 6px 2px #63f3fd;
+    border: 2.5px solid #1aa5dd;
+    border-radius: 4px;
 }
 
 .ImgsController {
@@ -136,26 +137,24 @@ width: 90px;
 }
 
 .biggestImage {
+    position: relative;
     width: 100%;
     max-width: 500px;
     height: 100%;
+    min-height: 450px;
     max-height: 500px;
-    
+    overflow: hidden;
+    border: 1px solid #afafaf;
+    border-radius: 4px;
 }
 
-.ImgContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
+.productImg {
+    position: absolute;
     width: 100%;
     height: 100%;
-    border-radius: 10px;
-
-    background-color: rgba(41, 40, 40, 0.461);
-    backdrop-filter: blur(20px);
-    color: white;
-
+    top: 0;
+    left: 0;
+    object-fit: cover;
 }
 
 .RightSection {
@@ -271,7 +270,8 @@ width: 90px;
     cursor: pointer;
 } */
 
-.productBuyBtn, .productCartBtn {
+.productBuyBtn,
+.productCartBtn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -355,34 +355,43 @@ width: 90px;
     .productContainer {
         margin-top: 0;
     }
+
     .LeftSection {
         width: 100%;
-    max-width: none;
-    height: fit-content;
-    max-height: none;
+        max-width: none;
+        height: fit-content;
+        max-height: none;
     }
+
     .imageContainer {
-        
-    flex-wrap: wrap-reverse;
+
+        flex-wrap: wrap-reverse;
     }
 
     .ImgsContainer {
-          width: 100%;
-          height: fit-content;
-          max-height: 500px;
-          overflow-y: hidden;
-          overflow-x: auto;
-        }
+        width: 100%;
+        height: fit-content;
+        max-height: 500px;
+        overflow-y: hidden;
+        overflow-x: auto;
+    }
 
-        .ImgContainer {
-            height: 400px;
-        }
-        
-        .ImgsHolder {
-            flex-direction: row;
-        }
+    .ImgContainer {
+        height: 400px;
+    }
 
-        .productBuyBtn, .productCartBtn {
-            font-size: 15px;
-        }
+    .ImgsHolder {
+        width: 100%;
+        flex-direction: row;
+    }
+
+    .productBuyBtn,
+    .productCartBtn {
+        font-size: 15px;
+    }
+
+    .biggestImage {
+        min-height: 300px;
+        max-height: 350px;
+    }
 }
