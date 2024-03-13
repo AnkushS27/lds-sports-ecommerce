@@ -32,7 +32,8 @@ export default function ProductCard({
   const [cart, setCart] = useState(checkCart);
   const [qty, setQty] = useState(1);
   const stock = 10;
-  const price = JSON.parse(params.variations[0]).price;
+  // const price = JSON.parse(params.variations[0]).price;
+  const price = 1000;
 
   const updateChoice = async (choice: string) => {
       // Backend function call is left.
