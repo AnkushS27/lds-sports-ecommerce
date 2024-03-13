@@ -134,7 +134,7 @@ export default function ProductDetails({ params }: { params: { Id: string } }) {
                   <div className={style1.productTitleDesc}>{product.desc}</div>
                   <div className={style1.productDiversityContainer}>
                     <div className={style1.productVaritionsName}>
-                      {product.variations.name}:
+                      {/* {product.variations.name}: */}
                     </div>
                     <div className={style1.productVariationsHolder}>
                       {/* {product.variations.variations.map((diversity, index) => {
