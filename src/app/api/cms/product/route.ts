@@ -31,7 +31,7 @@ interface FrontToBackProductType {
           const buffer = Buffer.from(await imgFile.arrayBuffer());
       
           // Save the image buffer to a file on the server
-          const path = `./public/product-imgs/${res.productId}_${index}_${imgFile.name}`;
+          const path = `./product-imgs/${res.productId}_${index}_${imgFile.name}`;
           imgPaths.push(path);
           await fsPromises.writeFile(path, buffer);
         }
