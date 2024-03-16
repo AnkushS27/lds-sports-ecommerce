@@ -16,8 +16,8 @@ export default function Footer() {
                     <div className={style1.linkHolder}>
                         <div className={style1.linkHolderHead}> Quick Links </div>
                         <Link href='/' className={style1.linkItem}> Home </Link>
-                        <Link href='#' className={style1.linkItem}> Account </Link>
-                        <Link href='/cart' className={style1.linkItem}> cart </Link>
+                        <Link href='/myaccount' className={style1.linkItem}> Account </Link>
+                        <Link href='/cart' className={style1.linkItem}> Cart </Link>
                     </div>
                     <div className={style1.linkHolder}>
                         <div className={style1.linkHolderHead}> Support </div>

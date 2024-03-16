@@ -35,13 +35,14 @@ export default function HorizontalNavBar(
                         <Link href="/cart">
                             <FaShoppingCart className={style1.navbarIcon} />
                         </Link>
-                        <Link href="/profile">
+                        <Link href="/myaccount">
                             <FaRegUserCircle className={style1.navbarIcon} />
                         </Link>
                     </div>
                     :
                     <div className={style1.iconsContainer}>
                         <Link href='/login' className={style1.navAuthenticationItem}> <span>Login</span> </Link>
+                        <Link href='/signup' className={style1.navAuthenticationItem}> <span>Signup</span> </Link>
                     </div>
                 }
             </div>

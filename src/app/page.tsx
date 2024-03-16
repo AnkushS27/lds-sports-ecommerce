@@ -39,7 +39,6 @@ let latest: ProductType[] = []
 let others: ProductType[] = []
 export default async function Home() {
     const session = await auth();
-    console.log(session?.user?.email??"No User");
     return (
         <div className={style1.mainWrapper}>
             <HorizontalNavBar params={{name:'ABC',loggedIn: session? true : false}} />

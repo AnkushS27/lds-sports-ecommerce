@@ -10,7 +10,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 const allowedOrigins = ["*"]
 
-const loginReqPages = ['/orders', '/profile', '/cart', '/favourites'];
+const loginReqPages = ['/orders', '/myaccount', '/cart', '/favourites'];
 const authPages = ['/login', '/signin', '/signup'];
 
 export default auth((req) => {

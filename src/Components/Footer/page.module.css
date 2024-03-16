@@ -1,7 +1,5 @@
 .mainWrapper {
     display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
     flex-direction: column;
 
     width: 100%;
@@ -17,26 +15,21 @@
 
 .mainContainer {
     display: flex;
-    align-items: flex-start;
     justify-content: space-between;
     flex-direction: row;
     flex-wrap: wrap;
 
     width: 100%;
-    max-width: 900px;
     height: fit-content;
 
-    gap: 20px;
-    padding: 10px;
+    gap: 40px;
+    padding: 40px;
 }
 
 .leftSection {
     display: flex;
     align-items: center;
     justify-content: center;
-
-    width: 280px;
-    height: fit-content;
 }
 
 .logoContainer {
@@ -50,28 +43,18 @@
 
 .rightSection {
     display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
     flex-direction: row;
     flex-wrap: wrap;
 
 
-    gap: 20px;
+    gap: 40px;
 
-    width: auto;
     height: fit-content;
 }
 
 .linkHolder {
     display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
     flex-direction: column;
-
-    width: fit-content;
-    height: fit-content;
-
-    padding: 10px;
 }
 
 .linkHolderHead {
@@ -80,13 +63,12 @@
     justify-content: center;
 
     width: 180px;
-    height: 40px;
 
-    padding: 10px;
     font-size: 20px;
+    padding: 20px;
 
-    border-bottom: 1px solid;
-    margin-bottom: 2px;
+    border-bottom: 2px solid #fff;
+    margin-bottom: 10px;
 }
 
 .linkItem {
