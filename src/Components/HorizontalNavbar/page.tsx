@@ -54,7 +54,7 @@ export default function HorizontalNavBar(
                 {/* Authentication Options */}
                 {params.loggedIn ?
                     <div className={style1.navAuthenticationCotanier}>
-                        <Link href='/profile' className={style1.navAuthenticationItem}> <span>Profile</span> </Link>
+                        <Link href='/myaccount' className={style1.navAuthenticationItem}> <span>Profile</span> </Link>
                         <div className={style1.navAuthenticationItem} onClick={() => {signOut({callbackUrl:'/'})}}> <span>Logout</span> </div>
                     </div>
                 :    

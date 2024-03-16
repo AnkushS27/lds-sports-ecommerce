@@ -1,3 +1,48 @@
+.mainWrapper {
+    position: relative;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: white;
+    color: black;
+    overflow: hidden;
+}
+
+
+.HorizontalmainContainer {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+
+    width: 100%;
+    height: 100%;
+
+    overflow-y: hidden;
+}
+
+.VerticalmainContainer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    min-width: 300px;
+    height: 100%;
+
+    overflow-y: auto;
+}
+
+.loadingScreen {
+    text-align: center;
+    width: 100%;
+}
+
 .mainProfileContainer {
     display: flex;
     flex-direction: column;
@@ -89,7 +134,8 @@
     margin-bottom: 4px;
 }
 
-.inputContainerItem input, .inputContainerItem span {
+.inputContainerItem input,
+.inputContainerItem span {
     width: 100%;
     background-color: #fff;
     color: #000;
@@ -110,7 +156,7 @@
     .section h2 {
         font-size: 18px;
     }
-    
+
     .inputContainer {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
