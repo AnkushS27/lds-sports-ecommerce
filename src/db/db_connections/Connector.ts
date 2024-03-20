@@ -2,9 +2,9 @@ import mongoose from 'mongoose';
 
 const db_URI: string = process.env.MONGODB_CLUSTER_URL as string;
 
-export async function ConnectDatabase() {
+export async function ConnectDatabase(){
     try {
-        mongoose.connect(db_URI!);
+        await mongoose.connect(db_URI!);
         const connection = mongoose.connection;
 
         connection.on('connected', () => {
@@ -18,7 +18,6 @@ export async function ConnectDatabase() {
     } catch (error) {
         console.log('Something goes wrong!');
         console.log(error);
-        
     }
 }
 
