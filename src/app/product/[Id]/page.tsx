@@ -20,6 +20,7 @@ import Product from "@/app/cms/product/[Id]/page";
 export default function ProductDetails({ params }: { params: { Id: string } }) {
   const isloggedIn = loggedIn({});
   const [variationIdx, setVariationIdx] = useState(0);
+  const [colorIdx, setColorIdx] = useState(0);
   // const data = await getData();
   // console.log(data);
 
@@ -78,14 +79,20 @@ export default function ProductDetails({ params }: { params: { Id: string } }) {
                           {product.img.map((image, index) => (
                             <div
                               className={style1.smallImage}
-                              onClick={() => handleImageClick(index, image.replace("./public", ""))} // Add onClick event handler
+                              onClick={() =>
+                                handleImageClick(
+                                  index,
+                                  image.replace("./public", "")
+                                )
+                              } // Add onClick event handler
                               key={index}
                             >
                               <Image
                                 src={image.replace("./public", "")}
                                 alt={`Product Image ${index + 1}`}
                                 className={`${style1.productImg} ${
-                                  selectedImageIndex === index && style1.activeImgBox
+                                  selectedImageIndex === index &&
+                                  style1.activeImgBox
                                 }`}
                                 width={100}
                                 height={100}
@@ -97,15 +104,18 @@ export default function ProductDetails({ params }: { params: { Id: string } }) {
                     </div>
                     <div className={style1.biggestImage}>
                       <div className={style1.ImgContainer}>
-                        {product && product.img && product.img[0] && selectedImage && (
-                          <Image
-                            src={selectedImage}
-                            alt="Product Image"
-                            className={style1.productImg}
-                            layout="fill"
-                            objectFit="cover"
-                          />
-                        )}
+                        {product &&
+                          product.img &&
+                          product.img[0] &&
+                          selectedImage && (
+                            <Image
+                              src={selectedImage}
+                              alt="Product Image"
+                              className={style1.productImg}
+                              layout="fill"
+                              objectFit="cover"
+                            />
+                          )}
                       </div>
                     </div>
                   </div>
@@ -119,7 +129,7 @@ export default function ProductDetails({ params }: { params: { Id: string } }) {
                 </div>
                 <div className={style1.RightSection}>
                   <div className={style1.productTitleHead}>{product.name}</div>
-                  {/* <div className={style1.productTagsContainer}>
+                  <div className={style1.productTagsContainer}>
                     {product.tags.map((tag, index) => {
                       return (
                         <div className={style1.productTagItem} key={index}>
@@ -127,22 +137,22 @@ export default function ProductDetails({ params }: { params: { Id: string } }) {
                         </div>
                       );
                     })}
-                  </div> */}
+                  </div>
                   <div className={style1.productCompany}>
                     {product.companyId}
                   </div>
                   <div className={style1.productTitleDesc}>{product.desc}</div>
                   <div className={style1.productDiversityContainer}>
-                    <div className={style1.productVaritionsName}>
-                      {/* {product.variations.name}: */}
+                    <div className={style1.productVariationsName}>
+                      {product.variations.name}:
                     </div>
                     <div className={style1.productVariationsHolder}>
-                      {/* {product.variations.variations.map((diversity, index) => {
+                      {product.variations.variations.map((variation, index) => {
                         return (
                           <div
                             className={style1.productDiversityItem}
                             style={
-                              index == variationIdx
+                              index === variationIdx
                                 ? { backgroundColor: "white", color: "black" }
                                 : {}
                             }
@@ -151,18 +161,45 @@ export default function ProductDetails({ params }: { params: { Id: string } }) {
                               setVariationIdx(index);
                             }}
                           >
-                            {diversity.size}
+                            {variation.value}
                           </div>
                         );
-                      })} */}
+                      })}
                     </div>
                   </div>
+
+                  <div className={style1.productDiversityContainer}>
+                    <div className={style1.productVariationsName}>
+                      Colors:
+                    </div>
+                    <div className={style1.productVariationsHolder}>
+                      {product.colors.map((color, index) => {
+                        return (
+                          <div
+                            className={style1.productDiversityItem}
+                            style={
+                              index === colorIdx
+                                ? { backgroundColor: "white", color: "black" }
+                                : {}
+                            }
+                            key={index}
+                            onClick={() => {
+                              setColorIdx(index);
+                            }}
+                          >
+                            {color}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
                   <div className="productPriceContainer">
                     <div className="productPriceHolder">
                       {/* Previous Product Price */}
-                      {/* <div className={style1.productPrice}>
-                        {product.variations.variations[variationIdx].price}
-                      </div> */}
+                      <div className={style1.productPrice}>
+                        Rs. {product.variations.variations[variationIdx].price}
+                      </div>
                       {/* Price After the discount */}
                     </div>
                     <div className="productDiscountOptions">

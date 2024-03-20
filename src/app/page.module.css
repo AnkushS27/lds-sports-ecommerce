@@ -103,8 +103,8 @@
   padding: 10px;
   gap: 10px;
 
-  scrollbar-width: thin;
-  /* scrollbar-color: transparent transparent; */
+  scrollbar-width: none;
+  scrollbar-color: transparent transparent;
 }
 
 .categoriesItem {

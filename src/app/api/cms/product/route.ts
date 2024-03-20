@@ -11,6 +11,7 @@ interface FrontToBackProductType {
     desc: string;
     companyId: string;
     tags: string;
+    colors: string;
     variations: string;
   }
   
@@ -44,6 +45,7 @@ interface FrontToBackProductType {
         name,
         desc,
         companyId,
+        colors: JSON.parse(res.colors),
         tags: JSON.parse(res.tags),
         variations: JSON.parse(res.variations),
         createdAt: new Date(),

@@ -45,10 +45,13 @@ export type UserType = {
     comments: string[]; // CommentId[]
 }
 
-interface variation {
-    type: string;
-    size?: number;
-    price?: number;
+interface Variation {
+    name: string; // This will be "Size"
+    variations: {
+        value: number;
+        stock: number;
+        price: number;
+    }[];
 }
 
 export type ProductType = {
@@ -59,7 +62,8 @@ export type ProductType = {
     companyId: string; // Contains the company Id.
     tags: string[];
 
-    variations?: string[];
+    variations: Variation;
+    colors: string[];
     createdAt?: Date;
     updatedAt?: Date;
 
