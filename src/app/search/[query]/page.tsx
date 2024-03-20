@@ -24,11 +24,11 @@ export default async function SearchResults({ params } : { params : { query : st
                         <div className={style1.resultsHead}>
                             Results for &quot;{params.query}&quot;
                         </div>
+                        {/* <ProductCard params={{name:'prod_1', "companyId" : "c1", "productId" : "001", "desc": "", "tags": [], "variations": [], }} />
                         <ProductCard params={{name:'prod_1', "companyId" : "c1", "productId" : "001", "desc": "", "tags": [], "variations": [], }} />
                         <ProductCard params={{name:'prod_1', "companyId" : "c1", "productId" : "001", "desc": "", "tags": [], "variations": [], }} />
                         <ProductCard params={{name:'prod_1', "companyId" : "c1", "productId" : "001", "desc": "", "tags": [], "variations": [], }} />
-                        <ProductCard params={{name:'prod_1', "companyId" : "c1", "productId" : "001", "desc": "", "tags": [], "variations": [], }} />
-                        <ProductCard params={{name:'prod_1', "companyId" : "c1", "productId" : "001", "desc": "", "tags": [], "variations": [], }} />
+                        <ProductCard params={{name:'prod_1', "companyId" : "c1", "productId" : "001", "desc": "", "tags": [], "variations": [], }} /> */}
                     </div>
                 </div>
             </div>
