@@ -28,15 +28,17 @@ export default function Cart() {
   };
 
   // State to store the list of products in the cart
-  const [cartProducts, setCartProducts] = useState<Product[]>([
-    // Initial list of products, replace this with your actual data
-    { name: "prod_1", company: "c1", pid: "001", desc:"sample desc", price: "₹1500", stock: "50" },
-    { name: "prod_2", company: "c1", pid: "002", desc:"sample desc", price: "₹2000", stock: "30" },
-    { name: "prod_3", company: "c1", pid: "003", desc:"sample desc", price: "₹6500", stock: "30" },
-    { name: "prod_4", company: "c1", pid: "004", desc:"sample desc", price: "₹1000", stock: "30" },
-    { name: "prod_5", company: "c1", pid: "005", desc:"sample desc", price: "₹1500", stock: "30" },
-    // ... add more products as needed
-  ]);
+    const [cartProducts, setCartProducts] = useState<Product[]>([
+      {
+        name: "prod_1",
+        company: "c1",
+        pid: "001",
+        desc: "sample desc",
+        price: "₹1500",
+        stock: "50",
+      },
+      // Add more products with variations data as needed
+    ]);
 
   // Function to handle product removal from the cart
   const handleRemoveFromCart = (productId: string) => {
@@ -87,7 +89,6 @@ export default function Cart() {
                   desc: product.desc, // Add the description if available
                   companyId: product.company,
                   tags: [], // Add tags if available
-                  variations: [], // Add variations if available
                 }}
                 isCart={true}
                 handleRemoveFromCart={() => handleRemoveFromCart(product.pid)}

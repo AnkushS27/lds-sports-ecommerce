@@ -62,8 +62,8 @@ export type ProductType = {
     companyId: string; // Contains the company Id.
     tags: string[];
 
-    variations: Variation;
-    colors: string[];
+    variations?: Variation;
+    colors?: string[];
     createdAt?: Date;
     updatedAt?: Date;
 
