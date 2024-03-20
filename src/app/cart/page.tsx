@@ -79,7 +79,7 @@ export default function Cart() {
           <div className={styles.productCradWrapper}>
             <div className={styles.productCardHead}> Cart </div>
             {/* Map through the cartProducts and render ProductCard for each product */}
-            {cartProducts.map((product) => (
+            {/* {cartProducts.map((product) => (
               <ProductCard
                 key={product.pid}
                 params={{
@@ -96,7 +96,7 @@ export default function Cart() {
                   handleQuantityChange(product.pid, quantity)
                 }
               />
-            ))}
+            ))} */}
           </div>
           <div className={styles.cartTotals}>
             <h2>Order Summary</h2>

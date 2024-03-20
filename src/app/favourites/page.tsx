@@ -18,11 +18,11 @@ export default async function Favourites() {
                 <div className={style1.VerticalMainContainer}>
                     <div className={style1.productCardWrapper}>
                         <div className={style1.productCardHead}> Favourites </div>
+                        {/* <ProductCard params={{name:'prod_1', "companyId" : "c1", "productId" : "001", "desc": "", "tags": [], }} />
                         <ProductCard params={{name:'prod_1', "companyId" : "c1", "productId" : "001", "desc": "", "tags": [], }} />
                         <ProductCard params={{name:'prod_1', "companyId" : "c1", "productId" : "001", "desc": "", "tags": [], }} />
                         <ProductCard params={{name:'prod_1', "companyId" : "c1", "productId" : "001", "desc": "", "tags": [], }} />
-                        <ProductCard params={{name:'prod_1', "companyId" : "c1", "productId" : "001", "desc": "", "tags": [], }} />
-                        <ProductCard params={{name:'prod_1', "companyId" : "c1", "productId" : "001", "desc": "", "tags": [], }} />
+                        <ProductCard params={{name:'prod_1', "companyId" : "c1", "productId" : "001", "desc": "", "tags": [], }} /> */}
                     </div>
                     <Footer />
                 </div>

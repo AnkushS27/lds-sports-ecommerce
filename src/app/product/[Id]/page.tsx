@@ -168,31 +168,33 @@ export default function ProductDetails({ params }: { params: { Id: string } }) {
                     </div>
                   </div>
 
-                  <div className={style1.productDiversityContainer}>
-                    <div className={style1.productVariationsName}>
-                      Colors:
+                  {product.colors && product.colors.length > 0 && (
+                    <div className={style1.productDiversityContainer}>
+                      <div className={style1.productVariationsName}>
+                        Colors:
+                      </div>
+                      <div className={style1.productVariationsHolder}>
+                        {product.colors.map((color, index) => {
+                          return (
+                            <div
+                              className={style1.productDiversityItem}
+                              style={
+                                index === colorIdx
+                                  ? { backgroundColor: "white", color: "black" }
+                                  : {}
+                              }
+                              key={index}
+                              onClick={() => {
+                                setColorIdx(index);
+                              }}
+                            >
+                              {color}
+                            </div>
+                          );
+                        })}
+                      </div>
                     </div>
-                    <div className={style1.productVariationsHolder}>
-                      {product.colors.map((color, index) => {
-                        return (
-                          <div
-                            className={style1.productDiversityItem}
-                            style={
-                              index === colorIdx
-                                ? { backgroundColor: "white", color: "black" }
-                                : {}
-                            }
-                            key={index}
-                            onClick={() => {
-                              setColorIdx(index);
-                            }}
-                          >
-                            {color}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
+                  )}
 
                   <div className="productPriceContainer">
                     <div className="productPriceHolder">
