@@ -23,7 +23,7 @@
   
   .VerticalmainContainer {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: flex-start;
     flex-direction: column;
   
@@ -66,23 +66,16 @@
   }
 
   .resultsHead {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    
-    width: 100%;
-    height: auto;
-
+    text-align: center;
     margin: 10px;
 
-    font-size: 40px;
+    font-size: 30px;
     font-weight: 700;
   }
 
   .productCardWrapper {
     display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
+    justify-content: center;
     flex-direction: row;
     flex-wrap: wrap;
 
