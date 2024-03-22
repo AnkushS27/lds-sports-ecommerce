@@ -66,31 +66,31 @@ export default function SearchResults({
             <div className={style1.optionItem}> sort by reviews </div>
             <div className={style1.optionItem}> sort by latest </div>
           </div> */}
-            <div className={style1.resultsHead}>
-              Results for &quot;{params.query}&quot;
-            </div>
-          <div className={style1.productCardWrapper}>
-              {loading ? (
-                <h4
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "100%",
-                    height: "100px",
-                  }}
-                >
-                  Loading products please wait...
-                </h4>
-              ) : products.length === 0 ? (
-                <h4>No products found.</h4>
-              ) : (
-                products.map((product) => (
-                  <ProductCard key={product.productId} params={product} />
-                ))
-              )}
+          <div className={style1.resultsHead}>
+            Results for &quot;{params.query}&quot;
           </div>
-          <Footer />
+          <div className={style1.productCardWrapper}>
+            {loading ? (
+              <h4
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "100%",
+                  height: "100px",
+                }}
+              >
+                Loading products please wait...
+              </h4>
+            ) : products.length === 0 ? (
+              <h4>No products found.</h4>
+            ) : (
+              products.map((product) => (
+                <ProductCard key={product.productId} params={product} />
+              ))
+            )}
+            <Footer />
+          </div>
         </div>
       </div>
     </div>

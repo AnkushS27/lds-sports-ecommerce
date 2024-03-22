@@ -10,6 +10,7 @@ import Comment from "@/Components/Comment/page";
 import Chatbox from "@/Components/Chatbox/page";
 import { useEffect, useState } from "react";
 import { ProductType } from "@/TypeInterfaces/TypeInterfaces";
+import { getSession } from "next-auth/react";
 
 // import { getData } from "@/db/testing";
 
@@ -18,7 +19,7 @@ import { BsCaretUpFill, BsCaretDownFill } from "react-icons/bs";
 import Product from "@/app/cms/product/[Id]/page";
 
 export default function ProductDetails({ params }: { params: { Id: string } }) {
-  const isloggedIn = loggedIn({});
+  const [session, setSession] = useState<any>();
   const [variationIdx, setVariationIdx] = useState(0);
   const [colorIdx, setColorIdx] = useState(0);
   // const data = await getData();
@@ -36,7 +37,8 @@ export default function ProductDetails({ params }: { params: { Id: string } }) {
   useEffect(() => {
     const fetchData = async () => {
       const productId = params.Id;
-
+      const userSession = await getSession();
+      setSession(userSession);
       try {
         const response = await fetch("/api/product/getProduct", {
           method: "POST",
@@ -51,7 +53,6 @@ export default function ProductDetails({ params }: { params: { Id: string } }) {
         }
 
         const data = await response.json();
-        console.log(data);
         setSelectedImage(data.img[0].replace("./public", ""));
         setProduct(data); // Update the state with the fetched data
       } catch (error) {
@@ -64,9 +65,9 @@ export default function ProductDetails({ params }: { params: { Id: string } }) {
 
   return (
     <div className={style1.mainWrapper}>
-      <HorizontalNavBar params={{ name: "ABC", loggedIn: isloggedIn }} />
+      <HorizontalNavBar params={{ name: "ABC", loggedIn: session ? true : false }} />
       <div className={style1.HorizontalMainContainer}>
-        <VerticalNavBar params={{ name: "ABC", loggedIn: isloggedIn }} />
+        <VerticalNavBar params={{ name: "ABC", loggedIn: session ? true : false }} />
         <div className={style1.VerticalMainContainer}>
           {product ? (
             <div className={style1.productContainer}>

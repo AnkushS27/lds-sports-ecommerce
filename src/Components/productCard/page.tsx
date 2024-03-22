@@ -189,14 +189,14 @@ export default function ProductCard({
       <div className={style1.productCardBtnsContainer}>
         {favourite ? (
           <FaHeart
-            className={style1.productCardBtn}
+            className={style1.productCardFavBtn}
             onClick={() => {
               updateChoice("favourite");
             }}
           />
         ) : (
           <CiHeart
-            className={style1.productCardBtn}
+            className={style1.productCardFavBtn}
             onClick={() => {
               updateChoice("favourite");
             }}
@@ -204,14 +204,14 @@ export default function ProductCard({
         )}
         {cart ? (
           <IoCartSharp
-            className={style1.productCardBtn}
+            className={style1.productCardCartBtn}
             onClick={() => {
               updateChoice("cart");
             }}
           />
         ) : (
           <IoCartOutline
-            className={style1.productCardBtn}
+            className={style1.productCardCartBtn}
             onClick={() => {
               updateChoice("cart");
             }}
