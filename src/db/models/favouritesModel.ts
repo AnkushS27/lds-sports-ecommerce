@@ -1,14 +1,9 @@
 import mongoose from "mongoose";
+const { Schema } = mongoose;
 
-const favouriteSchema = new mongoose.Schema({
-    favouriteId: {type: String, required: true, unique: true},
+const favouriteSchema = new Schema({
     userId: {type: String, required: true},
-    products: [{type: {
-        productId: {type: String, required: true},
-        variations:{type: String,}, 
-        qty: {type: Number, required: true, default: 1},
-        unique: true
-    },},],
+    products: [{type: String, required: true}],
 });
 
 const FavouriteModel = mongoose.models.Favourites || mongoose.model('Favourites', favouriteSchema);

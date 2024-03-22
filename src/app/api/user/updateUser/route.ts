@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { updateUser, getUser } from '@/db/db_connections/user';
+import { updateUser } from '@/db/db_connections/user';
 import { UserType } from '@/TypeInterfaces/TypeInterfaces';
 
 export async function POST(req: NextRequest, res: NextResponse) {

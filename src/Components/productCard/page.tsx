@@ -7,12 +7,13 @@ import style1 from "./page.module.css";
 // Imports
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // Icons
 import { CiHeart } from "react-icons/ci";
 import { FaHeart } from "react-icons/fa";
 import { IoCartOutline, IoCartSharp } from "react-icons/io5";
+import { getSession } from "next-auth/react";
 
 export default function ProductCard({
   params,
@@ -33,13 +34,46 @@ export default function ProductCard({
   const [cart, setCart] = useState(checkCart);
   const [qty, setQty] = useState(1);
   const stock = 10;
-  // const price = JSON.parse(params.variations[0]).price;
-  const price = 1000;
+  const price = params.variations.variations[0].price;
+
+  const fetchFavorites = async () => {
+    try {
+      const session = await getSession();
+      const userId = session?.user?.email;
+      const productId = params.productId;
+      if (userId) {
+        const response = await fetch(
+          "/api/favourite/checkFavourite", 
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ productId, userId }),
+          }
+        );
+        const data = await response.json();
+        setFavourite(data.isFavourite);
+      }
+    } catch (error) {
+      console.error('Error fetching favorites:', error);
+    }
+  };
+  
+  useEffect(() => {
+    if (checkFavourite === undefined) {
+      fetchFavorites();
+    }
+  }, []);
 
   const updateChoice = async (choice: string) => {
     // Backend function call is left.
     if (choice === "favourite") {
-      setFavourite(!favourite);
+      if (!favourite) {
+        await addToFavorites(params.productId);
+      } else {
+        await removeFromFavorites(params.productId);
+      }
     } else {
       setCart(!cart);
     }
@@ -59,13 +93,54 @@ export default function ProductCard({
     }
   };
 
+  const addToFavorites = async (productId: string) => {
+    try {
+      const session = await getSession();
+        const userId = session?.user?.email;
+      const response = await fetch('/api/favourite/addFavourite', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ productId, userId }),
+      });
+      if (response.ok) {
+        setFavourite(true); // Update the local state to reflect the change
+      } else {
+        // Handle error, maybe show a notification
+      }
+    } catch (error) {
+      console.error('Error adding to favorites:', error);
+      // Handle error, maybe show a notification
+    }
+  };
+
+  const removeFromFavorites = async (productId: string) => {
+    try {
+      const session = await getSession();
+      const userId = session?.user?.email;
+      const response = await fetch('/api/favourite/removeFavourite', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ productId, userId }),
+      });
+      if (response.ok) {
+        setFavourite(false); // Update the local state to reflect the change
+      } else {
+        // Handle error, maybe show a notification
+      }
+    } catch (error) {
+      console.error('Error removing from favorites:', error);
+      // Handle error, maybe show a notification
+    }
+  };
+
   return (
     <div className={style1.productMainContainer}>
       {/* Image here */}
-      <Link
-        href={`/product/${params.productId}`}
-      >
-        {" "}
+      <Link href={`/product/${params.productId}`}>
         {params.img && (
           <Image
             src={params.img[0].replace("./public", "")}
@@ -74,7 +149,7 @@ export default function ProductCard({
             alt="product_img"
             className={style1.productImgSection}
           />
-        )}{" "}
+        )}
       </Link>
       <Link
         href={`/product/${params.productId}`}
@@ -94,11 +169,17 @@ export default function ProductCard({
           style={{ bottom: "40px" }}
         >
           <div className={style1.productQtyContainer}>
-            <div className={style1.productQtyBtn} onClick={handleDecreaseQty}>
+            <div
+              className={style1.productQtyBtn}
+              onClick={handleDecreaseQty}
+            >
               -
             </div>
             <div>{qty}</div>
-            <div className={style1.productQtyBtn} onClick={handleIncreaseQty}>
+            <div
+              className={style1.productQtyBtn}
+              onClick={handleIncreaseQty}
+            >
               +
             </div>
           </div>

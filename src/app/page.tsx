@@ -144,7 +144,7 @@ let latest: ProductType[] = product;
                     height: "100px"
                   }}
                 >
-                  Loading products please wait...
+                  Loading, please wait...
                 </h4>
               )}
             </div>

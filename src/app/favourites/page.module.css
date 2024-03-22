@@ -48,7 +48,7 @@
     flex-wrap: wrap;
 
     width: 100%;
-    height: fit-content;
+    min-height: 70vh;
 
     gap: 10px;
     padding: 10px;
