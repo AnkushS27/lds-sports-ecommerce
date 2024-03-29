@@ -4,9 +4,9 @@ import { UserType } from "@/TypeInterfaces/TypeInterfaces";
 import styles from "./page.module.css";
 import VerticalNavBar from "@/Components/CMS/VerticalNavbar/page";
 import { useState, useEffect } from "react";
+import Loader from "@/Components/Loader/page";
 
 export default function Users() {
-  // Fetch user data from your API or mock data
   const [users, setUsers] = useState<UserType[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -38,7 +38,7 @@ export default function Users() {
         <h1>Manage Users</h1>
         <div className={styles.usersContainer}>
           {loading ? (
-            <h4>Loadind please wait..</h4>
+            <Loader />
           ) : (
             <table className={styles.userTable}>
               <thead>

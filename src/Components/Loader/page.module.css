@@ -1,0 +1,62 @@
+.loadingContainer{
+    display: flex;
+    justify-content: center;
+    height: 300px;
+    width: 100%;
+  }
+
+  .loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 8px;
+  }
+  
+  .loader div{
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    transform: scale(0);
+    animation: animate 1.5s ease-in-out infinite;
+  }
+  
+  .loader div:nth-child(1){
+    animation-delay: 0s;
+  }
+  
+  .loader div:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  
+  .loader div:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+  
+  .loader div:nth-child(4) {
+    animation-delay: 0.6s;
+  }
+  
+  .loader div:nth-child(5) {
+    animation-delay: 0.8s;
+  }
+  
+  .loader div:nth-child(6) {
+    animation-delay: 1s;
+  }
+  
+  @keyframes animate {
+    0%, 100%{
+      transform: scale(0.2);
+      background-color: #000;
+    }
+    40%{
+      transform: scale(1);
+      background-color: #404040;
+    }
+    50%{
+      transform: scale(1);
+      background-color: #333;
+    }
+  }

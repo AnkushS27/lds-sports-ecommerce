@@ -33,13 +33,13 @@ export default function VerticalNavBar({
           <Link href="/cms" className={styles.menuItem}>
             Dashboard
           </Link>
-          <Link href="/cms/product/001" className={styles.menuItem}>
+          <Link href="/cms/product" className={styles.menuItem}>
             Products
           </Link>
           <Link href="/cms/customers" className={styles.menuItem}>
             Customers
           </Link>
-          <Link href="#" className={styles.menuItem}>
+          <Link href="/cms/orders" className={styles.menuItem}>
             Orders
           </Link>
           <Link href="#" className={styles.menuItem}>

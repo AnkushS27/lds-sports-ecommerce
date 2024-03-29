@@ -5,6 +5,7 @@ import styles from "./page.module.css";
 import { getSession } from "next-auth/react";
 import HorizontalNavBar from "@/Components/HorizontalNavbar/page";
 import VerticalNavBar from "@/Components/VerticalNavbar/page";
+import Loader from "@/Components/Loader/page";
 
 type PersonalInfo = {
   name: string;
@@ -219,7 +220,7 @@ export default function MyAccount() {
         />
         {loading ? (
           <div className={styles.loadingScreen}>
-            <h3>Loading please wait...</h3>
+            <Loader />
           </div>
         ) : (
           <div className={styles.VerticalmainContainer}>

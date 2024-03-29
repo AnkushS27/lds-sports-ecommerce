@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import HorizontalNavBar from "@/Components/HorizontalNavbar/page";
 import VerticalNavBar from "@/Components/VerticalNavbar/page";
 import Footer from "@/Components/Footer/page";
+import Loader from "@/Components/Loader/page";
 
 import { loggedIn } from "../api/user/loggedIn";
 
@@ -56,17 +57,7 @@ export default function Favourites() {
           <div className={style1.productCardWrapper}>
             <div className={style1.productCardHead}> Favourites </div>
             {loading ? (
-              <h4
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                width: "100%",
-                height: "100px"
-              }}
-            >
-              Loading, please wait...
-            </h4>
+              <Loader />
             ) : product.length === 0 ? (
               <h4
                   style={{

@@ -10,6 +10,7 @@ import { auth } from "@/auth";
 import { ProductType } from "@/TypeInterfaces/TypeInterfaces";
 import { getSession } from "next-auth/react";
 import Footer from "@/Components/Footer/page";
+import Loader from "@/Components/Loader/page";
 
 export default function SearchResults({
   params,
@@ -71,17 +72,7 @@ export default function SearchResults({
           </div>
           <div className={style1.productCardWrapper}>
             {loading ? (
-              <h4
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  width: "100%",
-                  height: "100px",
-                }}
-              >
-                Loading products please wait...
-              </h4>
+              <Loader />
             ) : products.length === 0 ? (
               <h4>No products found.</h4>
             ) : (

@@ -10,16 +10,11 @@ import style1 from "./page.module.css";
 import HorizontalNavBar from "@/Components/HorizontalNavbar/page";
 import VerticalNavBar from "@/Components/VerticalNavbar/page";
 
-////////////////// Functions ////////////////////////
-// async function loggedIn() {
-//     var res = await fetch('http://localhost:3000/api/user',{method:'GET',});
-//     const data = await res.json();
-//     return data.result === 'success';
-// }\
 import ProductCard from "@/Components/productCard/page";
 import { auth } from "@/auth";
 import { ProductType } from "@/TypeInterfaces/TypeInterfaces";
 import { getSession } from "next-auth/react";
+import Loader from "@/Components/Loader/page";
 
 // const product: ProductType = {
 //     productId: "ABC123",
@@ -39,10 +34,10 @@ import { getSession } from "next-auth/react";
 // let others: ProductType[] = []
 
 export default function Home() {
-    const [session, setSession] = useState<any>();
-    const [product, setProducts] = useState<ProductType[]>([]);
+  const [session, setSession] = useState<any>();
+  const [product, setProducts] = useState<ProductType[]>([]);
   const [loading, setLoading] = useState(true);
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -55,19 +50,18 @@ export default function Home() {
           throw new Error("Failed to fetch data");
         }
         const data = await res.json();
-        console.log(data);
         setProducts(data);
         setLoading(false);
       } catch (error) {
-          console.error("Error fetching data:", error);
+        console.error("Error fetching data:", error);
         setLoading(false);
       }
     };
     fetchData();
-}, []);
+  }, []);
 
-let trending: ProductType[] = product;
-let latest: ProductType[] = product;
+  let trending: ProductType[] = product;
+  let latest: ProductType[] = product;
 
   return (
     <div className={style1.mainWrapper}>
@@ -106,17 +100,7 @@ let latest: ProductType[] = product;
                   return <ProductCard key={index} params={product} />;
                 })
               ) : (
-                <h4
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "100%",
-                    height: "100px"
-                  }}
-                >
-                  Loading products please wait...
-                </h4>
+                <Loader />
               )}
             </div>
           </div>
@@ -135,37 +119,13 @@ let latest: ProductType[] = product;
                   return <ProductCard key={index} params={product} />;
                 })
               ) : (
-                <h4
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "100%",
-                    height: "100px"
-                  }}
-                >
-                  Loading, please wait...
-                </h4>
+                <Loader />
               )}
             </div>
           </div>
-          {/* <div className={style1.sectionContainer}>
-                        <div className={style1.sectionHead}> For You </div>
-                        <div className={style1.categoriesContainer} style={{flexWrap:"nowrap",overflowX:"auto", maxWidth:"100%"}}>
-                            {forYou && forYou.length > 0 ?
-                            forYou.map((product,index) => {return(<ProductCard key={index} params={product} />)}) :
-                            <h2 style={{display:'flex',justifyContent:'center',width:'100%'}}>No Products available at this moment.</h2>
-                            }
-                        </div>
-                    </div> */}
           <Footer />
         </div>
       </div>
     </div>
   );
 }
-////////////////////////////
-// Works
-/*
-1. Link in function is to be replaced
-*/

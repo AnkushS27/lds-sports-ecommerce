@@ -2,6 +2,7 @@
 import HorizontalNavBar from "@/Components/HorizontalNavbar/page";
 import VerticalNavBar from "@/Components/VerticalNavbar/page";
 import Footer from "@/Components/Footer/page";
+import Loader from "@/Components/Loader/page";
 
 import Image from "next/image";
 import style1 from "./page.module.css";
@@ -220,7 +221,7 @@ export default function ProductDetails({ params }: { params: { Id: string } }) {
               </div>
             </div>
           ) : (
-            <p>Loading...</p>
+            <Loader />
           )}
           <Footer />
         </div>

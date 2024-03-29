@@ -92,7 +92,7 @@ export default function LoginSignup() {
               </div>
             </div>
           </div>
-          <button onClick={onSignup}>Continue</button>
+          <button onClick={onSignup} disabled={!user.username || !user.email || !user.password}>Continue</button>
           <p className={styles.loginSignupLogin}>
             Already have an account? <Link href="/login" className={styles.changePage}>Login</Link>
           </p>
