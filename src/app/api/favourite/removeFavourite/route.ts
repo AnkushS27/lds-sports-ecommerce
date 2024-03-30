@@ -11,7 +11,7 @@ export async function DELETE(req: NextRequest, res: NextResponse) {
 
     try {
         // Remove productId from user's favorites
-        const updatedFavorites = await FavouriteModel.deleteOne(
+        const updatedFavorites = await FavouriteModel.updateOne(
             { userId },
             { $pull: { products: productId } }, // Remove productId from the array
         );

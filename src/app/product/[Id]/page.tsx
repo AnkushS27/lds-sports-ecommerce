@@ -13,18 +13,10 @@ import { useEffect, useState } from "react";
 import { ProductType } from "@/TypeInterfaces/TypeInterfaces";
 import { getSession } from "next-auth/react";
 
-// import { getData } from "@/db/testing";
-
-//icons import
-import { BsCaretUpFill, BsCaretDownFill } from "react-icons/bs";
-import Product from "@/app/cms/product/[Id]/page";
-
 export default function ProductDetails({ params }: { params: { Id: string } }) {
   const [session, setSession] = useState<any>();
   const [variationIdx, setVariationIdx] = useState(0);
   const [colorIdx, setColorIdx] = useState(0);
-  // const data = await getData();
-  // console.log(data);
 
   const [product, setProduct] = useState<ProductType>();
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);

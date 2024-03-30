@@ -66,6 +66,7 @@ export type ProductType = {
     colors?: string[];
     createdAt?: Date;
     updatedAt?: Date;
+    quantity?: number;
 
     comments?: string[]; // CommentId[]
     offers?: string[]; // OfferId[]

@@ -20,15 +20,13 @@ export default function ProductCard({
   checkFavourite,
   checkCart,
   isCart = false,
-  handleRemoveFromCart,
   handleQuantityChange,
 }: {
   params: ProductType;
   checkFavourite?: boolean;
   checkCart?: boolean;
   isCart?: boolean; // Add isCart to the type definition
-  handleRemoveFromCart?: () => void;
-  handleQuantityChange?: (quantity: number) => void;
+  handleQuantityChange?: (productId: string, newQuantity: number) => void;
 }) {
   const [favourite, setFavourite] = useState(checkFavourite);
   const [cart, setCart] = useState(checkCart);
@@ -59,10 +57,37 @@ export default function ProductCard({
       console.error('Error fetching favorites:', error);
     }
   };
+
+  const fetchCart = async () => {
+    try {
+      const session = await getSession();
+      const userId = session?.user?.email;
+      const productId = params.productId;
+      if (userId) {
+        const response = await fetch(
+          "/api/cart/checkCart", 
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ productId, userId }),
+          }
+        );
+        const data = await response.json();
+        setCart(data.isCart);
+      }
+    } catch (error) {
+      console.error('Error fetching Cart:', error);
+    }
+  }
   
   useEffect(() => {
     if (checkFavourite === undefined) {
       fetchFavorites();
+    }
+    if(checkCart === undefined) {
+      fetchCart();
     }
   }, []);
 
@@ -74,22 +99,26 @@ export default function ProductCard({
       } else {
         await removeFromFavorites(params.productId);
       }
-    } else {
-      setCart(!cart);
+    } else if(choice === "cart") {
+      if(!cart) {
+        await addToCart(params.productId, qty);
+      } else {
+        await removeFromCart(params.productId, qty);
+      }
     }
   };
 
   const handleDecreaseQty = () => {
     if (qty > 1) {
       setQty(qty - 1);
-      handleQuantityChange && handleQuantityChange(qty - 1);
+      handleQuantityChange && handleQuantityChange(params.productId, qty - 1);
     }
   };
 
   const handleIncreaseQty = () => {
     if (qty < stock) {
       setQty(qty + 1);
-      handleQuantityChange && handleQuantityChange(qty + 1);
+      handleQuantityChange && handleQuantityChange(params.productId, qty + 1);
     }
   };
 
@@ -137,6 +166,50 @@ export default function ProductCard({
     }
   };
 
+  const addToCart = async (productId: string, qty: number) => {
+    try {
+      const session = await getSession();
+      const userId = session?.user?.email;
+      const response = await fetch('/api/cart/addCart', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ productId, userId, qty }),
+      });
+      if (response.ok) {
+        setCart(true); // Update the local state to reflect the change
+      } else {
+        // Handle error, maybe show a notification
+      }
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      // Handle error, maybe show a notification
+    }
+  };
+
+  const removeFromCart = async (productId: string, qty: number) => {
+    try {
+      const session = await getSession();
+      const userId = session?.user?.email;
+      const response = await fetch('/api/cart/removeCart', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ productId, userId, qty }),
+      });
+      if (response.ok) {
+        setCart(false); // Update the local state to reflect the change
+      } else {
+        // Handle error, maybe show a notification
+      }
+    } catch (error) {
+      console.error('Error removing from cart:', error);
+      // Handle error, maybe show a notification
+    }
+  };
+
   return (
     <div className={style1.productMainContainer}>
       {/* Image here */}
@@ -155,7 +228,7 @@ export default function ProductCard({
         href={`/product/${params.productId}`}
         className={style1.productBottomSection}
       >
-        <div className={style1.productName}>{params.name}</div>
+        <div className={style1.productName}>{params.name.length > 20 ? `${params.name.slice(0, 20)}...` : params.name}</div>
         <div className={style1.productCompany}>{params.companyId}</div>
         <div className={style1.productPriceSection}>
           <div className={style1.productPrice}>Rs. {price}</div>
