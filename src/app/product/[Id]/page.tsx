@@ -143,8 +143,8 @@ export default function ProductDetails({ params }: { params: { Id: string } }) {
                                   selectedImageIndex === index &&
                                   style1.activeImgBox
                                 }`}
-                                width={100}
-                                height={100}
+                                width={90}
+                                height={90}
                               />
                             </div>
                           ))}
@@ -161,8 +161,9 @@ export default function ProductDetails({ params }: { params: { Id: string } }) {
                               src={selectedImage}
                               alt="Product Image"
                               className={style1.productImg}
-                              layout="fill"
                               objectFit="cover"
+                              width={400}
+                              height={400}
                             />
                           )}
                       </div>

@@ -44,12 +44,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: row;
-
+  position: relative;
   width: calc(100% - 20px);
-  min-height: 350px;
+  min-height: 550px;
 
-  padding: 10px;
   border-radius: 10px;
   margin: 10px;
   
@@ -58,7 +56,28 @@
   font-weight: 700;
 
   color: white;
-  background-color: black;
+  overflow: hidden;
+}
+
+.bannerText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 50px;
+
+  font-size: 32px;
+  font-weight: 700;
+  width: 100%;
+  color: white;
+  text-align: center;
+  text-shadow: 2px 2px 4px #000;
+}
+
+.bannerImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .sectionContainer {
@@ -107,19 +126,35 @@
   scrollbar-color: transparent transparent;
 }
 
+.diffCategoriesContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  width: 100%;
+
+  padding: 10px;
+  gap: 10px;
+}
+
 .categoriesItem {
   display: flex;
   align-items: center;
   justify-content: center;
 
-  width: 210px;
-  height: 60px;
+  width: clamp(200px, 100%, 230px);
 
-  padding: 10px;
+  padding: 15px;
   border-radius: 10px;
   font-size: 20px;
   background-color: black;
   color: white;
   cursor: pointer;
+}
+
+.categoriesItem:hover {
+  background-color: #333;
 }
 /* Responsive Design : Mobile->700px  Small Screens->1120px */

@@ -5,6 +5,8 @@ import Footer from "@/Components/Footer/page";
 import style1 from "./page.module.css";
 
 // Imports
+import Image from "next/image";
+import Link from "next/link";
 
 // Components
 import HorizontalNavBar from "@/Components/HorizontalNavbar/page";
@@ -74,15 +76,18 @@ export default function Home() {
         />
         <div className={style1.VerticalmainContainer}>
           <div className={style1.brandAdsDisplayContainer}>
-            Display your brand ads here.
+            <div className={style1.bannerText}>Unleash Your Winning Edge: Explore Epic Sports Gear Now!</div>
+            <Image className={style1.bannerImage} unoptimized={true} src="/images/Designer.jpeg" alt="brandAds" width={100} height={100} />
           </div>
           <div className={style1.sectionContainer}>
             <div className={style1.sectionHead}> Categories </div>
-            <div className={style1.categoriesContainer}>
-              <div className={style1.categoriesItem}> Cricket bat </div>
-              <div className={style1.categoriesItem}> ball </div>
-              <div className={style1.categoriesItem}> tigh pads </div>
-              <div className={style1.categoriesItem}> Other accessories </div>
+            <div className={style1.diffCategoriesContainer}>
+              <Link className={style1.categoriesItem} href="/search/Bat"> Cricket bat </Link>
+              <Link className={style1.categoriesItem} href="/search/Ball"> Cricket Ball </Link>
+              <Link className={style1.categoriesItem} href="/search/Helmet"> Helmet </Link>
+              <Link className={style1.categoriesItem} href="/search/Thigh Pads"> Thigh pads </Link>
+              <Link className={style1.categoriesItem} href="/search/Football"> FootBall </Link>
+              <Link className={style1.categoriesItem} href="/search/Accessories"> Other accessories </Link>
             </div>
           </div>
           <div className={style1.sectionContainer}>

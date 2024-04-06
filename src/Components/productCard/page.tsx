@@ -240,8 +240,8 @@ export default function ProductCard({
         {params.img && (
           <Image
             src={params.img[0].replace("./public", "")}
-            width={100}
-            height={100}
+            width={500}
+            height={500}
             alt="product_img"
             className={style1.productImgSection}
           />
