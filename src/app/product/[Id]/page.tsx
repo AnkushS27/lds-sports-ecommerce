@@ -54,13 +54,68 @@ export default function ProductDetails({ params }: { params: { Id: string } }) {
     };
 
     fetchData();
-  }, [params.Id]);
+  }, []);
+
+  const addToCart = async () => {
+    if (session && product) {
+      try {
+        const session = await getSession();
+        const email = session?.user?.email;
+        const response = await fetch("/api/cart/addToCart", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId: email,
+            productId: product.productId,
+            qty: 1,
+            variationIdx,
+            colorIdx,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+      } catch (error) {
+        console.error("Error adding to cart:", error);
+      }
+    }
+  };
+
+  const addToFavorites = async () => {
+    if(session && product) {
+      try {
+        const session = await getSession();
+        const userId = session?.user?.email;
+        const response = await fetch("/api/favourite/addFavourite", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ productId:product.productId, userId }),
+        });
+        
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+      } catch (error) {
+        console.error("Error adding to favorites:", error);
+        // Handle error, maybe show a notification
+      }
+    }
+  };
 
   return (
     <div className={style1.mainWrapper}>
-      <HorizontalNavBar params={{ name: "ABC", loggedIn: session ? true : false }} />
+      <HorizontalNavBar
+        params={{ name: "ABC", loggedIn: session ? true : false }}
+      />
       <div className={style1.HorizontalMainContainer}>
-        <VerticalNavBar params={{ name: "ABC", loggedIn: session ? true : false }} />
+        <VerticalNavBar
+          params={{ name: "ABC", loggedIn: session ? true : false }}
+        />
         <div className={style1.VerticalMainContainer}>
           {product ? (
             <div className={style1.productContainer}>
@@ -114,8 +169,11 @@ export default function ProductDetails({ params }: { params: { Id: string } }) {
                     </div>
                   </div>
                   <div className={style1.productButtons}>
-                    <div className={style1.productCartBtn}>+ Add to Cart</div>
-                    <div className={style1.productBuyBtn}>
+                    <div className={style1.productCartBtn} onClick={addToCart}>
+                      {" "}
+                      + Add to Cart{" "}
+                    </div>
+                    <div className={style1.productBuyBtn} onClick={addToFavorites}>
                       {" "}
                       Add to Favourites{" "}
                     </div>
@@ -147,7 +205,10 @@ export default function ProductDetails({ params }: { params: { Id: string } }) {
                             className={style1.productDiversityItem}
                             style={
                               index === variationIdx
-                                ? { backgroundColor: "white", color: "black" }
+                                ? {
+                                    backgroundColor: "white",
+                                    color: "black",
+                                  }
                                 : {}
                             }
                             key={index}
@@ -174,7 +235,10 @@ export default function ProductDetails({ params }: { params: { Id: string } }) {
                               className={style1.productDiversityItem}
                               style={
                                 index === colorIdx
-                                  ? { backgroundColor: "white", color: "black" }
+                                  ? {
+                                      backgroundColor: "white",
+                                      color: "black",
+                                    }
                                   : {}
                               }
                               key={index}

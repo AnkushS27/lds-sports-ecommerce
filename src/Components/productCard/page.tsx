@@ -1,6 +1,6 @@
 "use client";
 
-import { ProductType } from "@/TypeInterfaces/TypeInterfaces";
+import { CartVariation, ProductType } from "@/TypeInterfaces/TypeInterfaces";
 // style
 import style1 from "./page.module.css";
 
@@ -19,11 +19,13 @@ export default function ProductCard({
   params,
   checkFavourite,
   checkCart,
+  variant,
   isCart = false,
   handleQuantityChange,
 }: {
   params: ProductType;
   checkFavourite?: boolean;
+  variant?: CartVariation;
   checkCart?: boolean;
   isCart?: boolean; // Add isCart to the type definition
   handleQuantityChange?: (productId: string, newQuantity: number) => void;
@@ -32,7 +34,9 @@ export default function ProductCard({
   const [cart, setCart] = useState(checkCart);
   const [qty, setQty] = useState(1);
   const stock = 10;
-  const price = params.variations.variations[0].price;
+  const price = params.variations.variations[variant?.variationIdx ?? 0].price;
+  const [originalPrice, setOriginalPrice] = useState(0);
+  const [discountPercent, setDiscountPercent] = useState(0);
 
   const fetchFavorites = async () => {
     try {
@@ -40,21 +44,18 @@ export default function ProductCard({
       const userId = session?.user?.email;
       const productId = params.productId;
       if (userId) {
-        const response = await fetch(
-          "/api/favourite/checkFavourite", 
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ productId, userId }),
-          }
-        );
+        const response = await fetch("/api/favourite/checkFavourite", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ productId, userId }),
+        });
         const data = await response.json();
         setFavourite(data.isFavourite);
       }
     } catch (error) {
-      console.error('Error fetching favorites:', error);
+      console.error("Error fetching favorites:", error);
     }
   };
 
@@ -64,31 +65,29 @@ export default function ProductCard({
       const userId = session?.user?.email;
       const productId = params.productId;
       if (userId) {
-        const response = await fetch(
-          "/api/cart/checkCart", 
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ productId, userId }),
-          }
-        );
+        const response = await fetch("/api/cart/checkCart", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ productId, userId }),
+        });
         const data = await response.json();
         setCart(data.isCart);
       }
     } catch (error) {
-      console.error('Error fetching Cart:', error);
+      console.error("Error fetching Cart:", error);
     }
-  }
-  
+  };
+
   useEffect(() => {
     if (checkFavourite === undefined) {
       fetchFavorites();
     }
-    if(checkCart === undefined) {
+    if (checkCart === undefined) {
       fetchCart();
     }
+    discountCalculate(price);
   }, []);
 
   const updateChoice = async (choice: string) => {
@@ -99,8 +98,8 @@ export default function ProductCard({
       } else {
         await removeFromFavorites(params.productId);
       }
-    } else if(choice === "cart") {
-      if(!cart) {
+    } else if (choice === "cart") {
+      if (!cart) {
         await addToCart(params.productId, qty);
       } else {
         await removeFromCart(params.productId, qty);
@@ -125,11 +124,11 @@ export default function ProductCard({
   const addToFavorites = async (productId: string) => {
     try {
       const session = await getSession();
-        const userId = session?.user?.email;
-      const response = await fetch('/api/favourite/addFavourite', {
-        method: 'POST',
+      const userId = session?.user?.email;
+      const response = await fetch("/api/favourite/addFavourite", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ productId, userId }),
       });
@@ -139,7 +138,7 @@ export default function ProductCard({
         // Handle error, maybe show a notification
       }
     } catch (error) {
-      console.error('Error adding to favorites:', error);
+      console.error("Error adding to favorites:", error);
       // Handle error, maybe show a notification
     }
   };
@@ -148,10 +147,10 @@ export default function ProductCard({
     try {
       const session = await getSession();
       const userId = session?.user?.email;
-      const response = await fetch('/api/favourite/removeFavourite', {
-        method: 'DELETE',
+      const response = await fetch("/api/favourite/removeFavourite", {
+        method: "DELETE",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ productId, userId }),
       });
@@ -161,7 +160,7 @@ export default function ProductCard({
         // Handle error, maybe show a notification
       }
     } catch (error) {
-      console.error('Error removing from favorites:', error);
+      console.error("Error removing from favorites:", error);
       // Handle error, maybe show a notification
     }
   };
@@ -170,10 +169,10 @@ export default function ProductCard({
     try {
       const session = await getSession();
       const userId = session?.user?.email;
-      const response = await fetch('/api/cart/addCart', {
-        method: 'POST',
+      const response = await fetch("/api/cart/addCart", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ productId, userId, qty }),
       });
@@ -183,7 +182,7 @@ export default function ProductCard({
         // Handle error, maybe show a notification
       }
     } catch (error) {
-      console.error('Error adding to cart:', error);
+      console.error("Error adding to cart:", error);
       // Handle error, maybe show a notification
     }
   };
@@ -192,12 +191,20 @@ export default function ProductCard({
     try {
       const session = await getSession();
       const userId = session?.user?.email;
-      const response = await fetch('/api/cart/removeCart', {
-        method: 'DELETE',
+      const variationIdx = variant?.variationIdx ?? 0;
+      const colorIdx = variant?.colorIdx ?? 0;
+      const response = await fetch("/api/cart/removeCart", {
+        method: "DELETE",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ productId, userId, qty }),
+        body: JSON.stringify({
+          productId,
+          userId,
+          qty,
+          colorIdx,
+          variationIdx,
+        }),
       });
       if (response.ok) {
         setCart(false); // Update the local state to reflect the change
@@ -205,10 +212,26 @@ export default function ProductCard({
         // Handle error, maybe show a notification
       }
     } catch (error) {
-      console.error('Error removing from cart:', error);
+      console.error("Error removing from cart:", error);
       // Handle error, maybe show a notification
     }
   };
+
+  const capitalizeFirstLetter = (word: any) => {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  };
+
+  const discountCalculate = (price: number) => {
+    // Generate a random discount percentage between 18% to 25%
+    const randomDiscountPercent = Math.floor(Math.random() * (28 - 15 + 1)) + 15;
+
+    // Calculate original price based on discounted price and discount percentage
+    const calculatedOriginalPrice = Math.round((price / (1 - randomDiscountPercent / 100)) * 100) / 100;
+
+    // Update state variables with calculated values
+    setDiscountPercent(randomDiscountPercent);
+    setOriginalPrice(calculatedOriginalPrice);
+  }
 
   return (
     <div className={style1.productMainContainer}>
@@ -228,33 +251,44 @@ export default function ProductCard({
         href={`/product/${params.productId}`}
         className={style1.productBottomSection}
       >
-        <div className={style1.productName}>{params.name.length > 20 ? `${params.name.slice(0, 20)}...` : params.name}</div>
+        <div className={style1.productName}>
+          {params.name.length > 20
+            ? `${params.name.slice(0, 20)}...`
+            : params.name}
+        </div>
         <div className={style1.productCompany}>{params.companyId}</div>
+
+        {isCart && variant && (
+          <div className={style1.variationContainer}>
+            {params.variations && (
+              <div className={style1.variantChild}>
+                Size: {params.variations.variations[variant.variationIdx].value}
+              </div>
+            )}
+            {params.colors && (
+              <div className={style1.variantChild}>
+                ,{capitalizeFirstLetter(`${params.colors[variant.colorIdx]}`)}
+              </div>
+            )}
+          </div>
+        )}
+
         <div className={style1.productPriceSection}>
-          <div className={style1.productPrice}>Rs. {price}</div>
+          <div className={style1.discountedPrice}>Rs. {price}</div>
+          <div className={style1.originalPrice}>{originalPrice}</div>
+          <div className={style1.discountPercent}>{discountPercent}%</div>
         </div>
       </Link>
 
       {/* Data here will be appeared from the cart page */}
       {isCart && (
-        <div
-          className={style1.productCardBtnsContainer}
-          style={{ bottom: "40px" }}
-        >
-          <div className={style1.productQtyContainer}>
-            <div
-              className={style1.productQtyBtn}
-              onClick={handleDecreaseQty}
-            >
-              -
-            </div>
-            <div>{qty}</div>
-            <div
-              className={style1.productQtyBtn}
-              onClick={handleIncreaseQty}
-            >
-              +
-            </div>
+        <div className={style1.productQtyContainer}>
+          <div className={style1.productQtyBtn} onClick={handleDecreaseQty}>
+            -
+          </div>
+          <div>{qty}</div>
+          <div className={style1.productQtyBtn} onClick={handleIncreaseQty}>
+            +
           </div>
         </div>
       )}

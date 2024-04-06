@@ -8,13 +8,14 @@ import VerticalNavBar from "@/Components/VerticalNavbar/page";
 import { loggedIn } from "@/app/api/user/loggedIn";
 import HorizontalNavBar from "@/Components/HorizontalNavbar/page";
 import { getSession, useSession } from "next-auth/react";
-import { ProductType } from "@/TypeInterfaces/TypeInterfaces";
+import { CartVariation, ProductType } from "@/TypeInterfaces/TypeInterfaces";
 import Loader from "@/Components/Loader/page";
 
 export default function Cart() {
   const [session, setSession] = useState<any>();
   const [product, setProducts] = useState<ProductType[]>([]);
   const [loading, setLoading] = useState(true);
+  const [variantValues, setVariantValues] = useState<CartVariation[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,8 +31,16 @@ export default function Cart() {
           throw new Error("Failed to fetch data");
         }
         const data = await res.json();
-        console.log(data);
+        console.log("Data on client side: " + data);
         setProducts(data);
+
+        const extractedVariants = data.map((prod: any) => ({
+          qty: prod.qty,
+          colorIdx: prod.colorIdx,
+          variationIdx: prod.variationIdx,
+        }));
+        setVariantValues(extractedVariants);
+
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -41,34 +50,6 @@ export default function Cart() {
     fetchData();
   }, []);
 
-  // type Product = {
-  //   pid: string;
-  //   name: string;
-  //   img?: string;
-  //   desc: string
-  //   price: string;
-  //   stock: string;
-  //   quantity?: number;
-  //   company: string;
-  //   offer?: {
-  //     discount: string;
-  //     newPrice?: string;
-  //   };
-  // };
-
-  // // State to store the list of products in the cart
-  //   const [cartProducts, setCartProducts] = useState<Product[]>([
-  //     {
-  //       name: "prod_1",
-  //       company: "c1",
-  //       pid: "001",
-  //       desc: "sample desc",
-  //       price: "₹1500",
-  //       stock: "50",
-  //     },
-  //     // Add more products with variations data as needed
-  //   ]);
-
   const handleQuantityChange = (productId: string, newQuantity: number) => {
     // Update the quantity in the cartProducts array
     const updatedCart = product.map((prod) =>
@@ -77,9 +58,15 @@ export default function Cart() {
     setProducts(updatedCart);
   };
 
+
+  // WOrk on subtotal calculation left from here last time //
+  // ********************************** //
   const calculateSubtotal = () => {
     return product.reduce((subtotal, prod) => {
-      const productSubtotal = prod.variations.variations[0].price * (prod.quantity || 1);
+      let productSubtotal = 0;
+      variantValues.map((value, index) => {
+        productSubtotal = prod.variations.variations[value.variationIdx].price * (prod.quantity || 1);
+      });
       return subtotal + productSubtotal;
     }, 0);
   };
@@ -100,19 +87,25 @@ export default function Cart() {
               <Loader />
             ) : product.length === 0 ? (
               <h4
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "100%",
-                    height: "100px"
-                  }}
-                >
-                  No products in Cart!
-                </h4>
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "100%",
+                  height: "100px",
+                }}
+              >
+                No products in Cart!
+              </h4>
             ) : (
               product.map((product, index) => (
-                <ProductCard key={index} params={product} isCart={true} handleQuantityChange={handleQuantityChange}/>
+                <ProductCard
+                  key={index}
+                  params={product}
+                  variant={variantValues[index]}
+                  isCart={true}
+                  handleQuantityChange={handleQuantityChange}
+                />
               ))
             )}
           </div>

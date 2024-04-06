@@ -5,10 +5,12 @@ import ProductModel from '@/db/models/productModel';
 
 export async function POST(request: NextRequest) {
     try {
+        await ConnectDatabase(); // Connect to MongoDB
+
         const requestBody = await request.json();
         const { userId } = requestBody;
 
-        await ConnectDatabase(); // Connect to MongoDB
+        console.log('Request Body:', requestBody);
 
         if (!userId) {
             return new NextResponse("User ID is required.", { status: 400 });
@@ -20,11 +22,33 @@ export async function POST(request: NextRequest) {
             return new NextResponse("User's Cart not found.", { status: 404 });
         }
 
-        const productIds = userCart.products.map((product:any) => product.productId);
+        const responseData = [];
 
-        const data = await ProductModel.find({ productId: { $in: productIds } });
-        console.log(data);
-        return new NextResponse(JSON.stringify(data), { status: 200 });
+        for (const cartProduct of userCart.products) {
+            const product = await ProductModel.findOne({ productId: cartProduct.productId });
+            if (product) {
+                responseData.push({
+                    productId: product.productId,
+                    img: product.img,
+                    name: product.name,
+                    desc: product.desc,
+                    companyId: product.companyId,
+                    tags: product.tags,
+                    colors: product.colors,
+                    variations: product.variations,
+                    createdAt: product.createdAt,
+                    updatedAt: product.updatedAt,
+                    comments: product.comments,
+                    offers: product.offers,
+                    // Add additional fields from userCart
+                    colorIdx: cartProduct.colorIdx,
+                    qty: cartProduct.qty,
+                    variationIdx: cartProduct.variationIdx,
+                });
+            }
+        }
+
+        return new NextResponse(JSON.stringify(responseData), { status: 200 });
     } catch (error) {
         return new NextResponse("Error fetching data from the database. Please try again later." + error, { status: 500 });
     }

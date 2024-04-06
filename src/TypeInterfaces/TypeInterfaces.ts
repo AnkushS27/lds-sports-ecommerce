@@ -72,6 +72,12 @@ export type ProductType = {
     offers?: string[]; // OfferId[]
 };
 
+export type CartVariation = {
+    qty: number;
+    colorIdx: number;
+    variationIdx: number;
+}
+
 export type FavouritesType = {
     favouriteId: string;
     userId: string;
