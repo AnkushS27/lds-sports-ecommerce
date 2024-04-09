@@ -5,6 +5,7 @@ import { ConnectDatabase } from "@/db/db_connections/Connector";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +26,7 @@ export default async function RootLayout({
         <body className={inter.className}>
           {children}
           <Analytics />
+          <SpeedInsights />
         </body>
       </html>
     </SessionProvider>
