@@ -62,8 +62,8 @@ export default function Home() {
     fetchData();
   }, []);
 
-  let trending: ProductType[] = product;
-  let latest: ProductType[] = product;
+  let trending: ProductType[] = product.slice(0,5);
+  let latest: ProductType[] = product.slice(5,);
 
   return (
     <div className={style1.mainWrapper}>
