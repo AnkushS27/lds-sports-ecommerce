@@ -8,7 +8,7 @@ import HorizontalNavBar from "@/Components/HorizontalNavbar/page";
 import { getSession } from "next-auth/react";
 import { CartVariation, ProductType } from "@/TypeInterfaces/TypeInterfaces";
 import Loader from "@/Components/Loader/page";
-import PaymentTesting from "../testing/payment/page";
+import {PaymentTesting} from "../testing/payment/page";
 
 export default function Cart() {
   const [session, setSession] = useState<any>();

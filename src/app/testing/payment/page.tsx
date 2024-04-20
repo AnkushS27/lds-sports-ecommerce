@@ -4,12 +4,7 @@ import { useRouter } from "next/navigation";
 import sha256 from "crypto-js/sha256";
 import style1 from "./page.module.css";
 
-interface PaymentTestingProps {
-  amount: number;
-  handlePaymentClick: () => Promise<void>; // Define handlePayment prop
-}
-
-const PaymentTesting: React.FC<PaymentTestingProps> = ({ amount, handlePaymentClick }) => {
+export function PaymentTesting({ amount, handlePaymentClick }: {amount:number, handlePaymentClick?: () => Promise<void>}) {
   const router = useRouter();
   const apiKey = "099eb0cd-02cf-4e2a-8aca-3e6c6aff0399";
   const saltIndex = 1;
@@ -37,8 +32,9 @@ const PaymentTesting: React.FC<PaymentTestingProps> = ({ amount, handlePaymentCl
   //     console.log(SHA256data + '###' + saltIndex);
   // }
   const handlePayment = async () => {
-    console.log("processing payment...");
-    await handlePaymentClick();
+    if (handlePaymentClick) {
+      await handlePaymentClick();
+    }
     const res = (
       await axios.post(
         "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay",
@@ -66,5 +62,3 @@ const PaymentTesting: React.FC<PaymentTestingProps> = ({ amount, handlePaymentCl
     </button>
   );
 };
-
-export default PaymentTesting;
