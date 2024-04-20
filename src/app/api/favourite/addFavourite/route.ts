@@ -5,7 +5,6 @@ import { NextResponse, NextRequest } from 'next/server';
 export async function POST(req: NextRequest, res: NextResponse) {
     const requestBody = await req.json();
     const { productId, userId } = requestBody;
-    console.log('Request Body:', requestBody);
 
     await ConnectDatabase(); // Connect to MongoDB
 

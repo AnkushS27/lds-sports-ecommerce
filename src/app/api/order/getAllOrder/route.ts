@@ -19,8 +19,6 @@ export async function POST(request: NextRequest) {
             return new NextResponse("User's orders not found.", { status: 404 });
         }
 
-        console.log(userOrders);
-
         return new NextResponse(JSON.stringify(userOrders), { status: 200 });
     } catch (error) {
         return new NextResponse("Error fetching data from the database. Please try again later." + error, { status: 500 });

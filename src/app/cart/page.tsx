@@ -85,8 +85,6 @@ export default function Cart() {
   }
 
   const handlePaymentClick = async () => {
-    // Include logic to handle payment and send data to backend
-    console.log("Processing payment...");
     // Example: Call placeOrder function from Cart component
     await placeOrder();
   };

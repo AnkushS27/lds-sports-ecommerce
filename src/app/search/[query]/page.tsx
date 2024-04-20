@@ -41,11 +41,10 @@ export default function SearchResults({
         }
 
         const data = await res.json();
-        console.log(data);
         setProducts(data);
         setLoading(false);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
     fetchData();

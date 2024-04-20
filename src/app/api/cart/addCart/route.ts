@@ -5,12 +5,10 @@ import { NextResponse, NextRequest } from 'next/server';
 export async function POST(req: NextRequest, res: NextResponse) {
     const requestBody = await req.json();
     const { productId, userId, qty } = requestBody;
-    console.log('Request Body:', requestBody);
 
     await ConnectDatabase(); // Connect to MongoDB
 
     try {
-        // Add productId to user's favorites
         const updatedCart = await CartModel.updateOne(
             { userId },
             { $push: { products: { productId, qty } } }, // Add productId if not already present

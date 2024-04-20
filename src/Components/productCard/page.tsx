@@ -124,8 +124,6 @@ export default function ProductCard({
             body: JSON.stringify({ productId, userId, colorIdx, variationIdx }),
           });
           const data = await response.json();
-          console.log(data);
-          console.log(data.updatedQty);
           setQty(data.updatedQty);
           handleQuantityChange && handleQuantityChange(params.productId, qty - 1);
         }
@@ -151,9 +149,7 @@ export default function ProductCard({
           body: JSON.stringify({ productId, userId, colorIdx, variationIdx }),
         });
         const data = await response.json();
-        console.log(data);
         setQty(data.updatedQty);
-        console.log(data.updatedQty);
         handleQuantityChange && handleQuantityChange(params.productId, qty + 1);
       }
     } catch (error) {

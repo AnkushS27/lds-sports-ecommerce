@@ -31,7 +31,6 @@ export default function MyAccount() {
         const session = await getSession();
         const email = session?.user?.email;
         setSession(session);
-        console.log(email);
 
         const response = await fetch("/api/user/getUser", {
           method: "POST",
@@ -46,7 +45,6 @@ export default function MyAccount() {
         }
 
         const data = await response.json();
-        console.log("Data:", data);
         setPersonalInfo({
           name: data.username,
           email: data.email,
@@ -101,11 +99,6 @@ export default function MyAccount() {
       if (!response.ok) {
         throw new Error("Error updating user data");
       }
-
-      const updatedUserData = await response.json();
-
-      console.log("User details updated successfully:", updatedUserData);
-
       // Add any further actions or state updates here if needed
     } catch (error) {
       console.error("Error updating user details:", error);
@@ -147,7 +140,6 @@ export default function MyAccount() {
     // Implement your save logic for personal info here
     handleUpdateUser();
     setEditPersonalInfo(false);
-    console.log("Saving personal info:", personalInfo);
   };
 
   const handleSaveAddress = async (index: number) => {

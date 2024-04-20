@@ -6,11 +6,9 @@ import VerticalNavBar from "@/Components/VerticalNavbar/page";
 import Footer from "@/Components/Footer/page";
 import Loader from "@/Components/Loader/page";
 
-import { loggedIn } from "../api/user/loggedIn";
-
 import style1 from "./page.module.css";
 import ProductCard from "@/Components/productCard/page";
-import { auth } from "@/auth";
+
 import { ProductType } from "@/TypeInterfaces/TypeInterfaces";
 import { getSession } from "next-auth/react";
 
@@ -33,7 +31,6 @@ export default function Favourites() {
           throw new Error("Failed to fetch data");
         }
         const data = await res.json();
-        console.log(data);
         setProducts(data);
         setLoading(false);
       } catch (error) {

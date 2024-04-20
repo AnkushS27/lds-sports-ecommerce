@@ -32,11 +32,6 @@ export default function PaymentTesting({
   const Base64Load = Buffer.from(payload).toString("base64");
   const fullURL = Base64Load + "/pg/v1/pay" + apiKey;
   const SHA256data = sha256(fullURL);
-  // const handlePayment = () => {
-  //     console.log(payload);
-  //     console.log(Base64Load);
-  //     console.log(SHA256data + '###' + saltIndex);
-  // }
   const handlePayment = async () => {
     if (handlePaymentClick) {
       await handlePaymentClick();

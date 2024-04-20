@@ -85,7 +85,7 @@ export default function ProductDetails({ params }: { params: { Id: string } }) {
   };
 
   const addToFavorites = async () => {
-    if(session && product) {
+    if (session && product) {
       try {
         const session = await getSession();
         const userId = session?.user?.email;
@@ -94,9 +94,9 @@ export default function ProductDetails({ params }: { params: { Id: string } }) {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ productId:product.productId, userId }),
+          body: JSON.stringify({ productId: product.productId, userId }),
         });
-        
+
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -171,12 +171,13 @@ export default function ProductDetails({ params }: { params: { Id: string } }) {
                   </div>
                   <div className={style1.productButtons}>
                     <div className={style1.productCartBtn} onClick={addToCart}>
-                      {" "}
-                      + Add to Cart{" "}
+                      Add to Cart
                     </div>
-                    <div className={style1.productBuyBtn} onClick={addToFavorites}>
-                      {" "}
-                      Add to Favourites{" "}
+                    <div
+                      className={style1.productBuyBtn}
+                      onClick={addToFavorites}
+                    >
+                      Add to Favourites
                     </div>
                   </div>
                 </div>

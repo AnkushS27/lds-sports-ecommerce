@@ -1,12 +1,10 @@
 import styles from "./page.module.css";
 import Link from 'next/link';
 
-// components
 // Components
 import HorizontalNavBar from "@/Components/HorizontalNavbar/page";
 import VerticalNavBar from "@/Components/VerticalNavbar/page";
 
-import { loggedIn } from "@/app/api/user/loggedIn";
 import { auth } from "@/auth";
 
 export default async function About() {

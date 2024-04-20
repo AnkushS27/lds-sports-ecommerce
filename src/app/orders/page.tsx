@@ -29,7 +29,6 @@ export default function Orders() {
           throw new Error("Failed to fetch data");
         }
         const data = await res.json();
-        console.log(data);
         setOrders(data);
         setLoading(false);
       } catch (error) {
@@ -62,7 +61,7 @@ export default function Orders() {
                 height: "100px",
               }}
             >
-              No products in Cart!
+              No orders!
             </h4>
           ) : (
             <div className={style1.ordersHolder}>

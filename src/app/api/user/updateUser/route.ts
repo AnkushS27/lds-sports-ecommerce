@@ -5,9 +5,7 @@ import { UserType } from '@/TypeInterfaces/TypeInterfaces';
 export async function POST(req: NextRequest, res: NextResponse) {
     try {
         const requestBody = await req.json();
-        console.log('Request Body:', requestBody);
         const { email, username, phone, addresses } = requestBody;
-        console.log('Username in Request Body:', username);
 
         if (!email || !username || !phone || !addresses) {
             return new NextResponse(
@@ -23,7 +21,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
         
         // Update the user data in the database
         const updatedUserData = await updateUser(email, {username, phone, addresses} as UserType);
-        console.log('Updated User Data:', updatedUserData);
 
         return new NextResponse(JSON.stringify(updatedUserData), {
             status: 200,
