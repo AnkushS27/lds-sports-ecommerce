@@ -14,7 +14,7 @@ export default async function order({ params }: { params: { Id: string } }) {
                 <VerticalNavBar params={{name : 'ABC', loggedIn : session?true:false}} />
                 <div className={styles.VerticalmainContainer}>
                 <div className={styles.order}>
-      <h2 className={styles.orderId}>Order #987654</h2>
+      <h2 className={styles.orderId}>Order #{params.Id}</h2>
       <div className={styles.header}>
         <div className={styles.orderInfo}>
           <p className={styles.customerInfo}>By John Doe from ABC Company</p>

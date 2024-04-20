@@ -99,15 +99,15 @@ export type CartType = {
 };
 
 export type OrderType = {
-    orderId: string;
+    _id: string;
     userId: string;
     products: {
         productId: string;
-        variations?: string;
         qty: number;
+        variantIdx: number;
+        colorIdx: number;
     }[];
-    offersApplied: string[]; // Offers applied at the checkout time offerId[]
-    price: number;
+    totalPrice: number;
     createdAt: Date;
     status: string;
 };

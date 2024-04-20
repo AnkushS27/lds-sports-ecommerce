@@ -1,15 +1,14 @@
 "use client";
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import styles from "./page.module.css";
 import ProductCard from "@/Components/productCard/page";
 import VerticalNavBar from "@/Components/VerticalNavbar/page";
 
-import { loggedIn } from "@/app/api/user/loggedIn";
 import HorizontalNavBar from "@/Components/HorizontalNavbar/page";
-import { getSession, useSession } from "next-auth/react";
+import { getSession } from "next-auth/react";
 import { CartVariation, ProductType } from "@/TypeInterfaces/TypeInterfaces";
 import Loader from "@/Components/Loader/page";
+import PaymentTesting from "../testing/payment/page";
 
 export default function Cart() {
   const [session, setSession] = useState<any>();
@@ -17,36 +16,35 @@ export default function Cart() {
   const [loading, setLoading] = useState(true);
   const [variantValues, setVariantValues] = useState<CartVariation[]>([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const userSession = await getSession();
-        const userId = userSession?.user?.email;
-        setSession(userSession);
-        const res = await fetch("/api/cart/getAllCart", {
-          method: "POST",
-          body: JSON.stringify({ userId }),
-        });
-        if (!res.ok) {
-          throw new Error("Failed to fetch data");
-        }
-        const data = await res.json();
-        console.log("Data on client side: " + data);
-        setProducts(data);
-
-        const extractedVariants = data.map((prod: any) => ({
-          qty: prod.qty,
-          colorIdx: prod.colorIdx,
-          variationIdx: prod.variationIdx,
-        }));
-        setVariantValues(extractedVariants);
-
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        setLoading(false);
+  let fetchData = async () => {
+    try {
+      const userSession = await getSession();
+      const userId = userSession?.user?.email;
+      setSession(userSession);
+      const res = await fetch("/api/cart/getAllCart", {
+        method: "POST",
+        body: JSON.stringify({ userId }),
+      });
+      if (!res.ok) {
+        throw new Error("Failed to fetch data");
       }
-    };
+      const data = await res.json();
+      setProducts(data);
+
+      const extractedVariants = data.map((prod: any) => ({
+        qty: prod.qty,
+        colorIdx: prod.colorIdx,
+        variationIdx: prod.variationIdx,
+      }));
+      setVariantValues(extractedVariants);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     fetchData();
   }, []);
 
@@ -56,19 +54,41 @@ export default function Cart() {
       prod.productId === productId ? { ...prod, quantity: newQuantity } : prod
     );
     setProducts(updatedCart);
+    fetchData();
   };
 
-
-  // WOrk on subtotal calculation left from here last time //
-  // ********************************** //
   const calculateSubtotal = () => {
-    return product.reduce((subtotal, prod) => {
-      let productSubtotal = 0;
-      variantValues.map((value, index) => {
-        productSubtotal = prod.variations.variations[value.variationIdx].price * (prod.quantity || 1);
-      });
-      return subtotal + productSubtotal;
+    const subtotal = product.reduce((total, prod) => {
+      return variantValues.reduce((acc, value) => {
+        const quantity = value.qty || 1; // Default quantity is 1 if not provided
+        const variationPrice = prod.variations.variations[value.variationIdx].price;
+        return acc + variationPrice * quantity; // Accumulate total price for each variation
+      }, 0);
     }, 0);
+    return subtotal;
+  };
+
+  const placeOrder = async () => {
+    try {
+      const userSession = await getSession();
+      const userId = userSession?.user?.email;
+      const res = await fetch("/api/order/placeOrder", {
+        method: "POST",
+        body: JSON.stringify({ userId, products: product, variants: variantValues, totalPrice: calculateSubtotal()}),
+      });
+      if (!res.ok) {
+        throw new Error("Failed to place order");
+      }
+    } catch (error) {
+      console.error("Error placing order:", error);
+    }
+  }
+
+  const handlePaymentClick = async () => {
+    // Include logic to handle payment and send data to backend
+    console.log("Processing payment...");
+    // Example: Call placeOrder function from Cart component
+    await placeOrder();
   };
 
   return (
@@ -111,17 +131,15 @@ export default function Cart() {
           </div>
           <div className={styles.cartTotals}>
             <h2>Order Summary</h2>
-            <div className={styles.subtotal}>
+            {/* <div className={styles.subtotal}>
               <span>SUBTOTAL</span>
-              <span>Rs. {calculateSubtotal()}</span>
-            </div>
+              <span>Rs. {subTotal}</span>
+            </div> */}
             <div className={styles.total}>
               <span>TOTAL</span>
-              <span>Rs. {calculateSubtotal()}</span>
+              <span>Rs. {calculateSubtotal()}.00</span>
             </div>
-            <button className={styles.checkoutButton}>
-              PROCEED TO PAYMENT
-            </button>
+            <PaymentTesting amount={calculateSubtotal()*100} handlePaymentClick={handlePaymentClick} />
           </div>
         </div>
       </div>

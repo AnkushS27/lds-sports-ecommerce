@@ -32,7 +32,7 @@ export default function ProductCard({
 }) {
   const [favourite, setFavourite] = useState(checkFavourite);
   const [cart, setCart] = useState(checkCart);
-  const [qty, setQty] = useState(1);
+  const [qty, setQty] = useState(variant?.qty ?? 1);
   const stock = 10;
   const price = params.variations.variations[variant?.variationIdx ?? 0].price;
   const [originalPrice, setOriginalPrice] = useState(0);
@@ -88,7 +88,7 @@ export default function ProductCard({
       fetchCart();
     }
     discountCalculate(price);
-  }, []);
+  }, [cart, favourite]);
 
   const updateChoice = async (choice: string) => {
     // Backend function call is left.
@@ -107,17 +107,57 @@ export default function ProductCard({
     }
   };
 
-  const handleDecreaseQty = () => {
+  const handleDecreaseQty = async () => {
     if (qty > 1) {
-      setQty(qty - 1);
-      handleQuantityChange && handleQuantityChange(params.productId, qty - 1);
+      try {
+        const session = await getSession();
+        const userId = session?.user?.email;
+        const productId = params.productId;
+        const colorIdx = variant?.colorIdx ?? 0;
+        const variationIdx = variant?.variationIdx ?? 0;
+        if (userId && variant) {
+          const response = await fetch("/api/cart/decreaseQty", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ productId, userId, colorIdx, variationIdx }),
+          });
+          const data = await response.json();
+          console.log(data);
+          console.log(data.updatedQty);
+          setQty(data.updatedQty);
+          handleQuantityChange && handleQuantityChange(params.productId, qty - 1);
+        }
+      } catch (error) {
+        console.error("Error fetching Cart:", error);
+      }
     }
   };
 
-  const handleIncreaseQty = () => {
-    if (qty < stock) {
-      setQty(qty + 1);
-      handleQuantityChange && handleQuantityChange(params.productId, qty + 1);
+  const handleIncreaseQty = async () => {
+    try {
+      const session = await getSession();
+      const userId = session?.user?.email;
+      const productId = params.productId;
+      const colorIdx = variant?.colorIdx ?? 0;
+      const variationIdx = variant?.variationIdx ?? 0;
+      if (userId && variant) {
+        const response = await fetch("/api/cart/increaseQty", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ productId, userId, colorIdx, variationIdx }),
+        });
+        const data = await response.json();
+        console.log(data);
+        setQty(data.updatedQty);
+        console.log(data.updatedQty);
+        handleQuantityChange && handleQuantityChange(params.productId, qty + 1);
+      }
+    } catch (error) {
+      console.error("Error fetching Cart:", error);
     }
   };
 
@@ -223,15 +263,17 @@ export default function ProductCard({
 
   const discountCalculate = (price: number) => {
     // Generate a random discount percentage between 18% to 25%
-    const randomDiscountPercent = Math.floor(Math.random() * (28 - 15 + 1)) + 15;
+    const randomDiscountPercent =
+      Math.floor(Math.random() * (28 - 15 + 1)) + 15;
 
     // Calculate original price based on discounted price and discount percentage
-    const calculatedOriginalPrice = Math.round((price / (1 - randomDiscountPercent / 100)) * 100) / 100;
+    const calculatedOriginalPrice =
+      Math.round((price / (1 - randomDiscountPercent / 100)) * 100) / 100;
 
     // Update state variables with calculated values
     setDiscountPercent(randomDiscountPercent);
     setOriginalPrice(calculatedOriginalPrice);
-  }
+  };
 
   return (
     <div className={style1.productMainContainer}>
