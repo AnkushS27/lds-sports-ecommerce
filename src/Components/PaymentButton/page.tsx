@@ -4,7 +4,13 @@ import { useRouter } from "next/navigation";
 import sha256 from "crypto-js/sha256";
 import style1 from "./page.module.css";
 
-export function PaymentTesting({ amount, handlePaymentClick }: {amount:number, handlePaymentClick?: () => Promise<void>}) {
+export default function PaymentTesting({
+  amount,
+  handlePaymentClick,
+}: {
+  amount: number;
+  handlePaymentClick?: () => Promise<void>;
+}) {
   const router = useRouter();
   const apiKey = "099eb0cd-02cf-4e2a-8aca-3e6c6aff0399";
   const saltIndex = 1;
@@ -15,10 +21,10 @@ export function PaymentTesting({ amount, handlePaymentClick }: {amount:number, h
     merchantTransactionId: "MT7850590068188104",
     merchantUserId: "MU933037302229373",
     amount: amount,
-    redirectUrl: `http://localhost:3000/testing/api/payment/${transactionId}`,
+    redirectUrl: `http://lds-sports.vercel.app/testing/api/payment/${transactionId}`,
     redirectMode: "POST",
     mobileNumber: "9999999999",
-    callbackUrl: `http://localhost:3000/testing/api/payment/${transactionId}`,
+    callbackUrl: `http://lds-sports.vercel.app/testing/api/payment/${transactionId}`,
     paymentInstrument: {
       type: "PAY_PAGE",
     },
@@ -52,13 +58,15 @@ export function PaymentTesting({ amount, handlePaymentClick }: {amount:number, h
     router.push(redirectUrl);
   };
   return (
-    <button
-      onClick={() => {
-        handlePayment();
-      }}
-      className={style1.checkoutButton}
-    >
-      PROCEED TO PAYMENT
-    </button>
+    <>
+      <button
+        onClick={() => {
+          handlePayment();
+        }}
+        className={style1.checkoutButton}
+      >
+        PROCEED TO PAYMENT
+      </button>
+    </>
   );
-};
+}

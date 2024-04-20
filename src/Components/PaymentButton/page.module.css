@@ -5,12 +5,12 @@
     padding: 10px 20px;
     border: none;
     cursor: pointer;
-  }
+}
 
-  .checkoutButton:hover {
+.checkoutButton:hover {
     background-color: #fff;
     color: #007bff;
     border: 2px solid #007bff;
     font-weight: 600;
     padding: 8px 20px;
-  }
+}
