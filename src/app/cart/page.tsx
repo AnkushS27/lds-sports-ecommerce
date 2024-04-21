@@ -149,7 +149,7 @@ export default function Cart() {
               Select Shipping Address:
               <select>
               {userAddress && userAddress.map((address, index) => (
-                <option value={index}>{address.houseno}, {address.street}, {address.city}</option>
+                <option key={index} value={index}>{address.houseno}, {address.street}, {address.city}</option>
               ))}
               </select>
             </div>
