@@ -10,8 +10,6 @@ export async function POST(request: NextRequest) {
         const requestBody = await request.json();
         const { userId } = requestBody;
 
-        console.log('Request Body:', requestBody);
-
         if (!userId) {
             return new NextResponse("User ID is required.", { status: 400 });
         }

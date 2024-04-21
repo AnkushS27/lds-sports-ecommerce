@@ -72,6 +72,14 @@
 }
 
 .ImgContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  gap: 10px;
+}
+
+.orderImage {
   width: 80px;
   height: 80px;
 

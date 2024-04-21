@@ -62,8 +62,8 @@ export default function Home() {
     fetchData();
   }, []);
 
-  let trending: ProductType[] = product.slice(0,5);
-  let latest: ProductType[] = product.slice(5,);
+  let trending: ProductType[] = product.slice(0,7);
+  let latest: ProductType[] = product.slice(7,);
 
   return (
     <div className={style1.mainWrapper}>
@@ -85,8 +85,10 @@ export default function Home() {
               <Link className={style1.categoriesItem} href="/search/Bat"> Cricket bat </Link>
               <Link className={style1.categoriesItem} href="/search/Ball"> Cricket Ball </Link>
               <Link className={style1.categoriesItem} href="/search/Helmet"> Helmet </Link>
-              <Link className={style1.categoriesItem} href="/search/Thigh Pads"> Thigh pads </Link>
+              <Link className={style1.categoriesItem} href="/search/Pads"> Pads </Link>
               <Link className={style1.categoriesItem} href="/search/Football"> FootBall </Link>
+              <Link className={style1.categoriesItem} href="/search/Hockey"> Hockey </Link>
+              <Link className={style1.categoriesItem} href="/search/Protein"> Protein Powder </Link>
               <Link className={style1.categoriesItem} href="/search/Accessories"> Other accessories </Link>
             </div>
           </div>

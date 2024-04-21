@@ -6,7 +6,7 @@ import VerticalNavBar from "@/Components/VerticalNavbar/page";
 
 import HorizontalNavBar from "@/Components/HorizontalNavbar/page";
 import { getSession } from "next-auth/react";
-import { CartVariation, ProductType } from "@/TypeInterfaces/TypeInterfaces";
+import { AddressType, CartVariation, ProductType } from "@/TypeInterfaces/TypeInterfaces";
 import Loader from "@/Components/Loader/page";
 import PaymentTesting from "@/Components/PaymentButton/page";
 
@@ -15,6 +15,7 @@ export default function Cart() {
   const [product, setProducts] = useState<ProductType[]>([]);
   const [loading, setLoading] = useState(true);
   const [variantValues, setVariantValues] = useState<CartVariation[]>([]);
+  const [userAddress, setUserAddress] = useState<AddressType[]>();
 
   let fetchData = async () => {
     try {
@@ -37,6 +38,17 @@ export default function Cart() {
         variationIdx: prod.variationIdx,
       }));
       setVariantValues(extractedVariants);
+
+      const res2 = await fetch("/api/user/getUserAddress", {
+        method: "POST",
+        body: JSON.stringify({ userId }),
+      });
+      if (!res2.ok) {
+        throw new Error("Failed to fetch data");
+      }
+      const data2 = await res2.json();
+      setUserAddress(data2);
+
       setLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -129,13 +141,17 @@ export default function Cart() {
           </div>
           <div className={styles.cartTotals}>
             <h2>Order Summary</h2>
-            {/* <div className={styles.subtotal}>
-              <span>SUBTOTAL</span>
-              <span>Rs. {subTotal}</span>
-            </div> */}
             <div className={styles.total}>
               <span>TOTAL</span>
               <span>Rs. {calculateSubtotal()}.00</span>
+            </div>
+            <div className={styles.addressContainer}>
+              Select Shipping Address:
+              <select>
+              {userAddress && userAddress.map((address, index) => (
+                <option value={index}>{address.houseno}, {address.street}, {address.city}</option>
+              ))}
+              </select>
             </div>
             <PaymentTesting amount={calculateSubtotal()*100} handlePaymentClick={handlePaymentClick} />
           </div>

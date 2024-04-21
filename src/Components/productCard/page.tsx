@@ -125,7 +125,8 @@ export default function ProductCard({
           });
           const data = await response.json();
           setQty(data.updatedQty);
-          handleQuantityChange && handleQuantityChange(params.productId, qty - 1);
+          handleQuantityChange &&
+            handleQuantityChange(params.productId, qty - 1);
         }
       } catch (error) {
         console.error("Error fetching Cart:", error);
@@ -290,8 +291,8 @@ export default function ProductCard({
         className={style1.productBottomSection}
       >
         <div className={style1.productName}>
-          {params.name.length > 20
-            ? `${params.name.slice(0, 20)}...`
+          {params.name.length > 35
+            ? `${params.name.slice(0, 35)}...`
             : params.name}
         </div>
         <div className={style1.productCompany}>{params.companyId}</div>
@@ -300,7 +301,8 @@ export default function ProductCard({
           <div className={style1.variationContainer}>
             {params.variations && (
               <div className={style1.variantChild}>
-                Size: {params.variations.variations[variant.variationIdx].value}
+                {params.variations.name}:{" "}
+                {params.variations.variations[variant.variationIdx].value}
               </div>
             )}
             {params.colors && (
@@ -311,25 +313,28 @@ export default function ProductCard({
           </div>
         )}
 
-        <div className={style1.productPriceSection}>
-          <div className={style1.discountedPrice}>Rs. {price}</div>
-          <div className={style1.originalPrice}>{originalPrice}</div>
-          <div className={style1.discountPercent}>{discountPercent}%</div>
+        <div className={style1.productPriceNQtySection}>
+          <div className={style1.priceContainer}>
+            <div className={style1.discountedPrice}>Rs. {price}</div>
+            <div className={style1.discountContainer}>
+              <div className={style1.originalPrice}>{originalPrice}</div>
+              <div className={style1.discountPercent}>{discountPercent}%</div>
+            </div>
+          </div>
+
+          {isCart && (
+            <div className={style1.productQtyContainer}>
+              <div className={style1.productQtyBtn} onClick={handleDecreaseQty}>
+                -
+              </div>
+              <div>{qty}</div>
+              <div className={style1.productQtyBtn} onClick={handleIncreaseQty}>
+                +
+              </div>
+            </div>
+          )}
         </div>
       </Link>
-
-      {/* Data here will be appeared from the cart page */}
-      {isCart && (
-        <div className={style1.productQtyContainer}>
-          <div className={style1.productQtyBtn} onClick={handleDecreaseQty}>
-            -
-          </div>
-          <div>{qty}</div>
-          <div className={style1.productQtyBtn} onClick={handleIncreaseQty}>
-            +
-          </div>
-        </div>
-      )}
 
       <div className={style1.productCardBtnsContainer}>
         {favourite ? (

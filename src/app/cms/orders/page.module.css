@@ -43,9 +43,10 @@
     border-radius: 8px;
     width: fit-content;
   }
-
+  
   .searchContainer input, .searchContainer button {
     padding: 10px;
+    background-color: #fff;
     border: none;
     outline: none;
     height: 100%;

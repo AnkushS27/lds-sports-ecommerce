@@ -8,7 +8,6 @@ import { AiFillCreditCard } from "react-icons/ai";
 import { MdInventory } from "react-icons/md";
 
 export default function Home() {
-  const isloggedIn = loggedIn({});
   return (
     <div className={styles.mainWrapper}>
       <VerticalNavBar params={{ name: "ABC", loggedIn: true }} />

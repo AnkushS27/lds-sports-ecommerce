@@ -72,7 +72,12 @@ export default function Orders() {
                     className={style1.orderItemContainer}
                     key={index}
                   >
-                    <Image src={'/images/box.jpg'} width={80} height={80} alt={"image"}className={style1.ImgContainer} />
+                    <div className={style1.ImgContainer}>
+                    <Image src={'/images/box.jpg'} width={80} height={80} alt={"image"}className={style1.orderImage} />
+                      <div className={style1.orderRightItemId}>
+                        *has {order.products.length} item
+                      </div>
+                    </div>
 
                     <div className={style1.orderItemRight}>
                       <div className={style1.orderRightItemId}>
@@ -85,8 +90,8 @@ export default function Orders() {
                       <div className={style1.orderRightItemPrice}>
                         Total Price: Rs. {order.totalPrice}.00
                       </div>
-                      <div className={style1.orderRightItemId}>
-                        *has {order.products.length} item
+                      <div style={{fontSize: "15px"}}>
+                        Status: <span style={order.status === "ordered" ? {color: "blue",} : {color: "red"}}>{order.status}</span>
                       </div>
                     </div>
                   </Link>
