@@ -313,6 +313,7 @@ export default function ProductCard({
           </div>
         )}
 
+      </Link>
         <div className={style1.productPriceNQtySection}>
           <div className={style1.priceContainer}>
             <div className={style1.discountedPrice}>Rs. {price}</div>
@@ -334,7 +335,6 @@ export default function ProductCard({
             </div>
           )}
         </div>
-      </Link>
 
       <div className={style1.productCardBtnsContainer}>
         {favourite ? (

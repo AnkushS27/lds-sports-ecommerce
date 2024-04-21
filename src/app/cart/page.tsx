@@ -6,7 +6,11 @@ import VerticalNavBar from "@/Components/VerticalNavbar/page";
 
 import HorizontalNavBar from "@/Components/HorizontalNavbar/page";
 import { getSession } from "next-auth/react";
-import { AddressType, CartVariation, ProductType } from "@/TypeInterfaces/TypeInterfaces";
+import {
+  AddressType,
+  CartVariation,
+  ProductType,
+} from "@/TypeInterfaces/TypeInterfaces";
 import Loader from "@/Components/Loader/page";
 import PaymentTesting from "@/Components/PaymentButton/page";
 
@@ -70,13 +74,14 @@ export default function Cart() {
   };
 
   const calculateSubtotal = () => {
-    const subtotal = product.reduce((total, prod) => {
-      return variantValues.reduce((acc, value) => {
-        const quantity = value.qty || 1; // Default quantity is 1 if not provided
-        const variationPrice = prod.variations.variations[value.variationIdx].price;
-        return acc + variationPrice * quantity; // Accumulate total price for each variation
-      }, 0);
-    }, 0);
+    let subtotal = 0;
+    for (let i = 0; i < product.length; i++) {
+      const prod = product[i];
+      const value = variantValues[i];
+      const variation = prod.variations.variations[value.variationIdx];
+      subtotal += variation.price * value.qty;
+      console.log(variation.price, value.qty, subtotal);
+    }
     return subtotal;
   };
 
@@ -86,7 +91,12 @@ export default function Cart() {
       const userId = userSession?.user?.email;
       const res = await fetch("/api/order/placeOrder", {
         method: "POST",
-        body: JSON.stringify({ userId, products: product, variants: variantValues, totalPrice: calculateSubtotal()}),
+        body: JSON.stringify({
+          userId,
+          products: product,
+          variants: variantValues,
+          totalPrice: calculateSubtotal(),
+        }),
       });
       if (!res.ok) {
         throw new Error("Failed to place order");
@@ -94,7 +104,7 @@ export default function Cart() {
     } catch (error) {
       console.error("Error placing order:", error);
     }
-  }
+  };
 
   const handlePaymentClick = async () => {
     // Example: Call placeOrder function from Cart component
@@ -148,12 +158,18 @@ export default function Cart() {
             <div className={styles.addressContainer}>
               Select Shipping Address:
               <select>
-              {userAddress && userAddress.map((address, index) => (
-                <option key={index} value={index}>{address.houseno}, {address.street}, {address.city}</option>
-              ))}
+                {userAddress &&
+                  userAddress.map((address, index) => (
+                    <option key={index} value={index}>
+                      {address.houseno}, {address.street}, {address.city}
+                    </option>
+                  ))}
               </select>
             </div>
-            <PaymentTesting amount={calculateSubtotal()*100} handlePaymentClick={handlePaymentClick} />
+            <PaymentTesting
+              amount={calculateSubtotal() * 100}
+              handlePaymentClick={handlePaymentClick}
+            />
           </div>
         </div>
       </div>
